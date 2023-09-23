@@ -5,7 +5,7 @@ import "./Hero.css";
 function Hero() {
   return (
     <section className="bg-hero bg-cover grow grid grid-cols-hero  mt-20 text-white">
-      <div className="flex flex-col items-start justify-evenly px-40 py-10">
+      <div className="flex flex-col items-start justify-evenly mx-40">
         <h2 className="font-serif md:text-4xl lg:leading-tight lg:text-6xl 2xl:text-7xl ">
           Bonds we <span className="italic">create</span> can hardly be broken
         </h2>
@@ -23,10 +23,7 @@ function Hero() {
           Odrer
         </button>
       </div>
-      <div
-        className="hidden lg:flex justify-end items-end overflow-hidden relative
-"
-      >
+      <div className="hidden lg:flex justify-end items-end overflow-hidden relative">
         <img
           className=" lg:w-11/12 rounded-3xl rotate-7 absolute -bottom-10 -right-11"
           src={HeroPostcard}
