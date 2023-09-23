@@ -3,7 +3,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.tsx", "./index.css"],
   theme: {
     extend: {
       fontFamily: {
@@ -11,9 +11,11 @@ module.exports = {
         sans: ["Raleway", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
-        hero: "url('./data/img/bg/hero.jpg')",
+        "iron-giant-hero":
+          "url('./data/img/raw/postcards/iron-giant-hero.JPG')",
+        hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/img/bg/hero.jpg')",
         "postcards-pattern":
-          "linear-gradient(to top, rgba(188, 69, 69, 0.9), rgba(242, 196, 205, 0.9)), url('./data/img/bg/bg-red.jpg')",
+          "linear-gradient(to top, rgba(188,69,69,.9), rgba(242,196,205,.9)), url('./data/img/bg/bg-red.jpg')",
       },
       colors: {
         "layout-crail": "#BC4545",
@@ -23,6 +25,12 @@ module.exports = {
       },
       fontSize: {
         xxs: ["0.5rem", "0,75rem"],
+      },
+      gridTemplateColumns: {
+        hero: "2fr 1fr",
+      },
+      rotate: {
+        7: "7deg",
       },
     },
   },

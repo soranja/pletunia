@@ -4,10 +4,10 @@ import Hero from "./components/Hero/Hero";
 
 function App() {
   return (
-    <div className="flex flex-col items-center  bg-slate-800">
+    <div className="flex flex-col bg-slate-800">
       <Header></Header>
 
-      <main className="flex flex-col w-full h-screen bg-slate-900">
+      <main className="flex flex-col h-screen bg-slate-900">
         <Hero></Hero>
         {/* <section className="p-10 bg-postcards-pattern">
           <span className="text-3xl font-serif text-red-700">
@@ -30,7 +30,7 @@ function App() {
           </span>
         </section> */}
       </main>
-      <footer className="flex flex-row  min-w-full p-10 bg-slate-300">
+      {/* <footer className="flex flex-row  min-w-full p-10 bg-slate-300">
         <span className="grow text-3xl font-serif text-red-600">
           THIS IS THE FOOTER
         </span>
@@ -43,7 +43,7 @@ function App() {
             <li>Contacts</li>
           </ul>
         </nav>
-      </footer>
+      </footer> */}
     </div>
   );
 }
