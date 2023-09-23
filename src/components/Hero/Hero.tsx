@@ -4,9 +4,9 @@ import "./Hero.css";
 
 function Hero() {
   return (
-    <section className="bg-hero bg-cover grow grid grid-cols-hero  mt-20 text-white">
-      <div className="flex flex-col items-start justify-evenly mx-40">
-        <h2 className="font-serif md:text-4xl lg:leading-tight lg:text-6xl 2xl:text-7xl ">
+    <section className="bg-hero bg-cover grow grid grid-cols-hero mt-20 pl-40 text-white">
+      <div className="flex flex-col items-start justify-evenly">
+        <h2 className="font-serif md:text-4xl lg:leading-tight lg:text-6xl 2xl:text-8xl ">
           Bonds we <span className="italic">create</span> can hardly be broken
         </h2>
         <div className="hero-description lg:text-2xl 2xl:w-7/12">
@@ -25,7 +25,7 @@ function Hero() {
       </div>
       <div className="hidden lg:flex justify-end items-end overflow-hidden relative">
         <img
-          className=" lg:w-11/12 rounded-3xl rotate-7 absolute -bottom-10 -right-11"
+          className=" lg:w-12/12 rounded-3xl rotate-7 absolute -bottom-10 -right-11"
           src={HeroPostcard}
           alt="hero postcard"
         />
