@@ -11,8 +11,6 @@ module.exports = {
         sans: ["Raleway", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
-        "iron-giant-hero":
-          "url('./data/img/raw/postcards/iron-giant-hero.JPG')",
         hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/img/bg/hero.jpg')",
         "postcards-pattern":
           "linear-gradient(to top, rgba(188,69,69,.9), rgba(242,196,205,.9)), url('./data/img/bg/bg-red.jpg')",
@@ -31,6 +29,7 @@ module.exports = {
       },
       rotate: {
         7: "7deg",
+        15: "15deg",
       },
     },
   },
