@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./components/Header/Header";
-import Hero from "./components/Hero/Hero";
+import Hero from "./pages/Hero/Hero";
+import Postcards from "./pages/Postcards/Postcards";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
 
       <main className="flex flex-col h-screen bg-slate-900">
         <Hero></Hero>
+        <Postcards></Postcards>
         {/* <section className="p-10 bg-postcards-pattern">
           <span className="text-3xl font-serif text-red-700">
             THIS IS THE POSTCARDS

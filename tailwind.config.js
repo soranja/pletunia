@@ -20,6 +20,7 @@ module.exports = {
         "layout-skintone": "#F2C4CD",
         "layout-dark-green": "#184017",
         "layout-blue-gray": "#315C72",
+        "layout-red-clay": "#6D3131",
       },
       fontSize: {
         xxs: ["0.5rem", "0,75rem"],
