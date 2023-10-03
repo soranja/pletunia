@@ -8,7 +8,7 @@ import CustomPortrait from "../../data/img/cut/custom.jpg";
 // a separate file for imports?
 
 function PostcardSlider() {
-  const [expandedIndex, setExpandedIndex] = useState<null | number>(null);
+  const [expandedIndex, setExpandedIndex] = useState<null | number>(1);
   const handleCardClick = (index: number) => {
     setExpandedIndex(index === expandedIndex ? -1 : index);
   };
@@ -18,12 +18,16 @@ function PostcardSlider() {
     collapsed: { width: "200px" },
   };
 
+  const cardNames = ["CORALINE", "THE PUMPKIN JACK", "CUSTOM"];
+  const cardPrices = [1500, 1500, 3000];
   const cardImages = [Coraline, PumpkinJack, CustomPortrait];
   const cardDescriptions = [
     "Take her!",
     "Halloween Soon!",
     "Fine choice, sir, fine choice...",
   ];
+
+  // names, prices, middle index are hadrcoded, is it ok if i dont plan to expand the slider, or...
 
   return (
     <section className="py-16 pb-[300px]">
@@ -44,13 +48,21 @@ function PostcardSlider() {
             >
               <div className="card-content h-full flex flex-col justify-end">
                 <div className="card-footer rounded-b-[20px] bg-opacity-75 min-h-[100px] flex flex-col items-center justify-center">
-                  <h4 className="text-xl font-extrabold text-white">
-                    Card {index + 1}
-                  </h4>
+                  {index !== expandedIndex && (
+                    <h4 className="text-xl font-extrabold text-white">
+                      {cardNames[index]}
+                    </h4>
+                  )}
+
                   {index === expandedIndex && (
-                    <p className="mt-2 text-center">
-                      {cardDescriptions[index]}
-                    </p>
+                    <div>
+                      <h4 className="text-xl font-extrabold text-white">
+                        {`${cardNames[index]} - ${cardPrices[index]}`}
+                      </h4>
+                      <p className="mt-2 text-center">
+                        {cardDescriptions[index]}
+                      </p>
+                    </div>
                   )}
                 </div>
               </div>

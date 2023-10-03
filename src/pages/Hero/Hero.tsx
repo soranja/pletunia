@@ -8,7 +8,7 @@ function Hero() {
     <section
       className="
       bg-hero bg-cover grow grid pl-10 pr-5 grid-cols-hero text-white 
-      md:px-20 md:pl-0 md:pr-0 
+      md:px-20 md:pl-5 md:pr-0 
       lg:pl-40 lg:mt-20"
     >
       <div
@@ -53,8 +53,8 @@ function Hero() {
         />
       </div>
       <div className="flex flex-col mt-16 justify-evenly items-center overflow-hidden lg:hidden">
-        <img className="w-3/12" src={Lighthouse} alt="charm" />
-        <img className="w-5/12" src={Lighthouse} alt="charm" />
+        <img className="w-3/12 md:hidden" src={Lighthouse} alt="charm" />
+        <img className="w-5/12 md:hidden" src={Lighthouse} alt="charm" />
         <img className="w-10/12" src={Lighthouse} alt="charm" />
       </div>
     </section>
