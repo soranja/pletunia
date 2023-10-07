@@ -8,14 +8,10 @@ function App() {
     <div className="flex flex-col bg-slate-800">
       <Header></Header>
 
-      <main className="flex flex-col h-screen bg-slate-900">
+      <main className="flex flex-col bg-slate-900">
         <Hero></Hero>
         <Postcards></Postcards>
-        {/* <section className="p-10 bg-postcards-pattern">
-          <span className="text-3xl font-serif text-red-700">
-            THIS IS THE POSTCARDS
-          </span>
-        </section>
+        {/*
         <section className="p-10 bg-slate-500">
           <span className="text-3xl font-serif text-red-600">
             THIS IS THE CONSTRUCTORS SETS

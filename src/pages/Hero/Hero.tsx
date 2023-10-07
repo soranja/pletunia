@@ -7,9 +7,9 @@ function Hero() {
   return (
     <section
       className="
-      bg-hero bg-cover grow grid pl-10 pr-5 grid-cols-hero text-white 
-      md:px-20 md:pl-5 md:pr-0 
-      lg:pl-40 lg:mt-20"
+      bg-hero bg-cover h-screen grid pl-10 pr-5 grid-cols-hero text-white 
+      md:px-20 md:pl-10 md:pr-0 
+      lg:pl-40"
     >
       <div
         className="mt-5 gap-y-6 flex flex-col items-center justify-center
