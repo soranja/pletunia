@@ -12,7 +12,7 @@ function Hero() {
       lg:pl-40"
     >
       <div
-        className="mt-5 gap-y-6 flex flex-col items-center justify-center
+        className=" md:mt-5 gap-y-6 flex flex-col items-center justify-center
         md:gap-y-10  
         lg:justify-evenly lg:items-start"
       >
@@ -52,7 +52,7 @@ function Hero() {
           alt="hero postcard"
         />
       </div>
-      <div className="flex flex-col mt-16 justify-evenly items-center overflow-hidden lg:hidden">
+      <div className="flex flex-col mt-10 justify-evenly items-center overflow-hidden lg:hidden">
         <img className="w-3/12 md:hidden" src={Lighthouse} alt="charm" />
         <img className="w-5/12 md:hidden" src={Lighthouse} alt="charm" />
         <img className="w-10/12" src={Lighthouse} alt="charm" />
