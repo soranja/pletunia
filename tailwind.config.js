@@ -27,7 +27,10 @@ module.exports = {
       },
       gridTemplateColumns: {
         hero: "2fr 1fr",
-        // "hero-mobile": "2fr 1fr",
+        order: "1fr 1fr",
+      },
+      gridTemplateRows: {
+        order: "4fr",
       },
       rotate: {
         7: "7deg",

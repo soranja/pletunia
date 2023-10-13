@@ -39,7 +39,7 @@ function Hero() {
           </p>
         </div>
         <button className="rounded-full p-5 px-10 tracking-wider bg-layout-dark-green font-bold text-xl self-start">
-          Odrer
+          Order
         </button>
       </div>
       <div

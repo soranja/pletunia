@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header/Header";
 import Hero from "./pages/Hero/Hero";
 import Postcards from "./pages/Postcards/Postcards";
+import Order from "./pages/Order/Order";
 
 function App() {
   return (
@@ -22,11 +23,8 @@ function App() {
             THIS IS THE BRACELETS
           </span>
         </section>
-        <section className="p-10 bg-slate-400">
-          <span className="text-3xl font-serif text-red-700">
-            THIS IS THE ORDER
-          </span>
-        </section> */}
+ */}
+        <Order></Order>
       </main>
       {/* <footer className="flex flex-row  min-w-full p-10 bg-slate-300">
         <span className="grow text-3xl font-serif text-red-600">
