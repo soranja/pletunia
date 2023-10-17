@@ -9,7 +9,7 @@ function Postcards() {
     >
       <h3
         className="text-layout-red-clay text-4xl pl-10 font-extrabold my-5 mb-16
-        md:text-6xl md:mb-10
+        md:text-6xl md:mb-10 mt-0
         lg:pl-0"
       >
         POSTCARDS

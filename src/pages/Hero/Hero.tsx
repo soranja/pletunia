@@ -7,7 +7,7 @@ function Hero() {
   return (
     <section
       className="
-      bg-hero bg-cover h-screen grid pl-10 pr-5 grid-cols-hero text-white 
+      bg-hero bg-cover h-screen grid pl-10 pr-5 grid-cols-hero text-white mt-10
       md:px-20 md:pl-10 md:pr-0 
       lg:pl-40"
     >
