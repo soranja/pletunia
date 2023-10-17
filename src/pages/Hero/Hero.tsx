@@ -12,8 +12,8 @@ function Hero() {
       lg:pl-40"
     >
       <div
-        className=" md:mt-5 gap-y-6 flex flex-col items-center justify-center
-        md:gap-y-10  
+        className="gap-y-6 flex flex-col items-center justify-center
+        md:gap-y-10 md:mt-16 md:pl-0
         lg:justify-evenly lg:items-start"
       >
         <h2

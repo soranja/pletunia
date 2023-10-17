@@ -7,22 +7,22 @@ function Order() {
   return (
     <div
       className="text-white 
-      flex flex-col items-center pt-20 pb-20 px-10
+      flex flex-col  pt-20 pb-20 px-10 pr-28
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl})`,
         backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
-        backgroundPositionY: `68%`,
-        backgroundPositionX: `51%`,
+        backgroundPositionY: `70%`,
+        backgroundPositionX: `49%`,
       }}
     >
       <div
         className="
-      left-column flex flex-col items-center lg:items-end
+      left-column flex flex-col lg:items-end
       lg:pr-24"
       >
         <h3
-          className="text-4xl font-extrabold mb-16 text-center pr-2
+          className="text-4xl font-extrabold mb-16 pr-2
           md:pr-0 
           lg:text-5xl lg:text-right"
         >
@@ -103,5 +103,5 @@ function Order() {
     </div>
   );
 }
-
+// make comment expandable
 export default Order;
