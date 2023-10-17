@@ -8,7 +8,7 @@ function Postcards() {
       lg:items-center"
     >
       <h3
-        className="text-layout-red-clay text-4xl pl-10 font-extrabold my-5 mb-16
+        className="text-layout-red-clay text-4xl pl-10 font-extrabold my-5 mb-12
         md:text-6xl md:mb-10 mt-0
         lg:pl-0"
       >

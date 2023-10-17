@@ -53,7 +53,7 @@ function Order() {
             <label htmlFor="item003">Custom</label>
           </div>
         </div>
-        <div className="info-inputs flex flex-col gap-5 items-center">
+        <div className="info-inputs flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <label htmlFor="name">Your name</label>
             <input
