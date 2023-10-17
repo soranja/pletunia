@@ -22,7 +22,7 @@ function Order() {
       lg:pr-24"
       >
         <h3
-          className="text-4xl font-extrabold mb-16 pr-2
+          className="text-3xl font-extrabold mb-12 
           md:pr-0 
           lg:text-5xl lg:text-right"
         >
