@@ -2,6 +2,8 @@ import React from "react";
 import GreenGirl from "../../data/img/cut/green_girl.jpg";
 
 function Order() {
+  const initialSize = window.innerWidth;
+
   return (
     <div
       className="text-white 
@@ -9,9 +11,12 @@ function Order() {
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:bg-layout-dark-green"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl})`,
-        backgroundSize: `17%`,
-        backgroundPositionY: `center`,
+        backgroundSize: `${initialSize <= 768 ? "17%" : "14%"}`,
+        backgroundPositionY: `68%`,
+        backgroundPositionX: `51%`,
       }}
+      // adapt bg image for desktop
+      // FIX INPUTS
     >
       <div
         className="
@@ -20,7 +25,7 @@ function Order() {
       >
         <h3
           className="
-        text-5xl font-extrabold mb-16"
+        text-4xl lg:text-5xl font-extrabold mb-16"
         >
           PLACE YOUR ORDER HERE
         </h3>
@@ -32,6 +37,7 @@ function Order() {
           alt="Green Girl"
         />
       </div>
+
       <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
         <h4 className="text-2xl lg:text-3xl font-bold">Choose your item(s):</h4>
         <div className="flex flex-col lg:flex-row gap-3 mb-8">
