@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import GreenGirl from "../../data/img/cut/green_girl.jpg";
 
 function Order() {
   const initialSize = window.innerWidth;
-  const [inputs, setInputs] = useState<null | string>("");
 
   return (
     <div
