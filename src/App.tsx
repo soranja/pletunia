@@ -45,3 +45,5 @@ function App() {
 }
 
 export default App;
+
+// responsive for laptops!

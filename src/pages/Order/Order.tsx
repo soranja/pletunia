@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import GreenGirl from "../../data/img/cut/green_girl.jpg";
 
 function Order() {
   const initialSize = window.innerWidth;
+  const [inputs, setInputs] = useState<null | string>("");
 
   return (
     <div
@@ -11,28 +12,28 @@ function Order() {
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:bg-layout-dark-green"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl})`,
-        backgroundSize: `${initialSize <= 768 ? "17%" : "14%"}`,
+        backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
         backgroundPositionY: `68%`,
         backgroundPositionX: `51%`,
       }}
-      // adapt bg image for desktop
+
       // FIX INPUTS
     >
       <div
         className="
-      left-column flex flex-col items-end
+      left-column flex flex-col items-start lg:items-end
       lg:pr-24"
       >
         <h3
           className="
-        text-4xl lg:text-5xl font-extrabold mb-16"
+        text-4xl lg:text-5xl font-extrabold mb-16 lg:text-right"
         >
           PLACE YOUR ORDER HERE
         </h3>
         <img
           className="
           hidden rounded-r-3xl
-          lg:block lg:w-4/12"
+          lg:block lg:w-5/12 xl:w-4/12"
           src={GreenGirl}
           alt="Green Girl"
         />
@@ -58,46 +59,45 @@ function Order() {
           <div className="flex flex-col gap-2">
             <label htmlFor="name">Your name</label>
             <input
-              className="lg:px-16 py-2 rounded-lg"
+              className="text-black px-5 w-80 py-2 rounded-lg"
               type="text"
               id="name"
               name="name"
-              value="name"
+              defaultValue=""
             />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="email">Your email</label>
             <input
-              className="lg:px-16 py-2 rounded-lg"
+              className="text-black px-5 w-80 py-2 rounded-lg"
               type="text"
               id="email"
               name="email"
-              value="email"
+              defaultValue=""
             />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="phone">Your phone</label>
             <input
-              className="lg:px-16 py-2 rounded-lg"
+              className="text-black px-5 w-80 py-2 rounded-lg"
               type="tel"
               id="phone"
               name="phone"
-              value="phone"
+              defaultValue=""
             />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="comment">Comment / Extra Contact</label>
-            <input
-              className="px-8 py-14 rounded-xl"
-              type="text"
+            <textarea
+              className="text-black px-5 w-80 py-5 rounded-xl"
               id="comment"
               name="comment"
-              value="comment"
+              defaultValue=""
             />
           </div>
         </div>
         <input
-          className="mt-4 rounded-full p-5 px-10 tracking-wider bg-layout-blue-gray font-bold text-xl"
+          className="mt-8 rounded-full p-5 px-10 w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
           type="submit"
           value="Order!"
         />
