@@ -42,3 +42,4 @@ export default App;
 
 // responsive for laptops!
 // image width (not %% ?)
+// read about SVG https://css-tricks.com/scale-svg/#aa-the-height-and-width-attributes

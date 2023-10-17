@@ -7,8 +7,8 @@ function Order() {
   return (
     <div
       className="text-white 
-      flex flex-col pt-20 pb-20 px-10
-      lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0"
+      flex flex-col items-center pt-20 pb-20 px-10
+      lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl})`,
         backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
@@ -18,12 +18,13 @@ function Order() {
     >
       <div
         className="
-      left-column flex flex-col items-start lg:items-end
+      left-column flex flex-col items-center lg:items-end
       lg:pr-24"
       >
         <h3
-          className="
-        text-4xl lg:text-5xl font-extrabold mb-16 lg:text-right"
+          className="text-4xl font-extrabold mb-16 text-center pr-2
+          md:pr-0 
+          lg:text-5xl lg:text-right"
         >
           PLACE YOUR ORDER HERE
         </h3>
@@ -52,11 +53,11 @@ function Order() {
             <label htmlFor="item003">Custom</label>
           </div>
         </div>
-        <div className="info-inputs flex flex-col gap-5">
+        <div className="info-inputs flex flex-col gap-5 items-center">
           <div className="flex flex-col gap-2">
             <label htmlFor="name">Your name</label>
             <input
-              className="text-black px-5 w-80 py-2 rounded-lg"
+              className="text-black px-5 lg:w-80 py-2 rounded-lg"
               type="text"
               id="name"
               name="name"
@@ -66,7 +67,7 @@ function Order() {
           <div className="flex flex-col gap-2">
             <label htmlFor="email">Your email</label>
             <input
-              className="text-black px-5 w-80 py-2 rounded-lg"
+              className="text-black px-5 lg:w-80 py-2 rounded-lg"
               type="text"
               id="email"
               name="email"
@@ -76,7 +77,7 @@ function Order() {
           <div className="flex flex-col gap-2">
             <label htmlFor="phone">Your phone</label>
             <input
-              className="text-black px-5 w-80 py-2 rounded-lg"
+              className="text-black px-5 lg:w-80 py-2 rounded-lg"
               type="tel"
               id="phone"
               name="phone"
@@ -86,18 +87,18 @@ function Order() {
           <div className="flex flex-col gap-2">
             <label htmlFor="comment">Comment / Extra Contact</label>
             <textarea
-              className="text-black px-5 w-80 py-5 rounded-xl"
+              className="text-black px-5 lg:w-80 py-5 rounded-xl"
               id="comment"
               name="comment"
               defaultValue=""
             />
           </div>
+          <input
+            className="mt-8 rounded-2xl p-5 px-10 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
+            type="submit"
+            value="Order!"
+          />
         </div>
-        <input
-          className="mt-8 rounded-2xl p-5 px-10 w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
-          type="submit"
-          value="Order!"
-        />
       </div>
     </div>
   );
