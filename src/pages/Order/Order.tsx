@@ -8,15 +8,13 @@ function Order() {
     <div
       className="text-white 
       flex flex-col pt-20 pb-20 px-10
-      lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:bg-layout-dark-green"
+      lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl})`,
         backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
         backgroundPositionY: `68%`,
         backgroundPositionX: `51%`,
       }}
-
-      // FIX INPUTS
     >
       <div
         className="
