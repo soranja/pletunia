@@ -94,7 +94,7 @@ function Order() {
           </div>
         </div>
         <input
-          className="mt-8 rounded-full p-5 px-10 w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
+          className="mt-8 rounded-2xl p-5 px-10 w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
           type="submit"
           value="Order!"
         />

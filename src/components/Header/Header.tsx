@@ -4,7 +4,7 @@ import { buttonStyleHeader } from "../../constants/buttonStyleHeader";
 
 function Header() {
   return (
-    <header className="z-20 fixed flex flex-row justify-between items-center w-full p-3 md:p-5 bg-layout-skintone font-sans shadow-xl">
+    <header className="z-20 fixed flex flex-row justify-between items-center w-full p-4 md:p-6 md:px-10 bg-layout-skintone font-sans shadow-xl">
       {/*logo*/}
       <span className="text-2xl md:text-3xl font-extrabold text-black">
         PLETUNIA
