@@ -4,6 +4,7 @@ import Hero from "./pages/Hero/Hero";
 import Postcards from "./pages/Postcards/Postcards";
 import Order from "./pages/Order/Order";
 import Footer from "./components/Footer/Footer";
+import Copyright from "./components/Copyright/Copyright";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Order></Order>
       </main>
       <Footer></Footer>
+      <Copyright></Copyright>
     </div>
   );
 }
