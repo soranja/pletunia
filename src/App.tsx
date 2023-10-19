@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Header from "./components/Header/Header";
 import Hero from "./pages/Hero/Hero";
 import Postcards from "./pages/Postcards/Postcards";
@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import Copyright from "./components/Copyright/Copyright";
 
 function App() {
+  // const ref = useRef<React.MutableRefObject<HTMLDivElement | null>>(null);
   return (
     <div className="flex flex-col bg-slate-800">
       <Header></Header>
@@ -43,3 +44,13 @@ export default App;
 // responsive for laptops!
 // image width (not %% ?)
 // read about SVG https://css-tricks.com/scale-svg/#aa-the-height-and-width-attributes
+
+/*
+- top bar - make interactive and with scroll + mobile drawer
+- LANG - translate the app and make the button functionable
+- hero.order - make the button interactive: a modal with a form or scroll to the form
+- postcards.order - when clicked scroll to the form in the end and tick the corresponding item
+- FOR SPECIAL - add illumination trail for mouse (desktop)
+- Order form - when submitted send the info to Alyona's TG.
+- Footer - make the links clickable, news and about us - modals.
+*/

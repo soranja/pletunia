@@ -40,16 +40,31 @@ function Order() {
       <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
         <h4 className="text-2xl lg:text-3xl font-bold">Choose your item(s):</h4>
         <div className="flex flex-col lg:flex-row gap-3 mb-8">
-          <div className="item001 flex  gap-2">
-            <input type="checkbox" id="item0001" value="Coraline" />
+          <div className="item001 flex gap-2 checked:bg-black">
+            <input
+              type="checkbox"
+              className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
+              id="item0001"
+              value="Coraline"
+            />
             <label htmlFor="item001">Coraline</label>
           </div>
           <div className="item002 flex gap-2">
-            <input type="checkbox" id="item0002" value="PumpkinJack" />
+            <input
+              type="checkbox"
+              className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
+              id="item0002"
+              value="PumpkinJack"
+            />
             <label htmlFor="item002">Pumpkin Jack</label>
           </div>
           <div className="item003 flex gap-2">
-            <input type="checkbox" id="item0003" value="Custom" />
+            <input
+              type="checkbox"
+              className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
+              id="item0003"
+              value="Custom"
+            />
             <label htmlFor="item003">Custom</label>
           </div>
         </div>

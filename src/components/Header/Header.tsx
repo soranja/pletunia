@@ -1,8 +1,9 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Burger from "../Burger/Burger";
 import { buttonStyleHeader } from "../../constants/buttonStyleHeader";
 
-function Header() {
+const Header = forwardRef(function Header(props, ref) {
+  const handleClick = () => {};
   return (
     <header className="z-20 fixed flex flex-row justify-between items-center w-full p-4 md:p-6 md:px-10 bg-layout-skintone font-sans shadow-xl">
       {/*logo*/}
@@ -16,39 +17,30 @@ function Header() {
       <nav className="items-center font-bold hidden lg:flex">
         <ul className="flex gap-x-6 text-base">
           <li>
-            <button>Overview</button>
-          </li>
-          <li>
-            <button className="flex items-center ">
-              Postcards <div className="text-xxs pl-1.5 mt-0.5">▼</div>
+            <button className="flex items-center">
+              Postcards <div className="hidden text-xxs pl-1.5 mt-0.5">▼</div>
             </button>
           </li>
-          <li>
+          <li className="hidden">
             <button>Bracelets</button>
           </li>
           <li>
-            <button>How to Order</button>
+            <button>Order</button>
           </li>
           <li>
-            <button>Contact Us</button>
+            <button>Contact us</button>
           </li>
         </ul>
       </nav>
       {/*contacts, order, lang buttons*/}
       <div className="gap-x-2.5 text-white font-bold hidden lg:flex">
-        <button className={`${buttonStyleHeader} bg-layout-dark-green`}>
-          Contact
-        </button>
-        <button className={`${buttonStyleHeader}  bg-layout-blue-gray`}>
-          Order
-        </button>
         <button className={`${buttonStyleHeader} bg-layout-blue-gray`}>
-          Lang
+          Ru
         </button>
       </div>
       <Burger></Burger>
     </header>
   );
-}
+});
 
 export default Header;
