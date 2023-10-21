@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Header from "./components/Header/Header";
 import Hero from "./pages/Hero/Hero";
 import Postcards from "./pages/Postcards/Postcards";

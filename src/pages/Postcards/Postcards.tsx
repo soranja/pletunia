@@ -6,6 +6,7 @@ function Postcards() {
     <section
       className="pt-16 pb-16 bg-postcards-pattern bg-cover flex flex-col  
       lg:items-center"
+      id="postcards"
     >
       <h3
         className="text-layout-red-clay text-4xl pl-10 font-extrabold my-5 mb-12

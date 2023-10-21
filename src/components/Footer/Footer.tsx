@@ -2,7 +2,10 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="z-20 flex flex-row min-w-full p-10 bg-layout-dark-green text-white lg:items-center">
+    <footer
+      className="z-20 flex flex-row min-w-full p-10 bg-layout-dark-green text-white lg:items-center"
+      id="contacts"
+    >
       <span className="grow text-2xl md:text-3xl font-extrabold">
         PLETUNIA
         <span className="text-black font-serif text-2xl md:text-4xl pl-0.5">
