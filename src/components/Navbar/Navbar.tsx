@@ -7,7 +7,9 @@ const NavBar: FC<{ isMobile: boolean }> = ({ isMobile }) => (
     <nav className="items-center font-bold">
       <ul
         className={`text-base cursor-pointer font-bold ${
-          isMobile ? "flex flex-col gap-y-6" : "hidden lg:flex gap-x-6 items-center"
+          isMobile
+            ? "flex flex-col gap-y-6"
+            : "hidden lg:flex gap-x-6 items-center"
         }`}
       >
         <li>
@@ -47,8 +49,14 @@ const NavBar: FC<{ isMobile: boolean }> = ({ isMobile }) => (
         </li>
       </ul>
     </nav>
-    <div className="gap-x-2.5 text-white font-bold hidden lg:flex">
-      <button className={`${buttonStyleHeader} bg-layout-blue-gray`}>Ru</button>
+    <div className="gap-x-2.5 text-white font-bold ">
+      <button
+        className={`${buttonStyleHeader} bg-layout-blue-gray ${
+          isMobile ? "flex" : "hidden lg:flex"
+        }`}
+      >
+        Ru
+      </button>
     </div>
   </>
 );

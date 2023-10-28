@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 
-function Sidebar() {
+function Drawer() {
   const [isOpen, setIsOpen] = useState(false);
 
   const ToggleSidebar = () => {
@@ -56,4 +56,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default Drawer;

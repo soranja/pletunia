@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../Sidebar/Sidebar";
+import Drawer from "../Drawer/Drawer";
 import { Link } from "react-scroll";
 import Navbar from "../Navbar/Navbar";
 
@@ -22,7 +22,7 @@ function Header() {
         </span>
       </Link>
       <Navbar isMobile={false}></Navbar>
-      <Sidebar></Sidebar>
+      <Drawer></Drawer>
     </header>
   );
 }
