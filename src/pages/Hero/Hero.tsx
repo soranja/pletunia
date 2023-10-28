@@ -15,10 +15,10 @@ function Hero() {
       <div
         className="gap-y-6 flex flex-col items-center justify-center
         md:gap-y-10 md:mt-16 md:pl-0
-        lg:justify-evenly lg:items-start"
+        lg:gap-y-28 lg:items-start"
       >
         <h2
-          className="font-serif text-3xl mt-5 text-left 
+          className="font-serif font-extrabold text-3xl mt-5 mb-5 text-left 
           md:text-6xl 
           lg:leading-tight
           2xl:text-8xl"

@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import Copyright from "./components/Copyright/Copyright";
 
 import { useTranslation } from "react-i18next";
+import { locales } from "./constants/locales";
 
 function App() {
   const [t, i18n] = useTranslation();
@@ -15,7 +16,7 @@ function App() {
     <div className="flex flex-col bg-slate-800">
       <Header></Header>
       <main className="flex flex-col bg-slate-900">
-        {/* <ul className="z-100 mt-40 text-white m-auto">
+        {/* <ul className="z-100 mt-40 text-white m-auto ">
           {Object.keys(locales).map((locale) => (
             <li key={locale}>
               <button
@@ -32,7 +33,7 @@ function App() {
           ))}
         </ul>
         <section className="p-10 bg-slate-500">
-          <span className="text-3xl font-serif text-red-600">
+          <span className="text-3xl font-serif font-extrabold text-red-600">
             {t("construction.description")}
           </span>
         </section> */}

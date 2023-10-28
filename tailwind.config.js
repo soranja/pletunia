@@ -7,8 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Arvo", ...defaultTheme.fontFamily.serif],
+        serif: ["Roboto Slab", ...defaultTheme.fontFamily.serif],
         sans: ["Raleway", ...defaultTheme.fontFamily.sans],
+        // cursive: ["Neucha", ...defaultTheme.fontFamily.cursive],
       },
       backgroundImage: {
         hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/img/bg/hero.jpg')",
