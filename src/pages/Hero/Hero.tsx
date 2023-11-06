@@ -2,8 +2,10 @@ import React from "react";
 import HeroPostcard from "../../data/img/raw/postcards/iron-giant-hero.jpg";
 import Lighthouse from "../../data/img/cut/lighthouse.png";
 import "./Hero.css";
+import { useTranslation } from "react-i18next";
 
 function Hero() {
+  const [t, i18n] = useTranslation();
   return (
     <section
       className="
@@ -18,12 +20,14 @@ function Hero() {
         lg:gap-y-28 lg:items-start"
       >
         <h2
-          className="font-serif font-extrabold text-3xl mt-5 mb-5 text-left 
+          className={`font-serif font-extrabold text-3xl mt-5 mb-5 text-left 
           md:text-6xl 
           lg:leading-tight
-          2xl:text-8xl"
+          2xl:text-8xl
+          `}
         >
-          Bonds we <span className="italic">create</span> can hardly be broken
+          {/* Bonds we <span className="italic">create</span> ???? can hardly be broken */}
+          {t("hero.slogan")}
         </h2>
         <div
           className="hero-description text-left 
@@ -31,12 +35,14 @@ function Hero() {
           2xl:w-7/12"
         >
           <p>
-            Postcards, bracelets, and whatever keeps your friendship strong and
-            valued.
+            {/* Postcards, bracelets, and whatever keeps your friendship strong and
+            valued. */}
+            {t("hero.aboutGoods")}
           </p>
           <p>
-            Free delivery in Yerevan, HayPost in Armenia. Need a worldwide
-            delivery? – Contact us!
+            {/* Free delivery in Yerevan, HayPost in Armenia. Need a worldwide
+            delivery? – Contact us! */}
+            {t("hero.aboutDelivery")}
           </p>
         </div>
         <button className="rounded-full p-5 px-10 tracking-wider bg-layout-dark-green font-bold text-xl self-start">

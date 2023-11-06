@@ -15,4 +15,8 @@ A shop selling postcards and bracelets. Stand by, it's under construction!
 - Footer - make the links clickable, news and about us - modals.
 - Move the images and translations to the server side, create server.
 
+
+- TRANSLATION ISSUES: CSS, default browser language etc
+
+- 11/5 STILL WORKING ON i18n !!!
 --->
