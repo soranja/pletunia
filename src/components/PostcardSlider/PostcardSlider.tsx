@@ -7,9 +7,19 @@ import { postcardNames } from "../../constants/postcardNames";
 import { cardDescriptions } from "../../constants/postcardDesctiptions";
 import { postcardNumbers } from "../../constants/itemNumbers";
 
+import { useTranslation } from "react-i18next";
+
+type ItemProps = {
+  name: string;
+  description: string;
+  itemNo: string;
+  price: string;
+};
+
 // names, prices, middle index are hadrcoded, is it ok if i dont plan to expand the slider, or...
 
 function PostcardSlider() {
+  const [t, i18n] = useTranslation();
   const initialSize = window.innerWidth;
   const [expandedIndex, setExpandedIndex] = useState<null | number>(
     initialSize <= 768 ? 0 : 1
@@ -82,6 +92,59 @@ function PostcardSlider() {
               </div>
             </motion.div>
           ))}
+          {/* {(
+            t("cards", {
+              returnObjects: true,
+            }) as string[]
+          ).map((card: string, index: number) => (
+            <motion.div
+              key={cards.name}
+              className={`card cursor-pointer h-[300px] md:h-[600px] bg-cover bg-center rounded-[20px] ${
+                index === expandedIndex ? "expanded" : ""
+              }`}
+              variants={initialSize <= 768 ? cardSizesMobile : cardSizesDesktop}
+              initial="collapsed"
+              animate={index === expandedIndex ? "expanded" : "collapsed"}
+              transition={{ duration: 0.5 }}
+              onClick={() => handleCardClick(index)}
+              style={{
+                background: `linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.0)), url(${postcardImages[index]})`,
+                backgroundSize: `cover`,
+                backgroundPosition: `center`,
+              }}
+            >
+              <div className="card-content h-full flex flex-col justify-end">
+                <div className="card-footer rounded-b-[20px] bg-opacity-75 min-h-[100px] flex flex-col items-center justify-center">
+                  {index !== expandedIndex && (
+                    <h4 className="text-xl font-extrabold text-white">
+                      {cards[index].name}
+                    </h4>
+                  )}
+
+                  {index === expandedIndex && (
+                    <div className="text-white flex flex-col">
+                      <h4 className="text-xl font-extrabold text-center">
+                        {`
+                        ${postcardNames[index]} - ${postcardPrices[index]}`}
+                      </h4>
+                      <span className="mt-2 text-center font-medium">
+                        {cardDescriptions[index]}
+                      </span>
+                      <span className="mb-4 text-center font-medium">
+                        {postcardNumbers[index]}
+                      </span>
+                      <button
+                        className="rounded-full p-2 px-4 tracking-wider bg-layout-dark-green font-bold text-base mb-8 self-center
+                        md:text-xl md:p-4 md:px-8"
+                      >
+                        Odrer
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))} */}
         </div>
       </div>
     </section>

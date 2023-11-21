@@ -1,37 +1,25 @@
 import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import Backend, { HttpBackendOptions } from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import Backend from "i18next-http-backend";
+import { initReactI18next } from "react-i18next";
+
+const defaultLanguage = window.navigator.language;
 
 i18n
-  // .use(LanguageDetector)
-  // .use(initReactI18next)
-  // .init({
-  //   debug: true,
-  //   fallbackLng: "en",
-  //   resources: {
-  //     en: {
-  //       translation: {
-  //         greeting: {
-  //           hello: "Hello mfck!",
-  //         },
-  //       },
-  //     },
-  //     ru: {
-  //       translation: {
-  //         greeting: {
-  //           hello: "Здарова, ребята!",
-  //         },
-  //       },
-  //     },
-  //   },
-  // });
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
-  .init({
-    debug: true,
+  .init<HttpBackendOptions>({
     fallbackLng: "en",
+    lng: defaultLanguage,
+    debug: true,
+    detection: {
+      order: ["queryString", "cookie"],
+      caches: ["cookie"],
+    },
+    interpolation: {
+      escapeValue: false,
+    },
   });
 
 export default i18n;

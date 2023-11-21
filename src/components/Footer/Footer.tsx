@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 
 function Footer() {
+  const [t, i18n] = useTranslation();
   return (
     <footer
       className="z-20 flex flex-row min-w-full p-10 bg-layout-dark-green text-white lg:items-center"
@@ -17,8 +20,8 @@ function Footer() {
           className="flex flex-col gap-y-4 items-end
           lg:flex-row lg:gap-x-6"
         >
-          <li>About Us</li>
-          <li>News</li>
+          <li>{t("footer.about")}</li>
+          <li>{t("footer.news")}</li>
           <li className="flex gap-x-2">
             Telegram
             <svg

@@ -1,8 +1,10 @@
 import React from "react";
 import GreenGirl from "../../data/img/cut/green_girl.jpg";
+import { useTranslation } from "react-i18next";
 
 function Order() {
   const initialSize = window.innerWidth;
+  const [t, i18n] = useTranslation();
 
   return (
     <div
@@ -12,7 +14,7 @@ function Order() {
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl})`,
         backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
-        backgroundPositionY: `70%`,
+        backgroundPositionY: `67%`,
         backgroundPositionX: `49%`,
       }}
       id="order"
@@ -27,7 +29,7 @@ function Order() {
           md:pr-0 
           lg:text-5xl lg:text-right"
         >
-          PLACE YOUR ORDER HERE
+          {t("orderForm.headline")}
         </h3>
         <img
           className="
@@ -39,7 +41,9 @@ function Order() {
       </div>
 
       <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
-        <h4 className="text-2xl lg:text-3xl font-bold">Choose your item(s):</h4>
+        <h4 className="text-2xl lg:text-3xl font-bold">
+          {t("orderForm.choose")}
+        </h4>
         <div className="flex flex-col lg:flex-row gap-3 mb-8">
           <div className="item001 flex gap-2 checked:bg-black">
             <input
@@ -71,7 +75,7 @@ function Order() {
         </div>
         <div className="info-inputs flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <label htmlFor="name">Your name</label>
+            <label htmlFor="name">{t("orderForm.name")}</label>
             <input
               className="text-black px-5 lg:w-80 py-2 rounded-lg"
               type="text"
@@ -81,7 +85,7 @@ function Order() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="email">Your email</label>
+            <label htmlFor="email">{t("orderForm.email")}</label>
             <input
               className="text-black px-5 lg:w-80 py-2 rounded-lg"
               type="text"
@@ -91,7 +95,7 @@ function Order() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="phone">Your phone</label>
+            <label htmlFor="phone">{t("orderForm.phone")}</label>
             <input
               className="text-black px-5 lg:w-80 py-2 rounded-lg"
               type="tel"
@@ -101,7 +105,7 @@ function Order() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="comment">Comment / Extra Contact</label>
+            <label htmlFor="comment">{t("orderForm.comment")}</label>
             <textarea
               className="text-black px-5 lg:w-80 py-5 rounded-xl"
               id="comment"
@@ -112,7 +116,7 @@ function Order() {
           <input
             className="mt-8 rounded-2xl p-5 px-10 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
             type="submit"
-            value="Order!"
+            value={`${t("orderButton")}!`}
           />
         </div>
       </div>
