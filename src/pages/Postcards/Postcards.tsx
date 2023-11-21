@@ -1,7 +1,9 @@
 import React from "react";
 import PostcardSlider from "../../components/PostcardSlider/PostcardSlider";
+import { useTranslation } from "react-i18next";
 
 function Postcards() {
+  const [t, i18n] = useTranslation();
   return (
     <section
       className="pt-16 pb-16 bg-postcards-pattern bg-cover flex flex-col  
@@ -13,15 +15,14 @@ function Postcards() {
         md:text-6xl md:mb-10 mt-0
         lg:pl-0"
       >
-        POSTCARDS
+        {t("postcards.headline")}
       </h3>
       <span
         className="text-white text-xl text-justify lg:text-center px-10 
         lg:px-0 md:text-2xl
         lg:font-semibold"
       >
-        A variety of postcards: templated and custom. Contact us if you want to
-        order an individual design!
+        {t("postcards.sectionDescription")}
       </span>
       <PostcardSlider></PostcardSlider>
     </section>

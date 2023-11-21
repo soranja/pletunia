@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 
 function Hero() {
   const [t, i18n] = useTranslation();
+  const currentLanguages = i18n.languages;
+
   return (
     <section
       className="
@@ -15,38 +17,30 @@ function Hero() {
       id="hero"
     >
       <div
-        className="gap-y-6 flex flex-col items-center justify-center
+        className={`
+        gap-y-6 flex flex-col items-center justify-center
         md:gap-y-10 md:mt-16 md:pl-0
-        lg:gap-y-28 lg:items-start"
+        lg:gap-y-28 lg:items-start`}
       >
         <h2
           className={`font-serif font-extrabold text-3xl mt-5 mb-5 text-left 
           md:text-6xl 
           lg:leading-tight
-          2xl:text-8xl
+          ${currentLanguages[0] === "ru" ? "2xl:text-7xl" : "2xl:text-8xl"} 
           `}
         >
-          {/* Bonds we <span className="italic">create</span> ???? can hardly be broken */}
           {t("hero.slogan")}
         </h2>
         <div
-          className="hero-description text-left 
+          className={`hero-description text-left 
           lg:text-2xl 
-          2xl:w-7/12"
+          ${currentLanguages[0] === "ru" ? "w-8/12" : "w-7/12"}`}
         >
-          <p>
-            {/* Postcards, bracelets, and whatever keeps your friendship strong and
-            valued. */}
-            {t("hero.aboutGoods")}
-          </p>
-          <p>
-            {/* Free delivery in Yerevan, HayPost in Armenia. Need a worldwide
-            delivery? – Contact us! */}
-            {t("hero.aboutDelivery")}
-          </p>
+          <p>{t("hero.aboutGoods")}</p>
+          <p>{t("hero.aboutDelivery")}</p>
         </div>
         <button className="rounded-full p-5 px-10 tracking-wider bg-layout-dark-green font-bold text-xl self-start">
-          Order
+          {t("orderButton")}
         </button>
       </div>
       <div
