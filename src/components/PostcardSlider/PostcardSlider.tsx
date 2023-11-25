@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Suspense } from "react";
+// import translation from "../../../public/locales/en/translation.json";
 
 import { postcardImages } from "../../constants/postcardImages";
 import { postcardPrices } from "../../constants/postcardPrices";
@@ -8,13 +10,23 @@ import { cardDescriptions } from "../../constants/postcardDesctiptions";
 import { postcardNumbers } from "../../constants/itemNumbers";
 
 import { useTranslation } from "react-i18next";
+import { title } from "process";
 
-type ItemProps = {
+type CardType = {
   name: string;
   description: string;
   itemNo: string;
   price: string;
 };
+
+const cardsStructure = [
+  {
+    cardName: "postcards.cards",
+    cardDescription: "postcards.cards",
+    cardItemNo: "postcards.cards",
+    cardPrice: "postcards.cards",
+  },
+];
 
 // names, prices, middle index are hadrcoded, is it ok if i dont plan to expand the slider, or...
 
@@ -39,11 +51,13 @@ function PostcardSlider() {
     collapsed: { width: "250px" },
   };
 
+  const cardsObj = t("postcards.cards");
+
   return (
     <section className="py-16">
       <div className="max-w-7xl">
         <div className="flex flex-col xl:flex-row justify-center items-center gap-6">
-          {postcardNames.map((cardName: string, index: number) => (
+          {/* {postcardNames.map((cardName: string, index: number) => (
             <motion.div
               key={cardName}
               className={`card cursor-pointer h-[300px] md:h-[600px] bg-cover bg-center rounded-[20px] ${
@@ -91,6 +105,10 @@ function PostcardSlider() {
                 </div>
               </div>
             </motion.div>
+          ))} */}
+
+          {cardsStructure.map((item) => (
+            <div key={item.cardName}>{t(item.cardName)}</div>
           ))}
           {/* {(
             t("cards", {
