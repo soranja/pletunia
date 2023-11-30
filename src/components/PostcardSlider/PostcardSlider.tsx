@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Suspense } from "react";
 // import translation from "../../../public/locales/en/translation.json";
 
 import { postcardImages } from "../../constants/postcardImages";
@@ -18,15 +17,6 @@ type CardType = {
   itemNo: string;
   price: string;
 };
-
-const cardsStructure = [
-  {
-    cardName: "postcards.cards",
-    cardDescription: "postcards.cards",
-    cardItemNo: "postcards.cards",
-    cardPrice: "postcards.cards",
-  },
-];
 
 // names, prices, middle index are hadrcoded, is it ok if i dont plan to expand the slider, or...
 
@@ -51,7 +41,10 @@ function PostcardSlider() {
     collapsed: { width: "250px" },
   };
 
-  const cardsObj = t("postcards.cards");
+  // const cards = t("postcards.cards" as unknown as TemplateStringsArray);
+  // const cards = JSON.stringify(t("postcards.cards", { returnObjects: true }));
+  // const cardsArray = [JSON.parse(cards)];
+  const cardsArray = t("postcards.cards", { returnObjects: true });
 
   return (
     <section className="py-16">
@@ -107,9 +100,59 @@ function PostcardSlider() {
             </motion.div>
           ))} */}
 
-          {cardsStructure.map((item) => (
-            <div key={item.cardName}>{t(item.cardName)}</div>
+          {cardsArray.map((card: CardType, index: number) => (
+            <motion.div
+              key={card.itemNo}
+              className={`card cursor-pointer h-[300px] md:h-[600px] bg-cover bg-center rounded-[20px] ${
+                index === expandedIndex ? "expanded" : ""
+              }`}
+              variants={initialSize <= 768 ? cardSizesMobile : cardSizesDesktop}
+              initial="collapsed"
+              animate={index === expandedIndex ? "expanded" : "collapsed"}
+              transition={{ duration: 0.5 }}
+              onClick={() => handleCardClick(index)}
+              style={{
+                background: `linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.0)), url(${postcardImages[index]})`,
+                backgroundSize: `cover`,
+                backgroundPosition: `center`,
+              }}
+            >
+              <div className="card-content h-full flex flex-col justify-end">
+                <div className="card-footer rounded-b-[20px] bg-opacity-75 min-h-[100px] flex flex-col items-center justify-center">
+                  {index !== expandedIndex && (
+                    <h4 className="text-xl font-extrabold text-white">
+                      {card.name}
+                    </h4>
+                  )}
+
+                  {index === expandedIndex && (
+                    <div className="text-white flex flex-col">
+                      <h4 className="text-xl font-extrabold text-center">
+                        {`
+              ${card.name} - ${card.price}`}
+                      </h4>
+                      <span className="mt-2 text-center font-medium">
+                        {card.description}
+                      </span>
+                      <span className="mb-4 text-center font-medium">
+                        {card.itemNo}
+                      </span>
+                      <button
+                        className="rounded-full p-2 px-4 tracking-wider bg-layout-dark-green font-bold text-base mb-8 self-center
+              md:text-xl md:p-4 md:px-8"
+                      >
+                        Odrer
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
           ))}
+
+          {/* {t("postcards.cards" as unknown as TemplateStringsArray).map((item :) => (
+            t("postcards.cards" as unknown as TemplateStringsArray)
+          ))} */}
           {/* {(
             t("cards", {
               returnObjects: true,
