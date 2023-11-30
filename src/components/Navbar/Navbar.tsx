@@ -68,6 +68,7 @@ function NavBar({ isMobile }: CheckMobile): React.JSX.Element {
           className={`${buttonStyleHeader} 
           bg-layout-blue-gray 
             ${isMobile ? "flex" : "hidden lg:flex"}
+            ${i18n.resolvedLanguage === "en" ? "font-bold underline" : ""}
             `}
         >
           EN
@@ -77,6 +78,7 @@ function NavBar({ isMobile }: CheckMobile): React.JSX.Element {
           className={`${buttonStyleHeader} 
           bg-layout-blue-gray 
             ${isMobile ? "flex" : "hidden lg:flex"}
+            ${i18n.resolvedLanguage === "ru" ? "font-bold underline" : ""}
             `}
         >
           RU

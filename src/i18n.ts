@@ -5,11 +5,18 @@ import { initReactI18next } from "react-i18next";
 
 const defaultLanguage = window.navigator.language;
 
+declare module "i18next" {
+  interface CustomTypeOptions {
+    returnNull: false;
+  }
+}
+
 i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init<HttpBackendOptions>({
+    returnNull: false,
     fallbackLng: "en",
     lng: defaultLanguage,
     debug: true,
