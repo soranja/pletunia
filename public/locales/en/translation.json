@@ -18,6 +18,8 @@
     "contacts": "Contact us",
     "languageSwitch": "Ru"
   },
+  "addButton": "Add",
+  "addedButton": "Added",
   "orderButton": "Order",
   "orderForm": {
     "headline": "PLACE YOUR ORDER HERE",

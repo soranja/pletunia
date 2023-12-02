@@ -16,12 +16,18 @@ function NavBar({ isMobile }: CheckMobile): React.JSX.Element {
 
   return (
     <>
-      <nav className="items-center font-bold">
+      <nav
+        className={`
+        font-bold
+        ${isMobile ? "flex flex-col gap-y-6" : "flex grow items"}
+        `}
+      >
         <ul
-          className={`text-base cursor-pointer font-bold ${
+          className={`text-base cursor-pointer font-bold 
+          ${
             isMobile
-              ? "flex flex-col gap-y-6"
-              : "hidden lg:flex gap-x-6 items-center"
+              ? "flex flex-col gap-y-4"
+              : "hidden lg:flex gap-x-6 items-center grow"
           }`}
         >
           <li>
@@ -61,29 +67,34 @@ function NavBar({ isMobile }: CheckMobile): React.JSX.Element {
             </Link>
           </li>
         </ul>
-      </nav>
-      <div className="gap-x-2.5 text-white flex">
-        <button
-          onClick={() => changeLanguage("en")}
-          className={`${buttonStyleHeader} 
+        <div
+          className={`
+      gap-x-2.5 text-white
+      ${isMobile ? "flex" : "flex"}
+      `}
+        >
+          <button
+            onClick={() => changeLanguage("en")}
+            className={`${buttonStyleHeader} 
           bg-layout-blue-gray 
             ${isMobile ? "flex" : "hidden lg:flex"}
             ${i18n.resolvedLanguage === "en" ? "font-bold underline" : ""}
             `}
-        >
-          EN
-        </button>
-        <button
-          onClick={() => changeLanguage("ru")}
-          className={`${buttonStyleHeader} 
+          >
+            EN
+          </button>
+          <button
+            onClick={() => changeLanguage("ru")}
+            className={`${buttonStyleHeader} 
           bg-layout-blue-gray 
             ${isMobile ? "flex" : "hidden lg:flex"}
             ${i18n.resolvedLanguage === "ru" ? "font-bold underline" : ""}
             `}
-        >
-          RU
-        </button>
-      </div>
+          >
+            RU
+          </button>
+        </div>
+      </nav>
     </>
   );
 }

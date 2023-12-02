@@ -18,6 +18,8 @@
     "contacts": "Конкакты",
     "languageSwitch": "Eng"
   },
+  "addButton": "Добавить",
+  "addedButton": "Добавлено!",
   "orderButton": "Заказать",
   "orderForm": {
     "headline": "ОСТАВЬТЕ ЗАЯВКУ НА ЗАКАЗ",

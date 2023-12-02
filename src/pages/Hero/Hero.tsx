@@ -18,9 +18,9 @@ function Hero() {
     >
       <div
         className={`
-        gap-y-6 flex flex-col items-center justify-center
+        gap-y-6 flex flex-col justify-center
         md:gap-y-10 md:mt-16 md:pl-0
-        lg:gap-y-28 lg:items-start`}
+        lg:gap-y-28`}
       >
         <h2
           className={`font-serif font-extrabold text-3xl mt-5 mb-5 text-left 

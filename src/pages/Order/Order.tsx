@@ -1,10 +1,12 @@
 import React from "react";
 import GreenGirl from "../../data/img/cut/green_girl.jpg";
 import { useTranslation } from "react-i18next";
+import { CardType } from "../../types/cardType";
 
 function Order() {
   const initialSize = window.innerWidth;
   const [t, i18n] = useTranslation();
+  const cardsArray = t("postcards.cards", { returnObjects: true });
 
   return (
     <div
@@ -44,84 +46,73 @@ function Order() {
         <h4 className="text-2xl lg:text-3xl font-bold">
           {t("orderForm.choose")}
         </h4>
-        <div className="flex flex-col lg:flex-row gap-3 mb-8">
-          <div className="item001 flex gap-2 checked:bg-black">
+        <div className="flex flex-col gap-3 mb-8">
+          <div className="flex gap-x-6">
+            {cardsArray.map((card: CardType, index: number) => (
+              <div key={card.itemNo} className="flex gap-2 checked:bg-black">
+                <input
+                  type="checkbox"
+                  className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
+                  id={card.itemNo}
+                  value={card.name}
+                />
+                <label htmlFor={card.itemNo}>{card.name}</label>
+              </div>
+            ))}
+          </div>
+          <div className="info-inputs flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name">{t("orderForm.name")}</label>
+              <input
+                required
+                className="text-black px-5 lg:w-80 py-2 rounded-lg"
+                type="text"
+                id="name"
+                name="name"
+                defaultValue=""
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email">{t("orderForm.email")}</label>
+              <input
+                required
+                className="text-black px-5 lg:w-80 py-2 rounded-lg"
+                type="text"
+                id="email"
+                name="email"
+                defaultValue=""
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="phone">{t("orderForm.phone")}</label>
+              <input
+                required
+                className="text-black px-5 lg:w-80 py-2 rounded-lg"
+                type="tel"
+                id="phone"
+                name="phone"
+                defaultValue=""
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="comment">{t("orderForm.comment")}</label>
+              <textarea
+                className="text-black px-5 lg:w-80 py-5 rounded-xl"
+                id="comment"
+                name="comment"
+                defaultValue=""
+              />
+            </div>
             <input
-              type="checkbox"
-              className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
-              id="item0001"
-              value="Coraline"
-            />
-            <label htmlFor="item001">Coraline</label>
-          </div>
-          <div className="item002 flex gap-2">
-            <input
-              type="checkbox"
-              className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
-              id="item0002"
-              value="PumpkinJack"
-            />
-            <label htmlFor="item002">Pumpkin Jack</label>
-          </div>
-          <div className="item003 flex gap-2">
-            <input
-              type="checkbox"
-              className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
-              id="item0003"
-              value="Custom"
-            />
-            <label htmlFor="item003">Custom</label>
-          </div>
-        </div>
-        <div className="info-inputs flex flex-col gap-5">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="name">{t("orderForm.name")}</label>
-            <input
-              className="text-black px-5 lg:w-80 py-2 rounded-lg"
-              type="text"
-              id="name"
-              name="name"
-              defaultValue=""
+              className="mt-8 rounded-2xl p-5 px-10 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
+              type="submit"
+              value={`${t("orderButton")}!`}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="email">{t("orderForm.email")}</label>
-            <input
-              className="text-black px-5 lg:w-80 py-2 rounded-lg"
-              type="text"
-              id="email"
-              name="email"
-              defaultValue=""
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="phone">{t("orderForm.phone")}</label>
-            <input
-              className="text-black px-5 lg:w-80 py-2 rounded-lg"
-              type="tel"
-              id="phone"
-              name="phone"
-              defaultValue=""
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="comment">{t("orderForm.comment")}</label>
-            <textarea
-              className="text-black px-5 lg:w-80 py-5 rounded-xl"
-              id="comment"
-              name="comment"
-              defaultValue=""
-            />
-          </div>
-          <input
-            className="mt-8 rounded-2xl p-5 px-10 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
-            type="submit"
-            value={`${t("orderButton")}!`}
-          />
         </div>
       </div>
     </div>
   );
 }
-// make comment expandable
+
 export default Order;
