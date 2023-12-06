@@ -53,10 +53,10 @@ function Order() {
                 <input
                   type="checkbox"
                   className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
-                  id={card.itemNo}
+                  id={`${card.itemNo}`}
                   value={card.name}
                 />
-                <label htmlFor={card.itemNo}>{card.name}</label>
+                <label htmlFor={`${card.itemNo}`}>{card.name}</label>
               </div>
             ))}
           </div>
@@ -104,7 +104,7 @@ function Order() {
               />
             </div>
             <input
-              className="mt-8 rounded-2xl p-5 px-10 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
+              className="mt-8 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
               type="submit"
               value={`${t("orderButton")}!`}
             />

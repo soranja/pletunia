@@ -18,8 +18,7 @@
     "contacts": "Contact us",
     "languageSwitch": "Ru"
   },
-  "addButton": "Add",
-  "addedButton": "Added",
+
   "orderButton": "Order",
   "orderForm": {
     "headline": "PLACE YOUR ORDER HERE",
@@ -34,22 +33,29 @@
     "sectionDescription": "A variety of postcards: templated and custom. Contact us if you want to order an individual design!",
     "cards": [
       {
+
         "name": "CORALINE",
         "description": "An adventurous 11-year-old girl.",
-        "itemNo": "Item No. 0001",
-        "price": "1500"
+        "itemNo": 0,
+        "price": "1500",
+        "addButton": "Add",
+        "addedButton": "Added"
       },
       {
         "name": "PUMPKIN",
         "description": "Halloween's classic!",
-        "itemNo": "Item No. 0002",
-        "price": "1500"
+        "itemNo": 1,
+        "price": "1500",
+        "addButton": "Add",
+        "addedButton": "Added"
       },
       {
         "name": "CUSTOM",
         "description": "All we need is your photo.",
-        "itemNo": "Item No. 0003",
-        "price": "3000"
+        "itemNo": 2,
+        "price": "3000",
+        "addButton": "Add",
+        "addedButton": "Added"
       }
     ]
   }

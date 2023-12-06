@@ -18,8 +18,7 @@
     "contacts": "Конкакты",
     "languageSwitch": "Eng"
   },
-  "addButton": "Добавить",
-  "addedButton": "Добавлено!",
+
   "orderButton": "Заказать",
   "orderForm": {
     "headline": "ОСТАВЬТЕ ЗАЯВКУ НА ЗАКАЗ",
@@ -36,20 +35,26 @@
       {
         "name": "КОРАЛИНА",
         "description": "Девочка-приключение.",
-        "itemNo": "Товар №. 0001",
-        "price": "1500"
+        "itemNo": 0,
+        "price": "1500",
+        "addButton": "Добавить",
+        "addedButton": "Добавлено!"
       },
       {
         "name": "ТЫКВА",
         "description": "Хэллоуинская классика!",
-        "itemNo": "Товар №. 0002",
-        "price": "1500"
+        "itemNo": 1,
+        "price": "1500",
+        "addButton": "Добавить",
+        "addedButton": "Добавлено!"
       },
       {
         "name": "ПОД ЗАКАЗ",
         "description": "Всё, что нам нужно, это ваше фото или картинка.",
-        "itemNo": "Товар №. 0003",
-        "price": "3000"
+        "itemNo": 2,
+        "price": "3000",
+        "addButton": "Добавить",
+        "addedButton": "Добавлено!"
       }
     ]
   }
