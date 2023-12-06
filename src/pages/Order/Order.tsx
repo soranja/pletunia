@@ -47,7 +47,7 @@ function Order() {
           {t("orderForm.choose")}
         </h4>
         <div className="flex flex-col gap-3 mb-8">
-          <div className="flex gap-x-6 flex-col md: flex-row">
+          <div className="flex gap-x-6 flex-col md:flex-row">
             {cardsArray.map((card: CardType, index: number) => (
               <div key={card.itemNo} className="flex gap-2 checked:bg-black">
                 <input
