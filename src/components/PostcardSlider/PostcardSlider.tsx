@@ -4,34 +4,32 @@ import { postcardImages } from "../../constants/postcardImages";
 import { useTranslation } from "react-i18next";
 import { CardType } from "../../types/cardType";
 
-function PostcardSlider() {
+export function PostcardSlider() {
   const [t, i18n] = useTranslation();
   const initialSize = window.innerWidth;
-  const [expandedIndex, setExpandedIndex] = useState<null | number>(
-    initialSize <= 768 ? 0 : 1
-  );
-  const [addButtonText, toggleAddButtonText] = useState(true);
-  const [selectCard, setSelectCard] = useState(0);
+  const [expandedIndex, setExpandedIndex] = useState<number[]>([
+    initialSize <= 768 ? 0 : 1,
+  ]);
+  const [selectCard, setSelectCard] = useState<number[]>([]);
+
 
   const handleCardClick = (index: number) => {
-    setExpandedIndex(index === expandedIndex ? -1 : index);
+    if (selectCard.includes(cardsArray[index].itemNo)) {
+      return;
+    }
+    setExpandedIndex((prevIndecies) =>
+      prevIndecies.includes(index)
+        ? prevIndecies.filter((prevIndex) => prevIndex !== index)
+        : [...prevIndecies, index]
+    );
   };
 
-  // const handleAddedCard = () => {
-  // setExpandedIndex(expandedIndex);
-  // toggleAddButtonText(!addButtonText);
-  // () => toggleAddButtonText(!addButtonText)
-  // };
-
   const handleAddButtonClick = (id: number) => {
-    setSelectCard(id);
-    toggleAddButtonText(!addButtonText);
-
-    // ??? how to make it work ???
-    // - keep the crad expanded, select several cards
-    setExpandedIndex(id === expandedIndex ? id : -1);
-
-    console.log(id, addButtonText, expandedIndex);
+    setSelectCard((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((prevId) => prevId !== id)
+        : [...prevSelected, id]
+    );
   };
 
   const cardSizesDesktop = {
@@ -54,14 +52,17 @@ function PostcardSlider() {
             (card: CardType, index: number) => (
               <motion.div
                 key={card.itemNo}
-                className={`card cursor-pointer h-[300px] md:h-[600px] bg-cover bg-center rounded-[20px] select-none ${
-                  index === expandedIndex ? "expanded" : ""
-                }`}
+                className={`card cursor-pointer h-[300px] md:h-[600px] bg-cover bg-center rounded-[20px] select-none`}
                 variants={
                   initialSize <= 768 ? cardSizesMobile : cardSizesDesktop
                 }
                 initial="collapsed"
-                animate={index === expandedIndex ? "expanded" : "collapsed"}
+                animate={
+                  expandedIndex.includes(index) ||
+                  selectCard.includes(card.itemNo)
+                    ? "expanded"
+                    : "collapsed"
+                }
                 transition={{ duration: 0.5 }}
                 onClick={() => handleCardClick(index)}
                 style={{
@@ -72,66 +73,49 @@ function PostcardSlider() {
               >
                 <div className="card-content h-full flex flex-col justify-end">
                   <div className="card-footer rounded-b-[20px] bg-opacity-75 min-h-[100px] flex flex-col items-center justify-center">
-                    {index !== expandedIndex && (
+                    {!expandedIndex.includes(index) && (
                       <h4 className="text-xl font-extrabold text-white">
                         {card.name}
                       </h4>
                     )}
-
-                    {index === expandedIndex && (
+                    {(selectCard.includes(card.itemNo) ||
+                      expandedIndex.includes(index)) && (
                       <div className="text-white flex flex-col">
                         <h4 className="text-xl font-extrabold text-center">
                           {`
-              ${card.name} - ${card.price}`}
+                        ${card.name} - ${card.price} AMD
+                      `}
                         </h4>
                         <span className="mt-2 text-center font-medium">
                           {card.description}
                         </span>
                         <span className="mb-8 text-center font-medium"></span>
-                        <button
-                          className={`
-                        rounded-full p-2 px-4 tracking-wider font-bold text-base mb-8 self-center
-                        md:text-xl md:p-4 md:px-8 bg-layout-dark-green
-                        ${
-                          selectCard === card.itemNo
-                            ? "text-layout-dark-green bg-white"
-                            : "bg-layout-dark-green"
-                        }
-                        `}
-                          onClick={() => handleAddButtonClick(card.itemNo)}
-                        >
-                          {selectCard === card.itemNo
-                            ? card.addedButton
-                            : card.addButton}
-                          {/* {addButtonText ? card.addButton : card.addedButton} */}
-                        </button>
                       </div>
                     )}
+                    <button
+                      className={`
+                        rounded-full p-2 px-4 tracking-wider font-bold text-base my-8 self-center
+                        md:text-xl md:p-4 md:px-8 bg-layout-dark-green
+                        ${
+                          selectCard.includes(card.itemNo)
+                            ? "text-layout-dark-green bg-white"
+                            : "bg-layout-dark-green text-white"
+                        }
+                        `}
+                      onClick={() => handleAddButtonClick(card.itemNo)}
+                    >
+                      {selectCard.includes(card.itemNo)
+                        ? card.addedButton
+                        : card.addButton}
+                    </button>
                   </div>
                 </div>
               </motion.div>
             ),
-            console.log(cardsArray)
+            console.log(selectCard, expandedIndex)
           )}
         </div>
       </div>
     </section>
   );
 }
-
-export default PostcardSlider;
-
-/*
-
-                        ${
-                          addButtonText
-                            ? "bg-layout-dark-green"
-                            : "text-layout-dark-green bg-white"
-                        }
-
-onClick={handleAddedCard}
-{addButtonText ? t("addButton") : t("addedButton")}
-
-how to choose particular card, change it to "added" and keep the other intact + the expanded card
-
- */

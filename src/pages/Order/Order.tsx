@@ -1,12 +1,65 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import GreenGirl from "../../data/img/cut/green_girl.jpg";
 import { useTranslation } from "react-i18next";
 import { CardType } from "../../types/cardType";
+import axios from "axios";
 
-function Order() {
+interface OrderProps {
+  cardsData: Record<number, boolean>;
+}
+
+const Order: React.FC<OrderProps> = ({ cardsData }) => {
   const initialSize = window.innerWidth;
   const [t, i18n] = useTranslation();
   const cardsArray = t("postcards.cards", { returnObjects: true });
+
+  const [userName, setUserName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userPhone, setUserPhone] = useState<
+    string | number | readonly string[] | undefined
+  >("");
+  const [userComment, setUserComment] = useState<string>("");
+  const [userOrder, setUserOrder] = useState<string[]>([]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const botToken = process.env.REACT_APP_TOKEN;
+    const chatId = process.env.REACT_APP_CHAT_ID;
+
+    // const selectedCards = Object.keys(cardsData)
+    //   .filter((itemNo) => cardsData[parseInt(itemNo, 10)])
+    //   .map((itemNo) => cardsArray[parseInt(itemNo, 10)].name);
+
+    // setUserOrder();
+
+    const message =
+      "Name: " +
+      userName +
+      "\nEmail: " +
+      userEmail +
+      "\nPhone: " +
+      userPhone +
+      "\nOrder: " +
+      userOrder +
+      "\nComment: " +
+      userComment;
+
+    try {
+      await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        chat_id: chatId,
+        text: message,
+      });
+      console.log("Message sent successfully!");
+
+      setUserName("");
+      setUserEmail("");
+      setUserPhone("");
+      setUserComment("");
+    } catch (error) {
+      console.error("Error sending message: ", error);
+    }
+  };
 
   return (
     <div
@@ -55,12 +108,16 @@ function Order() {
                   className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
                   id={`${card.itemNo}`}
                   value={card.name}
+                  defaultChecked={cardsData[card.itemNo]}
                 />
                 <label htmlFor={`${card.itemNo}`}>{card.name}</label>
               </div>
             ))}
           </div>
-          <div className="info-inputs flex flex-col gap-5">
+          <form
+            className="info-inputs flex flex-col gap-5"
+            onSubmit={handleSubmit}
+          >
             <div className="flex flex-col gap-2">
               <label htmlFor="name">{t("orderForm.name")}</label>
               <input
@@ -69,7 +126,8 @@ function Order() {
                 type="text"
                 id="name"
                 name="name"
-                defaultValue=""
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -80,7 +138,8 @@ function Order() {
                 type="text"
                 id="email"
                 name="email"
-                defaultValue=""
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -91,7 +150,8 @@ function Order() {
                 type="tel"
                 id="phone"
                 name="phone"
-                defaultValue=""
+                value={userPhone}
+                onChange={(e) => setUserPhone(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -100,19 +160,20 @@ function Order() {
                 className="text-black px-5 lg:w-80 py-5 rounded-xl"
                 id="comment"
                 name="comment"
-                defaultValue=""
-              />
+                value={userComment}
+                onChange={(e) => setUserComment(e.target.value)}
+              ></textarea>
             </div>
             <input
               className="mt-8 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
               type="submit"
               value={`${t("orderButton")}!`}
             />
-          </div>
+          </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Order;

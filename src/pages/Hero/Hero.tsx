@@ -3,6 +3,7 @@ import HeroPostcard from "../../data/img/raw/postcards/iron-giant-hero.jpg";
 import Lighthouse from "../../data/img/cut/lighthouse.png";
 import "./Hero.css";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-scroll";
 
 function Hero() {
   const [t, i18n] = useTranslation();
@@ -39,9 +40,17 @@ function Hero() {
           <p>{t("hero.aboutGoods")}</p>
           <p>{t("hero.aboutDelivery")}</p>
         </div>
-        <button className="rounded-full p-5 px-10 tracking-wider bg-layout-dark-green font-bold text-xl self-start">
-          {t("orderButton")}
-        </button>
+        <Link
+          to="postcards"
+          spy={true}
+          smooth={true}
+          offset={-50}
+          duration={500}
+        >
+          <button className="rounded-full p-5 px-10 tracking-wider bg-layout-dark-green font-bold text-xl self-start">
+            {t("hero.want")}
+          </button>
+        </Link>
       </div>
       <div
         className="hidden justify-end items-end overflow-hidden relative
