@@ -1,5 +1,5 @@
-import React, { FormEvent, useState, useEffect } from "react";
-import GreenGirl from "../data/img/cut/green_girl.jpg";
+import React, { FormEvent, useState } from "react";
+import GreenGirl from "../data/img/pages/green_girl.jpg";
 import { useTranslation } from "react-i18next";
 import { CardType } from "../types/cardType";
 import axios from "axios";

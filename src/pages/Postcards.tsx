@@ -16,8 +16,6 @@ const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
   const { t }: any = useTranslation("translation", { i18n });
   // 'any' for reason t func errors -- 'For now, this is the only possible workaround. This is a TypeScript limitation that will be address at some point in the future.'
 
-
-
   // Expanded cards, not selected; Default is set by screen size
   const initialSize = window.innerWidth;
   const [expandedIndex, setExpandedIndex] = useState<number[]>([
@@ -26,8 +24,8 @@ const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
 
   // Selected cards arrays
   // const [selectedCards, setSelectedCards] = useState<SelectedCards>({
-  //   selectedIds: new Array(cardsArray.length).fill(9999),
-  //   areSelected: new Array(cardsArray.length).fill(false),
+  //   selectedIds: new Array(postcards.length).fill(9999),
+  //   areSelected: new Array(postcards.length).fill(false),
   // });
 
   // Handles cards expansion and collapse

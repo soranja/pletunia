@@ -4,7 +4,7 @@ import postcards from "../../data/postcards.json";
 
 const initialState: SelectInitialState = {
   selectedCardsIds: new Array(postcards.length).fill(9999),
-  //   areSelectedCards: new Array(cardsArray.length).fill(false),
+  // areSelectedCards: new Array(postcards.length).fill(false),
 };
 
 export const selectSlice = createSlice({
