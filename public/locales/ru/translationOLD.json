@@ -32,22 +32,32 @@
   "postcards": {
     "headline": "ОТКРЫТКИ",
     "sectionDescription": "Открытки по шаблону и на заказ (по фото или картинке). Напишите нам, если хотите индивидуальный дизайн!",
-    "addButton": "Добавить",
-    "addedButton": "Добавлено!",
-    "cards": {
-      "coraline": {
+    "cards": [
+      {
         "name": "КОРАЛИНА",
-        "description": "Девочка-приключение."
+        "description": "Девочка-приключение.",
+        "itemNo": 0,
+        "price": "1500",
+        "addButton": "Добавить",
+        "addedButton": "Добавлено!"
       },
-      "pumpkin": {
+      {
         "name": "ТЫКВА",
-        "description": "Хэллоуинская классика!"
+        "description": "Хэллоуинская классика!",
+        "itemNo": 1,
+        "price": "1500",
+        "addButton": "Добавить",
+        "addedButton": "Добавлено!"
       },
-      "custom": {
+      {
         "name": "ПОД ЗАКАЗ",
-        "description": "Всё, что нам нужно, это ваше фото или картинка."
+        "description": "Всё, что нам нужно, это ваше фото или картинка.",
+        "itemNo": 2,
+        "price": "3000",
+        "addButton": "Добавить",
+        "addedButton": "Добавлено!"
       }
-    }
+    ]
   },
   "modals": {
     "close": "Закрыть",

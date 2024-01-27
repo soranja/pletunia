@@ -9,12 +9,9 @@ module.exports = {
       fontFamily: {
         serif: ["Roboto Slab", ...defaultTheme.fontFamily.serif],
         sans: ["Raleway", ...defaultTheme.fontFamily.sans],
-        // cursive: ["Neucha", ...defaultTheme.fontFamily.cursive],
       },
       backgroundImage: {
-        hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/img/bg/hero.jpg')",
-        "postcards-pattern":
-          "linear-gradient(to top, rgba(188,69,69,.9), rgba(242,196,205,.7)), url('./data/img/bg/bg-red.jpg')",
+        hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/img/pages/hero.jpg')",
         postcards:
           "linear-gradient(rgba(1,1,1,.2), rgba(1,1,1,.2)), url('./data/animations/postcards-bg-poster.jpg')",
       },

@@ -12,20 +12,19 @@ declare module "i18next" {
 }
 
 i18n
-  .use(Backend)
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init<HttpBackendOptions>({
-    returnNull: false,
+  .use(Backend) // load translation using http -> /public/locales
+  .use(LanguageDetector) // detect user language
+  .use(initReactI18next) // init i18next in React, bind react-i18next to the instance
+  .init({
+    // returnNull: false,
     fallbackLng: "en",
+    fallbackNS: "translation",
+    ns: ["translation"],
     lng: defaultLanguage,
-    debug: true,
+    debug: true, // log more information in the developer console
     detection: {
       order: ["queryString", "cookie"],
       caches: ["cookie"],
-    },
-    interpolation: {
-      escapeValue: false,
     },
   });
 
