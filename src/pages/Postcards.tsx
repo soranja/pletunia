@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import backgroundVideo from "../data/animations/postcards-bg-video.mp4";
 import backgroundVideoPoster from "../data/animations/postcards-bg-poster.jpg";
-
-// PostcardSlider
 import { motion } from "framer-motion";
-import { CardType } from "../types/cardType";
-import { SelectedCards } from "../types/postcardTypes";
-import i18n from "../i18n";
-// import { cardsArray } from "../../constants/cardsArray";
-import postcards from "../data/postcards.json";
 
-const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
+// Data
+import postcards from "../data/postcards.json";
+import { CardType } from "../types/cardType";
+
+// Translation
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
+
+// Redux
+import { useAppSelector } from "../hooks/selector";
+import { useActions } from "../hooks/actions";
+
+const Postcards = () => {
   // Translation function
   const { t }: any = useTranslation("translation", { i18n });
   // 'any' for reason t func errors -- 'For now, this is the only possible workaround. This is a TypeScript limitation that will be address at some point in the future.'
@@ -21,62 +25,6 @@ const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
   const [expandedIndex, setExpandedIndex] = useState<number[]>([
     initialSize <= 768 ? 0 : 1,
   ]);
-
-  // Selected cards arrays
-  // const [selectedCards, setSelectedCards] = useState<SelectedCards>({
-  //   selectedIds: new Array(postcards.length).fill(9999),
-  //   areSelected: new Array(postcards.length).fill(false),
-  // });
-
-  // Handles cards expansion and collapse
-  const handleCardClick = (index: number) => {
-    if (selectedIds.includes(postcards[index].id)) {
-      return;
-    }
-    setExpandedIndex((prevIndecies) =>
-      prevIndecies.includes(index)
-        ? prevIndecies.filter((prevIndex) => prevIndex !== index)
-        : [...prevIndecies, index]
-    );
-  };
-
-  // Handles cards selections and syncs them to ORDER
-  const handleAddButtonClick = (id: number) => {
-    // setSelectedCards((prevSelected: SelectedCards) => {
-    //   const updatedSelectedIds = prevSelected.selectedIds.includes(id)
-    //     ? prevSelected.selectedIds.map((value: number, i: number) =>
-    //         i === id ? 9999 : value
-    //       )
-    //     : prevSelected.selectedIds.map((value: number, i: number) =>
-    //         i === id ? id : value
-    //       );
-    //   const updatedAreSelected = prevSelected.selectedIds.includes(id)
-    //     ? prevSelected.areSelected.map((value: boolean, i: number) =>
-    //         i === id ? false : value
-    //       )
-    //     : prevSelected.areSelected.map((value: boolean, i: number) =>
-    //         i === id ? true : value
-    //       );
-    //   const selectionMap: Record<number, boolean> = {};
-    //   updatedSelectedIds
-    //     .filter((value) => typeof value === "number")
-    //     .forEach((selectedId) => {
-    //       selectionMap[selectedId] = true;
-    //     });
-    //   prevSelected.selectedIds
-    //     .filter((prevId) => !updatedSelectedIds.includes(prevId))
-    //     .forEach((deselectedId) => {
-    //       if (typeof deselectedId === "number") {
-    //         selectionMap[deselectedId] = false;
-    //       }
-    //     });
-    //   updateCardsData(prevSelected.areSelected);
-    //   return {
-    //     selectedIds: updatedSelectedIds,
-    //     areSelected: updatedAreSelected,
-    //   };
-    // });
-  };
 
   // Cards size - expanded / collapsed for desktop
   const cardSizesDesktop = {
@@ -88,6 +36,52 @@ const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
   const cardSizesMobile = {
     expanded: { width: "300px" },
     collapsed: { width: "250px" },
+  };
+
+  const { selectedCardsIds, checkedCards } = useAppSelector(
+    (state) => state.selector
+  );
+  const { setSelectedCardsIds, setCheckedCards } = useActions();
+
+  // Handles cards expansion and collapse
+  const handleCardClick = (index: number) => {
+    if (selectedCardsIds.includes(postcards[index].id)) {
+      return;
+    }
+    setExpandedIndex((prevIndecies) =>
+      prevIndecies.includes(index)
+        ? prevIndecies.filter((prevIndex) => prevIndex !== index)
+        : [...prevIndecies, index]
+    );
+  };
+
+  const handleAddButtonClick = (id: number) => {
+    // Add cards Ids to an array, Ids are sorted
+    setSelectedCardsIds(
+      selectedCardsIds.includes(id)
+        ? selectedCardsIds
+            .filter((prevId) => prevId !== id)
+            .sort(function (a, b) {
+              return a - b;
+            })
+        : [...selectedCardsIds, id].sort(function (a, b) {
+            return a - b;
+          })
+    );
+
+    // Update checkedCards array
+    function updatedCheckedCards(prevCheckedCards: boolean[]) {
+      const updatedCheckedCardsArray = [...prevCheckedCards];
+      const indexToUpdate = postcards.findIndex((card) => card.id === id);
+
+      if (indexToUpdate !== -1) {
+        updatedCheckedCardsArray[indexToUpdate] =
+          !updatedCheckedCardsArray[indexToUpdate];
+      }
+      return updatedCheckedCardsArray;
+    }
+
+    setCheckedCards(updatedCheckedCards(checkedCards));
   };
 
   return (
@@ -137,7 +131,7 @@ const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
                   initial="collapsed"
                   animate={
                     expandedIndex.includes(index) ||
-                    selectedIds.includes(card.id)
+                    selectedCardsIds.includes(card.id)
                       ? "expanded"
                       : "collapsed"
                   }
@@ -152,13 +146,13 @@ const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
                   <div className="card-content h-full flex flex-col justify-end">
                     <div className="card-footer rounded-b-[20px] bg-opacity-75 min-h-[100px] flex flex-col items-center justify-center">
                       {!expandedIndex.includes(index) &&
-                        !selectedIds.includes(card.id) && (
+                        !selectedCardsIds.includes(card.id) && (
                           <h4 className="text-xl font-extrabold text-white">
                             {t(`postcards.cards.${card.name}.name` as const)}
                           </h4>
                         )}
 
-                      {(selectedIds.includes(card.id) ||
+                      {(selectedCardsIds.includes(card.id) ||
                         expandedIndex.includes(index)) && (
                         <div className="text-white flex flex-col">
                           <h4 className="text-xl font-extrabold text-center">
@@ -179,14 +173,14 @@ const Postcards: React.FC<SelectedCards> = ({ selectedIds }) => {
                         rounded-full p-2 px-4 tracking-wider font-bold text-base my-8 self-center
                         md:text-xl md:p-4 md:px-8 bg-layout-dark-green
                         ${
-                          selectedIds.includes(card.id)
+                          selectedCardsIds.includes(card.id)
                             ? "text-layout-dark-green bg-white"
                             : "bg-layout-dark-green text-white"
                         }
                         `}
                         onClick={() => handleAddButtonClick(card.id)}
                       >
-                        {selectedIds.includes(card.id)
+                        {selectedCardsIds.includes(card.id)
                           ? t(`postcards.${card.addedButton}` as const)
                           : t(`postcards.${card.addButton}` as const)}
                       </button>

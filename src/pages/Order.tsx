@@ -1,30 +1,75 @@
 import React, { FormEvent, useState } from "react";
 import GreenGirl from "../data/img/pages/green_girl.jpg";
-import { useTranslation } from "react-i18next";
+
+// Data
+import postcards from "../data/postcards.json";
 import { CardType } from "../types/cardType";
-import axios from "axios";
-import { SelectedCards } from "../types/postcardTypes";
+
+// Translation
+import { useTranslation } from "react-i18next";
 import i18n from "../i18n";
 
-interface OrderProps {
-  cardsData: Record<number, boolean>;
-}
+// Redux
+import { useAppSelector } from "../hooks/selector";
+import { useActions } from "../hooks/actions";
 
-const Order: React.FC<SelectedCards> = ({ selectedIds, areSelected }) => {
+// Form submission
+import axios from "axios";
+
+const Order = () => {
   const initialSize = window.innerWidth;
-  const { t } = useTranslation("translation", { i18n });
-  const cardsArray = t("postcards.cards", { returnObjects: true });
+  const { t }: any = useTranslation("translation", { i18n });
+  // 'any' for reason t func errors -- 'For now, this is the only possible workaround. This is a TypeScript limitation that will be address at some point in the future.'
 
+  const { checkedCards, selectedCardsIds } = useAppSelector(
+    (state) => state.selector
+  );
+  const { setSelectedCardsIds, setCheckedCards } = useActions();
+
+  // Duplicates handleAddButtonClick, so both components can update the same state
+  const handleTick = (id: number) => {
+    // Add cards Ids to an array, Ids are sorted
+    setSelectedCardsIds(
+      selectedCardsIds.includes(id)
+        ? selectedCardsIds
+            .filter((prevId) => prevId !== id)
+            .sort(function (a, b) {
+              return a - b;
+            })
+        : [...selectedCardsIds, id].sort(function (a, b) {
+            return a - b;
+          })
+    );
+
+    // Update checkedCards array
+    function updatedCheckedCards(prevCheckedCards: boolean[]) {
+      const updatedCheckedCardsArray = [...prevCheckedCards];
+      const indexToUpdate = postcards.findIndex((card) => card.id === id);
+
+      if (indexToUpdate !== -1) {
+        updatedCheckedCardsArray[indexToUpdate] =
+          !updatedCheckedCardsArray[indexToUpdate];
+      }
+      return updatedCheckedCardsArray;
+    }
+
+    setCheckedCards(updatedCheckedCards(checkedCards));
+  };
+
+  // Print names of selected postcards
+  const selectedPostcards = postcards
+    .filter((card) => selectedCardsIds.includes(card.id))
+    .map((card) => card.name);
+
+  // States for the order form & message
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPhone, setUserPhone] = useState<
     string | number | readonly string[] | undefined
   >("");
   const [userComment, setUserComment] = useState<string>("");
-  const [userOrder, setUserOrder] = useState<string[]>([]);
 
-  // console.log("CARDS FROM POSTCARDS, IN ORDER:", selectedIds, areSelected);
-
+  // Submit order to TG bot
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -39,7 +84,7 @@ const Order: React.FC<SelectedCards> = ({ selectedIds, areSelected }) => {
       "\nPhone: " +
       userPhone +
       "\nOrder: " +
-      userOrder +
+      selectedPostcards +
       "\nComment: " +
       userComment;
 
@@ -54,7 +99,6 @@ const Order: React.FC<SelectedCards> = ({ selectedIds, areSelected }) => {
       setUserEmail("");
       setUserPhone("");
       setUserComment("");
-      setUserOrder([]);
     } catch (error) {
       console.error("Error sending message: ", error);
     }
@@ -100,18 +144,21 @@ const Order: React.FC<SelectedCards> = ({ selectedIds, areSelected }) => {
         </h4>
         <div className="flex flex-col gap-3 mb-8">
           <div className="flex gap-x-6 flex-col md:flex-row">
-            {/* {cardsArray.map((card: CardType, index: number) => (
-              <div key={card.itemNo} className="flex gap-2 checked:bg-black">
+            {postcards.map((card: CardType, index: number) => (
+              <div key={card.id} className="flex gap-2 checked:bg-black">
                 <input
                   type="checkbox"
                   className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
-                  id={`${card.itemNo}`}
+                  id={`${card.id}`}
                   value={card.name}
-                  defaultChecked={areSelected[card.itemNo]}
+                  checked={checkedCards[index]}
+                  onChange={() => handleTick(card.id)}
                 />
-                <label htmlFor={`${card.itemNo}`}>{card.name}</label>
+                <label htmlFor={`${card.id}`}>
+                  {t(`postcards.cards.${card.name}.name` as const)}
+                </label>
               </div>
-            ))} */}
+            ))}
           </div>
           <form
             className="info-inputs flex flex-col gap-5"
