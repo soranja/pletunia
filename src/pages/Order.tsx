@@ -72,9 +72,10 @@ const Order = () => {
   // Submit order to TG bot
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    const botToken = process.env.REACT_APP_TOKEN;
-    const chatId = process.env.REACT_APP_CHAT_ID;
+    // MAKE THEM READABLE
+    // ORDER
+    const botToken = process.env.REACT_APP_VERCEL_ENV_TOKEN;
+    const chatId = process.env.REACT_APP_VERCEL_ENV_CHAT_ID;
 
     const message =
       "Name: " +
