@@ -1,6 +1,6 @@
 import React from "react";
-import HeroPostcard from "../data/img/pages/iron-giant-hero.jpg";
-import Lighthouse from "../data/img/pages/lighthouse.png";
+import HeroPostcard from "../data/imgs/pages/iron-giant-hero.jpg";
+import Lighthouse from "../data/imgs/pages/lighthouse.png";
 import i18n from "../i18n";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-scroll";

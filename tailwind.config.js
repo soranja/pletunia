@@ -11,7 +11,7 @@ module.exports = {
         sans: ["Raleway", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
-        hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/img/pages/hero.jpg')",
+        hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/imgs/pages/hero.jpg')",
         postcards:
           "linear-gradient(rgba(1,1,1,.2), rgba(1,1,1,.2)), url('./data/animations/postcards-bg-poster.jpg')",
       },

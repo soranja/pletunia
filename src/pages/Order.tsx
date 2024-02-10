@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import GreenGirl from "../data/img/pages/green_girl.jpg";
+import GreenGirl from "../data/imgs/pages/green_girl.jpg";
 
 // Data
 import postcards from "../data/postcards.json";
@@ -72,10 +72,16 @@ const Order = () => {
   // Submit order to TG bot
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // MAKE THEM READABLE
-    // ORDER
-    const botToken = process.env.REACT_APP_VERCEL_ENV_TOKEN;
-    const chatId = process.env.REACT_APP_VERCEL_ENV_CHAT_ID;
+
+    // local
+    const botToken = process.env.REACT_APP_TOKEN;
+    const chatId = process.env.REACT_APP_CHAT_ID;
+
+    // Vercel
+    // const botToken = process.env.REACT_APP_VERCEL_ENV_TOKEN;
+    // const chatId = process.env.REACT_APP_VERCEL_ENV_CHAT_ID;
+
+    // Replace TOKEN + logic with Node.js backend for SECURITY!
 
     const message =
       "Name: " +
@@ -85,7 +91,11 @@ const Order = () => {
       "\nPhone: " +
       userPhone +
       "\nOrder: " +
-      selectedPostcards +
+      selectedPostcards.map(
+        (postcard: string) =>
+          // Extra space at the beginning
+          " " + postcard.charAt(0).toUpperCase() + postcard.slice(1)
+      ) +
       "\nComment: " +
       userComment;
 
@@ -100,6 +110,7 @@ const Order = () => {
       setUserEmail("");
       setUserPhone("");
       setUserComment("");
+      setSelectedCardsIds([]);
     } catch (error) {
       console.error("Error sending message: ", error);
     }
