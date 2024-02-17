@@ -23,3 +23,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# ...
+.next
+next-env.d.ts
+dist
+# next-video
+animations/*
+!animations/*.json
+!animations/*.js
+!animations/*.ts
+public/_next-video

@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import GreenGirl from "../data/imgs/pages/green_girl.jpg";
+import GreenGirl from "../../public/imgs/pages/green_girl.jpg";
 
 // Data
 import postcards from "../data/postcards.json";
@@ -97,6 +97,10 @@ const Order = () => {
     // const botToken = process.env.REACT_APP_VERCEL_ENV_TOKEN;
     // const chatId = process.env.REACT_APP_VERCEL_ENV_CHAT_ID;
 
+    // Next
+    // const botToken = process.env.NEXT_PUBLIC_TOKEN
+    // const chatId = process.env.NEXT_PUBLIC_CHAT_ID
+
     // Replace TOKEN + logic with Node.js backend for SECURITY!
 
     // Message form
@@ -141,7 +145,7 @@ const Order = () => {
       flex flex-col  pt-20 pb-20 px-10 pr-28
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
       style={{
-        background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl})`,
+        background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl.src})`,
         backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
         backgroundPositionY: `67%`,
         backgroundPositionX: `49%`,
@@ -164,9 +168,18 @@ const Order = () => {
           className="
           hidden rounded-r-3xl
           lg:block lg:w-5/12 xl:w-4/12"
-          src={GreenGirl}
+          src={GreenGirl.src}
           alt="Green Girl"
         />
+        {/* <Image
+          src={"./pages/green_girl.jpg"}
+          className="
+          hidden rounded-r-3xl
+          lg:block lg:w-5/12 xl:w-4/12"
+          alt="Green Girl"
+          width={500}
+          height={500}
+        ></Image> */}
       </div>
 
       <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">

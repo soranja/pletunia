@@ -1,6 +1,6 @@
 import React from "react";
-import HeroPostcard from "../data/imgs/pages/iron-giant-hero.jpg";
-import Lighthouse from "../data/imgs/pages/lighthouse.png";
+import HeroPostcard from "../../public/imgs/pages/iron-giant-hero.jpg";
+import Lighthouse from "../../public/imgs/pages/lighthouse.png";
 import i18n from "../i18n";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-scroll";
@@ -60,14 +60,14 @@ function Hero() {
       >
         <img
           className="w-full rounded-3xl rotate-7 absolute -bottom-10 -right-11"
-          src={HeroPostcard}
+          src={HeroPostcard.src}
           alt="hero postcard"
         />
       </div>
       <div className="flex flex-col mt-10 justify-evenly items-center overflow-hidden lg:hidden">
         {/* <img className="w-3/12 md:hidden" src={Lighthouse} alt="charm" />
         <img className="w-5/12 md:hidden" src={Lighthouse} alt="charm" /> */}
-        <img className="md:w-10/12" src={Lighthouse} alt="charm" />
+        <img className="md:w-10/12" src={Lighthouse.src} alt="charm" />
       </div>
     </section>
   );

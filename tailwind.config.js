@@ -3,7 +3,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.tsx", "./index.css"],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -11,9 +11,9 @@ module.exports = {
         sans: ["Raleway", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
-        hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('./data/imgs/pages/hero.jpg')",
+        hero: "linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('../public/imgs/pages/hero.jpg')",
         postcards:
-          "linear-gradient(rgba(1,1,1,.2), rgba(1,1,1,.2)), url('./data/animations/postcards-bg-poster.jpg')",
+          "linear-gradient(rgba(1,1,1,.2), rgba(1,1,1,.2)), url('../public/imgs/postcards-bg/postcards-bg-poster.jpg')",
       },
       colors: {
         "layout-crail": "#BC4545",

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import backgroundVideo from "../data/animations/postcards-bg-video.mp4";
-import backgroundVideoPoster from "../data/animations/postcards-bg-poster.jpg";
-import { motion } from "framer-motion";
+import backgroundVideo from "../../public/videos/postcards-bg-video.mp4";
+import backgroundVideoPoster from "../../public/imgs/postcards-bg/postcards-bg-poster.jpg";
+import { MotionDiv } from "../constants/motion";
 
 // Data
 import postcards from "../data/postcards.json";
@@ -90,13 +90,13 @@ const Postcards = () => {
     >
       {initialSize >= 1280 && (
         <video
-          src={backgroundVideo}
-          poster={backgroundVideoPoster}
+          src={require(`${backgroundVideo}`)}
+          poster={backgroundVideoPoster.src}
           autoPlay
           loop
           muted
           className="object-cover absolute h-screen w-screen -z-10"
-        ></video>
+        />
       )}
 
       <div
@@ -122,7 +122,7 @@ const Postcards = () => {
           <div className="max-w-7xl">
             <div className="flex flex-col xl:flex-row justify-center xl:items-center px-10 gap-6">
               {postcards.map((card: CardType, index: number) => (
-                <motion.div
+                <MotionDiv
                   key={card.id}
                   className={`card cursor-pointer h-[300px] md:h-[600px] bg-cover bg-center rounded-[20px] select-none`}
                   variants={
@@ -186,7 +186,7 @@ const Postcards = () => {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
           </div>
