@@ -27,7 +27,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         hero: "2fr 1fr",
-        order: "1fr 1fr",
+        order: "3fr 2fr 1fr",
       },
       gridTemplateRows: {
         order: "4fr",

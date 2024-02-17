@@ -16,10 +16,16 @@ import { useActions } from "../hooks/actions";
 // Form submission
 import axios from "axios";
 
+// Local storage
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { OrderData } from "../types/orderData";
+
 const Order = () => {
   const initialSize = window.innerWidth;
   const { t }: any = useTranslation("translation", { i18n });
   // 'any' for reason t func errors -- 'For now, this is the only possible workaround. This is a TypeScript limitation that will be address at some point in the future.'
+
+  const { setItem, getItem, removeItem } = useLocalStorage("postcardsOrder");
 
   const { checkedCards, selectedCardsIds } = useAppSelector(
     (state) => state.selector
@@ -69,6 +75,16 @@ const Order = () => {
   >("");
   const [userComment, setUserComment] = useState<string>("");
 
+  // const [orderData, setOrderData] = useState<OrderData>();
+
+  const orderData = {
+    userName,
+    userComment,
+    userPhone,
+    userEmail,
+    selectedPostcards,
+  };
+
   // Submit order to TG bot
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -83,6 +99,7 @@ const Order = () => {
 
     // Replace TOKEN + logic with Node.js backend for SECURITY!
 
+    // Message form
     const message =
       "Name: " +
       userName +
@@ -99,11 +116,13 @@ const Order = () => {
       "\nComment: " +
       userComment;
 
+    // Message submit and form reset
     try {
       await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         chat_id: chatId,
         text: message,
       });
+
       alert("Message sent successfully!");
 
       setUserName("");
@@ -225,11 +244,19 @@ const Order = () => {
             <input
               className="mt-8 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
               type="submit"
+              onClick={() => setItem(orderData)}
               value={`${t("orderButton")}!`}
             />
           </form>
         </div>
       </div>
+      <div>
+        {[getItem()].map(
+          (order) =>
+            `Dear ${order.userName}, we are very glad to receive your order! You've selected the following items: ${order.selectedPostcards}. We'll reach out to you shortly. Have a nice day!`
+        )}
+      </div>
+      {/* <span className="font-extrabold"> PUT THIS INTO ORDER MESSAGE ABOVE</span> */}
     </div>
   );
 };
