@@ -1,5 +1,6 @@
+"use client";
+
 import React, { FormEvent, useState } from "react";
-import GreenGirl from "../../public/imgs/pages/green_girl.jpg";
 
 // Data
 import postcards from "../data/postcards.json";
@@ -7,7 +8,7 @@ import { CardType } from "../types/cardType";
 
 // Translation
 import { useTranslation } from "react-i18next";
-import i18n from "../i18n";
+import i18n from "../../i18n";
 
 // Redux
 import { useAppSelector } from "../hooks/selector";
@@ -145,7 +146,7 @@ const Order = () => {
       flex flex-col  pt-20 pb-20 px-10 pr-28
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
       style={{
-        background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${GreenGirl.src})`,
+        background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")`,
         backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
         backgroundPositionY: `67%`,
         backgroundPositionX: `49%`,
@@ -168,18 +169,9 @@ const Order = () => {
           className="
           hidden rounded-r-3xl
           lg:block lg:w-5/12 xl:w-4/12"
-          src={GreenGirl.src}
+          src="/images/pages/green_girl.jpg"
           alt="Green Girl"
         />
-        {/* <Image
-          src={"./pages/green_girl.jpg"}
-          className="
-          hidden rounded-r-3xl
-          lg:block lg:w-5/12 xl:w-4/12"
-          alt="Green Girl"
-          width={500}
-          height={500}
-        ></Image> */}
       </div>
 
       <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">

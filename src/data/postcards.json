@@ -4,7 +4,7 @@
     "name": "coraline",
     "description": "coraline",
     "price": 1500,
-    "imgUrl": "/imgs/postcards/coraline.jpg",
+    "imgUrl": "/images/postcards/coraline.jpg",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -13,7 +13,7 @@
     "name": "pumpkin",
     "description": "pumpkin",
     "price": 1500,
-    "imgUrl": "/imgs/postcards/pumpkin.jpg",
+    "imgUrl": "/images/postcards/pumpkin.jpg",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -22,7 +22,7 @@
     "name": "custom",
     "description": "custom",
     "price": 3000,
-    "imgUrl": "/imgs/postcards/custom.jpg",
+    "imgUrl": "/images/postcards/custom.jpg",
     "addButton": "addButton",
     "addedButton": "addedButton"
   }

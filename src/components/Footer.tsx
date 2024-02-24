@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-scroll";
-import Modal from "./Modal";
-import i18n from "../i18n";
+// import Modal from "./Modal";
+import i18n from "../../i18n";
 
 const media = {
   open: (url: string) => window.open(url, "_blank", "noreferrer"),
@@ -45,17 +47,17 @@ function Footer() {
               <button onClick={() => setIsOpen(true)}>
                 {t("footer.about")}
               </button>
-              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+              {/* <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                 {t("modals.about")}
-              </Modal>
+              </Modal> */}
             </li>
             <li>
               <button onClick={() => setIsOpen(true)}>
                 {t("footer.news")}
               </button>
-              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+              {/* <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                 {t("modals.news.12-28-2023")}
-              </Modal>
+              </Modal> */}
             </li>
             <li>
               <button
@@ -114,7 +116,7 @@ function Footer() {
                 className="flex gap-x-2"
                 onClick={() => media.open(media.whatsApp)}
               >
-                What's App
+                What&apos;s App
                 <svg
                   width="24px"
                   height="24px"

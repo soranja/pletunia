@@ -6,7 +6,5 @@ declare module "i18next" {
       translation: typeof translation;
     };
     allowObjectInHTMLChildren: true;
-    // returnNull: false;
-    // returnObjects: true;
   }
 }

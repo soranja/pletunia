@@ -1,9 +1,10 @@
+"use client";
+
 import React from "react";
-import { buttonStyleHeader } from "../constants/buttonStyleHeader";
 import { Link } from "react-scroll";
 
 import { useTranslation } from "react-i18next";
-import i18n from "../i18n";
+import i18n from "../../i18n";
 
 type CheckMobile = {
   isMobile: boolean;
@@ -76,8 +77,8 @@ function NavBar({ isMobile }: CheckMobile): React.JSX.Element {
         >
           <button
             onClick={() => changeLanguage("en")}
-            className={`${buttonStyleHeader} 
-          bg-layout-blue-gray 
+            className={`
+            rounded-full p-2 px-5 tracking-wider bg-layout-blue-gray 
             ${isMobile ? "flex" : "hidden lg:flex"}
             ${i18n.resolvedLanguage === "en" ? "font-bold underline" : ""}
             `}
@@ -86,8 +87,7 @@ function NavBar({ isMobile }: CheckMobile): React.JSX.Element {
           </button>
           <button
             onClick={() => changeLanguage("ru")}
-            className={`${buttonStyleHeader} 
-          bg-layout-blue-gray 
+            className={`rounded-full p-2 px-5 tracking-wider bg-layout-blue-gray 
             ${isMobile ? "flex" : "hidden lg:flex"}
             ${i18n.resolvedLanguage === "ru" ? "font-bold underline" : ""}
             `}

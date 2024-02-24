@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useState } from "react";
-import backgroundVideo from "../../public/videos/postcards-bg-video.mp4";
-import backgroundVideoPoster from "../../public/imgs/postcards-bg/postcards-bg-poster.jpg";
-import { MotionDiv } from "../constants/motion";
+// import backgroundVideo from "../../public/videos/postcards-bg-video.mp4";
+// import backgroundVideoPoster from "../../public/images/postcards-bg/postcards-bg-poster.jpg";
+// import { MotionDiv } from "../constants/motion";
+import { motion } from "framer-motion";
 
 // Data
 import postcards from "../data/postcards.json";
@@ -9,7 +12,7 @@ import { CardType } from "../types/cardType";
 
 // Translation
 import { useTranslation } from "react-i18next";
-import i18n from "../i18n";
+import i18n from "../../i18n";
 
 // Redux
 import { useAppSelector } from "../hooks/selector";
@@ -90,8 +93,8 @@ const Postcards = () => {
     >
       {initialSize >= 1280 && (
         <video
-          src={require(`${backgroundVideo}`)}
-          poster={backgroundVideoPoster.src}
+          src={require("../../public/videos/postcards-bg-video.mp4")}
+          poster="/images/postcards-bg/postcards-bg-poster.jpg"
           autoPlay
           loop
           muted
@@ -122,7 +125,7 @@ const Postcards = () => {
           <div className="max-w-7xl">
             <div className="flex flex-col xl:flex-row justify-center xl:items-center px-10 gap-6">
               {postcards.map((card: CardType, index: number) => (
-                <MotionDiv
+                <motion.div
                   key={card.id}
                   className={`card cursor-pointer h-[300px] md:h-[600px] bg-cover bg-center rounded-[20px] select-none`}
                   variants={
@@ -186,7 +189,7 @@ const Postcards = () => {
                       </button>
                     </div>
                   </div>
-                </MotionDiv>
+                </motion.div>
               ))}
             </div>
           </div>
