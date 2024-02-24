@@ -3,7 +3,11 @@ import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-const defaultLanguage = window.navigator.language;
+let defaultLanguage = "en";
+
+if (typeof window !== "undefined") {
+  defaultLanguage = window.navigator.language;
+}
 
 declare module "i18next" {
   interface CustomTypeOptions {
