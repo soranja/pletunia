@@ -1,10 +1,10 @@
-import { i18nRouter } from "next-i18n-router";
-import { NextRequest } from "next/server";
-import i18nConfig from "./i18nConfig";
+import { chain } from "./middlewares/chain";
+import { withDataFetch } from "./middlewares/withDataFetch";
+import { withI18n } from "./middlewares/withI18n";
 
-export function middleware(request: NextRequest) {
-  return i18nRouter(request, i18nConfig);
-}
+
+const middlewares = [withDataFetch, withI18n];
+export default chain(middlewares);
 
 // applies this middleware only to files in the app directory
 export const config = {

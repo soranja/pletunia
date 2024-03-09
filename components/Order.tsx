@@ -22,7 +22,6 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 // import { OrderData } from "../types/orderData";
 
 const Order = () => {
-
   const { t }: any = useTranslation(["home", "common"]);
   // 'any' for reason t func errors -- 'For now, this is the only possible workaround. This is a TypeScript limitation that will be address at some point in the future.'
 
@@ -90,19 +89,8 @@ const Order = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // local
-    const botToken = process.env.REACT_APP_TOKEN;
-    const chatId = process.env.REACT_APP_CHAT_ID;
-
-    // Vercel
-    // const botToken = process.env.REACT_APP_VERCEL_ENV_TOKEN;
-    // const chatId = process.env.REACT_APP_VERCEL_ENV_CHAT_ID;
-
-    // Next
-    // const botToken = process.env.NEXT_PUBLIC_TOKEN
-    // const chatId = process.env.NEXT_PUBLIC_CHAT_ID
-
-    // Replace TOKEN + logic with Node.js backend for SECURITY!
+    const botToken = process.env.TG_TOKEN;
+    const chatId = process.env.TG_CHAT_ID;
 
     // Message form
     const message =
