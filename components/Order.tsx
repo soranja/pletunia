@@ -2,6 +2,7 @@
 
 import React, { FormEvent, useState } from "react";
 import { initialSize } from "@/constants/initialSize";
+import { useRouter } from "next/navigation";
 
 // data
 import postcards from "../data/postcards.json";
@@ -85,9 +86,32 @@ const Order = () => {
     selectedPostcards,
   };
 
+  const router = useRouter();
   // Submit order to TG bot
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const order = {
+      userName,
+      userEmail,
+      userPhone,
+      userComment,
+      selectedPostcards,
+    };
+
+    // order id ??
+    // server 4000 ?? good for prod ??
+
+    const res = await fetch("http://localhost:4000/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
+
+    if (res.status === 201) {
+      router.refresh();
+      router.push("/orders");
+    }
 
     const botToken = process.env.TG_TOKEN;
     const chatId = process.env.TG_CHAT_ID;
@@ -109,7 +133,7 @@ const Order = () => {
       "\nComment: " +
       userComment;
 
-    // Message submit and form reset
+    //  Message submit and form reset
     try {
       await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         chat_id: chatId,
@@ -255,3 +279,9 @@ const Order = () => {
 };
 
 export default Order;
+
+// Remove order from the site, send the order to the data (server), give it an ID and show it to the client, send the order from order data to tg bot, confirm order submit to the client
+
+// Set up order message
+
+// Create validation for the client on every line

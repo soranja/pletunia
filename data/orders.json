@@ -1,0 +1,10 @@
+{
+  "orders": {
+    "id": 1,
+    "name": "Ivan",
+    "email": "orange@framecatcher@gmail.com",
+    "phone": "+374-98-678-828",
+    "comment": "no",
+    "selectedPostcards": ["coraline", "custom"]
+  }
+}
