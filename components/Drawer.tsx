@@ -32,7 +32,7 @@ function Drawer() {
           isOpen === true ? "sidebar-menu relative z-50" : "hidden"
         }`}
       >
-        <nav className="fixed bottom-0 md:top-0 right-0 flex flex-col w-[270px] max-w-sm py-14 px-10 text-white bg-layout-dark-green border-r ">
+        <nav className="fixed md:bottom-0 top-0 right-0 flex flex-col w-[270px] max-w-sm py-14 px-10 text-white bg-layout-dark-green border-r ">
           <div className="flex justify-between items-start mb-4">
             <Navbar isMobile={true}></Navbar>
             <button className="sidebar-to-close" onClick={ToggleSidebar}>

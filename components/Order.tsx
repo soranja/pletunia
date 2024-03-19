@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { FormEvent, useState } from "react";
 import { initialSize } from "@/constants/initialSize";
-import { useRouter } from "next/navigation";
 
 // data
 import postcards from "../data/postcards.json";
@@ -15,12 +15,8 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../hooks/selector";
 import { useActions } from "../hooks/actions";
 
-// form submission
-import axios from "axios";
-
 // local storage
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-// import { OrderData } from "../types/orderData";
 
 const Order = () => {
   const { t }: any = useTranslation(["home", "common"]);
@@ -76,80 +72,9 @@ const Order = () => {
   >("");
   const [userComment, setUserComment] = useState<string>("");
 
-  // const [orderData, setOrderData] = useState<OrderData>();
-
-  const orderData = {
-    userName,
-    userComment,
-    userPhone,
-    userEmail,
-    selectedPostcards,
-  };
-
-  const router = useRouter();
   // Submit order to TG bot
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    const order = {
-      userName,
-      userEmail,
-      userPhone,
-      userComment,
-      selectedPostcards,
-    };
-
-    // order id ??
-    // server 4000 ?? good for prod ??
-
-    const res = await fetch("http://localhost:4000/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(order),
-    });
-
-    if (res.status === 201) {
-      router.refresh();
-      router.push("/orders");
-    }
-
-    const botToken = process.env.TG_TOKEN;
-    const chatId = process.env.TG_CHAT_ID;
-
-    // Message form
-    const message =
-      "Name: " +
-      userName +
-      "\nEmail: " +
-      userEmail +
-      "\nPhone: " +
-      userPhone +
-      "\nOrder: " +
-      selectedPostcards.map(
-        (postcard: string) =>
-          // Extra space at the beginning
-          " " + postcard.charAt(0).toUpperCase() + postcard.slice(1)
-      ) +
-      "\nComment: " +
-      userComment;
-
-    //  Message submit and form reset
-    try {
-      await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        chat_id: chatId,
-        text: message,
-      });
-
-      alert("Message sent successfully!");
-
-      setUserName("");
-      setUserEmail("");
-      setUserPhone("");
-      setUserComment("");
-      setSelectedCardsIds([]);
-    } catch (error) {
-      console.error("Error sending message: ", error);
-    }
   };
 
   return (
@@ -177,6 +102,7 @@ const Order = () => {
         >
           {t("orderForm.headline")}
         </h3>
+
         <img
           className="
           hidden rounded-r-3xl
@@ -191,27 +117,27 @@ const Order = () => {
           {t("orderForm.choose")}
         </h4>
         <div className="flex flex-col gap-3 mb-8">
-          <div className="flex gap-x-6 flex-col md:flex-row">
-            {postcards.map((card: CardType, index: number) => (
-              <div key={card.id} className="flex gap-2 checked:bg-black">
-                <input
-                  type="checkbox"
-                  className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
-                  id={`${card.id}`}
-                  value={card.name}
-                  checked={checkedCards[index]}
-                  onChange={() => handleTick(card.id)}
-                />
-                <label htmlFor={`${card.id}`}>
-                  {t(`postcards.cards.${card.name}.name` as const)}
-                </label>
-              </div>
-            ))}
-          </div>
           <form
             className="info-inputs flex flex-col gap-5"
             onSubmit={handleSubmit}
           >
+            <div className="flex gap-x-6 flex-col md:flex-row">
+              {postcards.map((card: CardType, index: number) => (
+                <div key={card.id} className="flex gap-2 checked:bg-black">
+                  <input
+                    type="checkbox"
+                    className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
+                    id={`${card.id}`}
+                    value={card.name}
+                    checked={checkedCards[index]}
+                    onChange={() => handleTick(card.id)}
+                  />
+                  <label htmlFor={`${card.id}`}>
+                    {t(`postcards.cards.${card.name}.name` as const)}
+                  </label>
+                </div>
+              ))}
+            </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="name">{t("orderForm.name")}</label>
               <input
@@ -261,27 +187,14 @@ const Order = () => {
             <input
               className="mt-8 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
               type="submit"
-              onClick={() => setItem(orderData)}
+              // onClick={() => setItem(newOrder)}
               value={`${t("common:buttons.orderButton")}!`}
             />
           </form>
         </div>
       </div>
-      {/* <div>
-        {[getItem()].map(
-          (order) =>
-            `Dear ${order.userName}, we are very glad to receive your order! You've selected the following items: ${order.selectedPostcards}. We'll reach out to you shortly. Have a nice day!`
-        )}
-      </div> */}
-      {/* <span className="font-extrabold"> PUT THIS INTO ORDER MESSAGE ABOVE</span> */}
     </div>
   );
 };
 
 export default Order;
-
-// Remove order from the site, send the order to the data (server), give it an ID and show it to the client, send the order from order data to tg bot, confirm order submit to the client
-
-// Set up order message
-
-// Create validation for the client on every line
