@@ -62,7 +62,9 @@ const Order = () => {
   // Print names of selected postcards
   const selectedPostcards = postcards
     .filter((card) => selectedCardsIds.includes(card.id))
-    .map((card) => card.name);
+    .map((card) =>
+      navigator.language.includes("ru") ? card.nameRu : card.nameEn
+    );
 
   // States for the order form & message
   const [userName, setUserName] = useState<string>("");

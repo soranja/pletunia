@@ -33,11 +33,15 @@ function Navbar({ isMobile }: CheckMobile): React.JSX.Element {
           }`}
         >
           <li>
-            {t("navbar.postcards")}
+            <LinkScroll to={"postcards"} offset={-50}>
+              {t("navbar.postcards")}
+            </LinkScroll>
             <div className="hidden text-xxs pl-1.5 mt-0.5">▼</div>
           </li>
           <li className="hidden">{"navbar.bracelets"}</li>
-          <li>{t("buttons.orderButton")}</li>
+          <LinkScroll to={"order"} offset={-90}>
+            <li>{t("buttons.orderButton")}</li>
+          </LinkScroll>
           <LinkScroll to={"contacts"} offset={50}>
             <li>{t("navbar.contacts")}</li>
           </LinkScroll>

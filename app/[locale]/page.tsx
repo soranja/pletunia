@@ -16,7 +16,11 @@ const Postcards = dynamic(() => import("@/components/Postcards"), {
   ssr: false,
 });
 
-const Order = dynamic(() => import("@/components/Order"), {
+// const Order = dynamic(() => import("@/components/Order"), {
+//   ssr: false,
+// });
+
+const OrderForm = dynamic(() => import("@/components/OrderForm"), {
   ssr: false,
 });
 
@@ -26,7 +30,8 @@ export default function Home() {
       <main>
         <Hero></Hero>
         <Postcards></Postcards>
-        <Order></Order>
+        {/* <Order></Order> */}
+        <OrderForm></OrderForm>
       </main>
     </Provider>
   );
