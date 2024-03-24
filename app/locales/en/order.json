@@ -1,0 +1,9 @@
+{
+  "emailConfirmation": {
+    "greeting": "Hi, {{user}}!",
+    "thanks": "Thank you for your order.",
+    "message": "A confirmation email is already on the way to your mailbox ({{email}}).",
+    "notReceived": "If you haven't gotten a message for some reason, please write to us directly at:",
+    "copyEmailButton": "Copy Email"
+  }
+}

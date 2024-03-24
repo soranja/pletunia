@@ -37,10 +37,14 @@ function Footer() {
           lg:flex-row lg:gap-x-6"
           >
             <li>
-              <button onClick={() => setIsOpen(true)}>{t("footer.about")}</button>
+              <button onClick={() => setIsOpen(true)}>
+                {t("footer.about")}
+              </button>
             </li>
             <li>
-              <button onClick={() => setIsOpen(true)}>{t("footer.news")}</button>
+              <button onClick={() => setIsOpen(true)}>
+                {t("footer.news")}
+              </button>
             </li>
             <li>
               <button

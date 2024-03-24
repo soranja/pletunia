@@ -6,11 +6,11 @@ import { useTranslation } from "react-i18next";
 import LinkScroll from "./LinkScroll";
 
 function Hero() {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <section
-      className="
+      className="hero
       bg-hero bg-cover h-screen grid pl-10 pr-5 grid-cols-hero text-white mt-0
       md:px-20 md:pl-10 md:pr-0 
       lg:pl-40"
@@ -36,11 +36,15 @@ function Hero() {
           lg:text-2xl 
           `}
         >
-          <p className="py-1 opacity-90 not-first:mb-4">{t("hero.aboutGoods")}</p>
+          <p className="py-1 opacity-90 not-first:mb-4">
+            {t("hero.aboutGoods")}
+          </p>
           <p className="py-1 opacity-90">{t("hero.aboutDelivery")}</p>
         </div>
         <button className="rounded-full p-5 px-10 tracking-wider bg-layout-dark-green font-bold text-xl self-start">
-          {t("hero.want")}
+          <LinkScroll to={"postcards"} offset={-50}>
+            {t("hero.want")}
+          </LinkScroll>
         </button>
       </div>
       <div

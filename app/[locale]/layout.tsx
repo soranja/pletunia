@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "Postcards, postcards constructors sets, and friendship bracelets from Yerevan",
 };
 
-const i18nNamespaces = ["home", "common", "news"];
+const i18nNamespaces = ["home", "common", "news", "order"];
 
 export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));

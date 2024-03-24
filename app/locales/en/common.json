@@ -3,6 +3,7 @@
     "close": "Close",
     "open": "Open",
     "orderButton": "Order",
+    "orderInProgress": "Ordering in progress...",
     "want": "I want!",
     "languageSwitch": "Ru"
   },

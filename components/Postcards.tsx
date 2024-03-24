@@ -90,7 +90,9 @@ const Postcards = () => {
 
   return (
     <section
-      className={`${initialSize <= 1280 ? "bg-postcards bg-cover" : ""}`}
+      className={`postcards
+      ${initialSize <= 1280 ? "bg-postcards bg-cover" : ""}`}
+      id="postcards"
     >
       {initialSize >= 1280 && (
         <video
@@ -106,7 +108,6 @@ const Postcards = () => {
       <div
         className="pt-16 flex flex-col bg-white/[0.1]  
         lg:items-center"
-        id="postcards"
       >
         <h3
           className="text-white text-4xl pl-10 font-extrabold my-5 mb-12

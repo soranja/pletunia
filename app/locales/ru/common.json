@@ -2,7 +2,8 @@
   "buttons": {
     "close": "Закрыть",
     "open": "Открыть",
-    "orderButton": "Заказ",
+    "orderButton": "Заказать",
+    "orderInProgress": "Заказываем...",
     "languageSwitch": "Eng"
   },
   "copyright": "2024 Ivan Zakharov",

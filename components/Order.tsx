@@ -1,35 +1,133 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-
-import React, { FormEvent, useState } from "react";
+/* eslint-disable react/no-unescaped-entities */
+import React, { useState, useRef, useEffect } from "react";
 import { initialSize } from "@/constants/initialSize";
+
+// translation
+import { useTranslation } from "react-i18next";
 
 // data
 import postcards from "../data/postcards.json";
 import { CardType } from "../types/cardType";
 
-// translation
-import { useTranslation } from "react-i18next";
-
 // redux
 import { useAppSelector } from "../hooks/selector";
 import { useActions } from "../hooks/actions";
 
+// ui
+import { Label } from "./ui/Label";
+import { Input } from "./ui/Input";
+import Image from "next/image";
+
 // local storage
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-const Order = () => {
-  const { t }: any = useTranslation(["home", "common"]);
-  // 'any' for reason t func errors -- 'For now, this is the only possible workaround. This is a TypeScript limitation that will be address at some point in the future.'
+// type safety and guards
+function isInputNamedElement(
+  e: Element
+): e is HTMLInputElement & { name: string } {
+  return "value" in e && "name" in e;
+}
 
-  const { setItem, getItem, removeItem } = useLocalStorage("postcardsOrder");
+interface FormDataType {
+  selectedPostcards: string[];
+  name: string;
+  email: string;
+  comment: string;
+}
 
+// the component
+function OrderForm() {
+  // ========================================
+
+  // Data fetching and localStorage
+  const [state, setState] = useState<string>();
+  const formRef = useRef<HTMLFormElement>(null);
+  // formData for getItem
+  const [formData, setFormData] = useState<FormDataType>();
+  const localStorageKey = "formData";
+  const { setItem, getItem, removeItem } = useLocalStorage(localStorageKey);
+
+  // Click event: triggers submission, reset, localStorage; updates setState.
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setState("loading");
+    // Collect data and send it to POST API
+    await submitFormData();
+    setState("ready");
+    resetForm();
+  }
+
+  // Collect data from form, send it to POST API, and add it to localStorage
+  async function submitFormData() {
+    // formData for POST API and setItem
+    const formData: Record<string, string | string[] | number[]> = {};
+
+    Array.from(formRef.current?.elements || [])
+      .filter(isInputNamedElement)
+      .forEach((field) => {
+        if (!field.name) return;
+        if (field.type === "checkbox") {
+          if (!formData[field.name]) {
+            formData[field.name] = [];
+          }
+          if ((field as HTMLInputElement).checked) {
+            (formData[field.name] as string[]).push(field.value);
+          }
+        } else {
+          formData[field.name] = field.value;
+        }
+      });
+
+    await fetch("/api/orders", {
+      method: "POST",
+      body: JSON.stringify({
+        selectedPostcards: selectedPostcards.map(
+          (postcard: string) =>
+            // Extra space at the beginning
+            " " + postcard.charAt(0).toUpperCase() + postcard.slice(1)
+        ),
+        name: formData.name,
+        email: formData.email,
+        comment: formData.comment,
+        lang: navigator.language,
+      }),
+    });
+
+    // Add form data to local storage
+    setItem(formData);
+  }
+
+  // Reset form
+  function resetForm() {
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+
+    // Clear selected postcards and their checkboxes (update Redux state)
+    setSelectedCardsIds([]);
+    setCheckedCards(new Array(postcards.length).fill(false));
+  }
+
+  useEffect(() => {
+    // Retrieve form data from localStorage
+    const formDataFromLocalStorage = getItem();
+    setFormData(formDataFromLocalStorage);
+    console.log(formDataFromLocalStorage);
+    // if (formDataFromLocalStorage) {
+    //
+    // }
+  }, [state]);
+
+  // ========================================
+
+  // Postcards updation
   const { checkedCards, selectedCardsIds } = useAppSelector(
     (state) => state.selector
   );
   const { setSelectedCardsIds, setCheckedCards } = useActions();
 
-  // Duplicates handleAddButtonClick, so both components can update the same state
+  // Duplicate handleAddButtonClick, so both components can update the same state
   const handleTick = (id: number) => {
     // Add cards Ids to an array, Ids are sorted
     setSelectedCardsIds(
@@ -59,30 +157,29 @@ const Order = () => {
     setCheckedCards(updatedCheckedCards(checkedCards));
   };
 
-  // Print names of selected postcards
+  // Print names of selected postcards (relies on user's browser)
   const selectedPostcards = postcards
     .filter((card) => selectedCardsIds.includes(card.id))
     .map((card) =>
       navigator.language.includes("ru") ? card.nameRu : card.nameEn
     );
 
-  // States for the order form & message
-  const [userName, setUserName] = useState<string>("");
-  const [userEmail, setUserEmail] = useState<string>("");
-  const [userPhone, setUserPhone] = useState<
-    string | number | readonly string[] | undefined
-  >("");
-  const [userComment, setUserComment] = useState<string>("");
+  // ========================================
 
-  // Submit order to TG bot
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-  };
+  // Translation
+  const { t }: any = useTranslation(["home", "common", "order"]);
+  // 'any' for reason t func errors -- 'For now, this is the only possible workaround. This is a TypeScript limitation that will be address at some point in the future.'
+
+  // ========================================
+
+  // Text copying
+  const [copied, setCopiedId] = useState<string>();
+  const [copiedText, setCopiedText] = useState<string>();
 
   return (
-    <div
-      className="text-white 
-      flex flex-col  pt-20 pb-20 px-10 pr-28
+    <section
+      className="order
+      text-white flex flex-col pt-20 pb-20 px-10 pr-28
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")`,
@@ -93,9 +190,9 @@ const Order = () => {
       id="order"
     >
       <div
-        className="
-      left-column flex flex-col lg:items-end
-      lg:pr-24"
+        className="left-column 
+        flex flex-col 
+        lg:items-end lg:pr-24"
       >
         <h3
           className="text-3xl font-extrabold mb-12 
@@ -113,90 +210,89 @@ const Order = () => {
           alt="Green Girl"
         />
       </div>
-
-      <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
+      <div className="center-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
         <h4 className="text-2xl lg:text-3xl font-bold">
           {t("orderForm.choose")}
         </h4>
-        <div className="flex flex-col gap-3 mb-8">
-          <form
-            className="info-inputs flex flex-col gap-5"
-            onSubmit={handleSubmit}
-          >
-            <div className="flex gap-x-6 flex-col md:flex-row">
-              {postcards.map((card: CardType, index: number) => (
-                <div key={card.id} className="flex gap-2 checked:bg-black">
-                  <input
-                    type="checkbox"
-                    className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
-                    id={`${card.id}`}
-                    value={card.name}
-                    checked={checkedCards[index]}
-                    onChange={() => handleTick(card.id)}
-                  />
-                  <label htmlFor={`${card.id}`}>
-                    {t(`postcards.cards.${card.name}.name` as const)}
-                  </label>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name">{t("orderForm.name")}</label>
-              <input
-                required
-                className="text-black px-5 lg:w-80 py-2 rounded-lg"
-                type="text"
-                id="name"
-                name="name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email">{t("orderForm.email")}</label>
-              <input
-                required
-                className="text-black px-5 lg:w-80 py-2 rounded-lg"
-                type="text"
-                id="email"
-                name="email"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="phone">{t("orderForm.phone")}</label>
-              <input
-                required
-                className="text-black px-5 lg:w-80 py-2 rounded-lg"
-                type="tel"
-                id="phone"
-                name="phone"
-                value={userPhone}
-                onChange={(e) => setUserPhone(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="comment">{t("orderForm.comment")}</label>
-              <textarea
-                className="text-black px-5 lg:w-80 py-5 rounded-xl"
-                id="comment"
-                name="comment"
-                value={userComment}
-                onChange={(e) => setUserComment(e.target.value)}
-              ></textarea>
-            </div>
-            <input
-              className="mt-8 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
-              type="submit"
-              // onClick={() => setItem(newOrder)}
-              value={`${t("common:buttons.orderButton")}!`}
-            />
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
 
-export default Order;
+        <form
+          className="flex flex-col gap-5"
+          onSubmit={handleSubmit}
+          ref={formRef}
+        >
+          <div className="flex gap-x-6 flex-col md:flex-row">
+            {postcards.map((card: CardType, index: number) => (
+              <div key={card.id} className="flex gap-2 checked:bg-black">
+                <input
+                  type="checkbox"
+                  className="text-green-600 bg-gray-100 border-gray-300 rounded accent-green-600"
+                  id={`${card.id}`}
+                  name="selectedPostcards"
+                  value={card.name}
+                  checked={checkedCards[index]}
+                  onChange={() => handleTick(card.id)}
+                />
+                <label htmlFor={`${card.id}`}>
+                  {t(`postcards.cards.${card.name}.name` as const)}
+                </label>
+              </div>
+            ))}
+          </div>
+          <Label htmlFor="name">{t("orderForm.name")}</Label>
+          <Input id="name" name="name" />
+          <Label htmlFor="email">{t("orderForm.email")}</Label>
+          <Input id="email" name="email" />
+          <Label htmlFor="comment">{t("orderForm.comment")}</Label>
+          <textarea
+            id="comment"
+            name="comment"
+            className="text-black px-5 lg:w-80 py-5 rounded-xl"
+          ></textarea>
+          <button
+            className="mt-8 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
+            disabled={state === "loading"}
+            onClick={getItem() && removeItem}
+          >
+            {state === "loading"
+              ? `${t("common:buttons.orderInProgress")}`
+              : `${t("common:buttons.orderButton")}!`}
+          </button>
+        </form>
+      </div>
+      {state === "ready" && (
+        <div className="right-column flex flex-col gap-y-3 items-center text-center">
+          <Image
+            className="inline"
+            src="/images/svgs-icons/email.svg"
+            height={24}
+            width={24}
+            alt="email-icon"
+          ></Image>
+          <h4>
+            {t("order:emailConfirmation.greeting", { user: formData?.name })}
+          </h4>
+          <h3>{t("order:emailConfirmation.thanks")}</h3>
+          <p>
+            {t("order:emailConfirmation.message", { email: formData?.email })}
+          </p>
+          <p>{t("order:emailConfirmation.notReceived")}</p>
+          <span className="my-5 font-bold cursor-pointer">
+            pletunia.orders@gmail.com
+          </span>
+          {/* <button
+          onClick={async () => {
+            await navigator.clipboard.writeText("pletunia.orders@gmail.com");
+            setCopiedId("write-text");
+          }}
+        >
+          {copied === "write-text"
+            ? "Copied!"
+            : t("order:emailConfirmation.copyEmailButton")}
+        </button> */}
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default OrderForm;
