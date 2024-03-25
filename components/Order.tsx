@@ -46,7 +46,7 @@ function OrderForm() {
   // Data fetching, localStorage, and ID generating*
   const [state, setState] = useState<string>();
   const formRef = useRef<HTMLFormElement>(null);
-  // formData for getItem
+  // formData for getItem (noId and address)
   const [formData, setFormData] = useState<FormDataType>();
   const localStorageKey = "formData";
   const { setItem, getItem, removeItem } = useLocalStorage(localStorageKey);
@@ -98,11 +98,13 @@ function OrderForm() {
         name: formData.name,
         email: formData.email,
         comment: formData.comment,
-        userAddress: formData.userAddress,
         lang: navigator.language,
         orderId: nanoid(),
+        userAddress: formData.userAddress,
       }),
     });
+
+    console.log(formData, selectedPostcards);
 
     // Add form data to local storage
     setItem(formData);
@@ -251,8 +253,8 @@ function OrderForm() {
           <Input id="name" name="name" />
           <Label htmlFor="email">{t("orderForm.email")}</Label>
           <Input id="email" name="email" />
-          <Label htmlFor="address">{t("orderForm.address")}</Label>
-          <Input id="address" name="address" />
+          <Label htmlFor="userAddress">{t("orderForm.address")}</Label>
+          <Input id="userAddress" name="userAddress" />
           <Label htmlFor="comment">{t("orderForm.comment")}</Label>
           <textarea
             id="comment"

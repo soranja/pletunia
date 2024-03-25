@@ -38,7 +38,7 @@ export const OrderEmail = ({
   userAddress,
 }: OrderEmailProps) => {
   // lang relies on user's browser
-  
+
   return (
     <Html lang={lang}>
       <Tailwind>
@@ -55,15 +55,15 @@ export const OrderEmail = ({
         />
         <>
           <Preview>Плетунья благодорит вас за заказ!</Preview>
-          <Body className="bg-emerald-950 my-12 mx-auto">
-            <Container className="bg-green-900 text-white p-5 rounded-lg shadow-lg pt-10">
+          <Body className="bg-slate-100">
+            <Container className="bg-white text-black p-5 shadow-lg pt-10 my-20 mx-auto">
               <Img
                 src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
                 alt="pletunia"
                 className="rounded-full mx-auto w-24"
               ></Img>
               <Heading as="h2" className="text-center text-xl">
-                Здравствуйте, Юзер{name}!
+                Здравствуйте, {name}!
               </Heading>
               <Section className="p-5">
                 <Row className="mb-8">
@@ -94,7 +94,7 @@ export const OrderEmail = ({
                       pletunia.orders@gmail.com или в Телеграм:{" "}
                       <Link
                         href="https://t.me/Alyonka_che"
-                        className="text-amber-500 visited:text-rose-500"
+                        className="visited:text-rose-500"
                       >
                         @Alyonka_che
                       </Link>
