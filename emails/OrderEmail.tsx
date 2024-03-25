@@ -24,6 +24,7 @@ interface OrderEmailProps {
   name: string;
   comment: string;
   lang: string;
+  orderId: string;
 }
 
 export const OrderEmail = ({
@@ -31,6 +32,7 @@ export const OrderEmail = ({
   name,
   comment,
   lang,
+  orderId,
 }: OrderEmailProps) => {
   // lang relies on user's browser
   return (
@@ -42,20 +44,21 @@ export const OrderEmail = ({
           <Preview>АЛОХА! Спасибо за заказ!</Preview>
           <Body>
             <Container
-              // className="text-white 
-              // flex flex-col  pt-20 pb-20 px-10 pr-28
-              // lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
-              // style={{
-              //   background:
-              //     'linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")',
-              //   backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
-              //   backgroundPositionY: `67%`,
-              //   backgroundPositionX: `49%`,
-              // }}
+            // className="text-white
+            // flex flex-col  pt-20 pb-20 px-10 pr-28
+            // lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
+            // style={{
+            //   background:
+            //     'linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")',
+            //   backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
+            //   backgroundPositionY: `67%`,
+            //   backgroundPositionX: `49%`,
+            // }}
             >
               <Heading>Привет, {name}</Heading>
               <Section className="px-6 py-10">
                 <Column>
+                  <Text>Номер вашего заказа: {orderId}</Text>
                   <Text>Вы выбрали {selectedPostcards}.</Text>
                   <Text>Примечания, доп. контакты: {comment}</Text>
                   <Text>

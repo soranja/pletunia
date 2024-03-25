@@ -22,6 +22,9 @@ import Image from "next/image";
 // local storage
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
+// id generator
+import { customAlphabet } from "nanoid";
+
 // type safety and guards
 function isInputNamedElement(
   e: Element
@@ -40,7 +43,7 @@ interface FormDataType {
 function OrderForm() {
   // ========================================
 
-  // Data fetching and localStorage
+  // Data fetching, localStorage, and ID generating*
   const [state, setState] = useState<string>();
   const formRef = useRef<HTMLFormElement>(null);
   // formData for getItem
@@ -79,6 +82,11 @@ function OrderForm() {
         }
       });
 
+    // ID generating
+    // * nano id is used temporarily, while we don't have a proper database
+    const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const nanoid = customAlphabet(alphabet, 10);
+
     await fetch("/api/orders", {
       method: "POST",
       body: JSON.stringify({
@@ -91,6 +99,7 @@ function OrderForm() {
         email: formData.email,
         comment: formData.comment,
         lang: navigator.language,
+        orderId: nanoid(),
       }),
     });
 
@@ -279,15 +288,15 @@ function OrderForm() {
             pletunia.orders@gmail.com
           </span>
           <button
-          onClick={async () => {
-            await navigator.clipboard.writeText("pletunia.orders@gmail.com");
-            setCopiedId("write-text");
-          }}
-        >
-          {copied === "write-text"
-            ? "Copied!"
-            : t("order:emailConfirmation.copyEmailButton")}
-        </button>
+            onClick={async () => {
+              await navigator.clipboard.writeText("pletunia.orders@gmail.com");
+              setCopiedId("write-text");
+            }}
+          >
+            {copied === "write-text"
+              ? "Copied!"
+              : t("order:emailConfirmation.copyEmailButton")}
+          </button>
         </div>
       )}
     </section>
