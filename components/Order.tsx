@@ -174,9 +174,6 @@ function OrderForm() {
 
   // Email copying
   const [copied, setCopiedId] = useState<string>();
-  const [copiedText, setCopiedText] = useState<string>();
-
-
 
   return (
     <section
