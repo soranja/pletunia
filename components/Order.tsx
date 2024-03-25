@@ -98,6 +98,7 @@ function OrderForm() {
         name: formData.name,
         email: formData.email,
         comment: formData.comment,
+        userAddress: formData.userAddress,
         lang: navigator.language,
         orderId: nanoid(),
       }),
@@ -250,6 +251,8 @@ function OrderForm() {
           <Input id="name" name="name" />
           <Label htmlFor="email">{t("orderForm.email")}</Label>
           <Input id="email" name="email" />
+          <Label htmlFor="address">{t("orderForm.address")}</Label>
+          <Input id="address" name="address" />
           <Label htmlFor="comment">{t("orderForm.comment")}</Label>
           <textarea
             id="comment"

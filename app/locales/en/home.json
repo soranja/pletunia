@@ -33,6 +33,7 @@
     "name": "Your name",
     "email": "Your email",
     "phone": "Your phone",
+    "address": "Your address",
     "comment": "Comment / Extra Contact"
   }
 }

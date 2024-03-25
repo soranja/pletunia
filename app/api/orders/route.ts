@@ -6,8 +6,15 @@ import { OrderEmail } from "@/emails/OrderEmail";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  const { selectedPostcards, name, email, comment, lang, orderId } =
-    await request.json();
+  const {
+    selectedPostcards,
+    name,
+    email,
+    comment,
+    lang,
+    orderId,
+    userAddress,
+  } = await request.json();
 
   try {
     await resend.emails.send({
@@ -15,7 +22,14 @@ export async function POST(request: Request) {
       to: [email],
       bcc: process.env.MAIL_BCC,
       subject: orderId,
-      react: OrderEmail({ selectedPostcards, name, comment, lang, orderId }),
+      react: OrderEmail({
+        selectedPostcards,
+        name,
+        comment,
+        lang,
+        orderId,
+        userAddress,
+      }),
     });
     return NextResponse.json(
       {

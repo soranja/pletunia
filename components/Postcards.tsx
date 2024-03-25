@@ -109,18 +109,10 @@ const Postcards = () => {
         className="pt-16 flex flex-col bg-white/[0.1]  
         lg:items-center"
       >
-        <h3
-          className="text-white text-4xl pl-10 font-extrabold my-5 mb-12
-        md:text-6xl md:mb-10 mt-0
-        lg:pl-0"
-        >
+        <h3 className="text-white text-4xl pl-10 font-extrabold my-5 mb-12 md:text-6xl md:mb-10 mt-0 lg:pl-0">
           {t("postcards.headline")}
         </h3>
-        <span
-          className="text-white text-xl text-justify lg:text-center px-10 
-        lg:px-0 md:text-2xl
-        lg:font-semibold"
-        >
+        <span className="text-white text-xl text-justify px-10 lg:text-center lg:px-0 md:text-2xl lg:font-semibold">
           {t("postcards.sectionDescription")}
         </span>
         <div className="py-16">

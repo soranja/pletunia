@@ -17,6 +17,7 @@ import {
   Section,
   Text,
   Tailwind,
+  Font,
 } from "@react-email/components";
 
 interface OrderEmailProps {
@@ -25,6 +26,7 @@ interface OrderEmailProps {
   comment: string;
   lang: string;
   orderId: string;
+  userAddress: string;
 }
 
 export const OrderEmail = ({
@@ -33,44 +35,76 @@ export const OrderEmail = ({
   comment,
   lang,
   orderId,
+  userAddress,
 }: OrderEmailProps) => {
   // lang relies on user's browser
+  
   return (
     <Html lang={lang}>
       <Tailwind>
-        <Head />
-        {/* {lang.includes("ru") ? ( */}
+        <Head key={orderId} />
+        <Font
+          fontFamily="Roboto Slab"
+          fallbackFontFamily="Arial"
+          webFont={{
+            url: "https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800&display=swap",
+            format: "truetype",
+          }}
+          fontWeight={400}
+          fontStyle="normal"
+        />
         <>
-          <Preview>АЛОХА! Спасибо за заказ!</Preview>
-          <Body>
-            <Container
-            // className="text-white
-            // flex flex-col  pt-20 pb-20 px-10 pr-28
-            // lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
-            // style={{
-            //   background:
-            //     'linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")',
-            //   backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
-            //   backgroundPositionY: `67%`,
-            //   backgroundPositionX: `49%`,
-            // }}
-            >
-              <Heading>Привет, {name}</Heading>
-              <Section className="px-6 py-10">
-                <Column>
-                  <Text>Номер вашего заказа: {orderId}</Text>
-                  <Text>Вы выбрали {selectedPostcards}.</Text>
-                  <Text>Примечания, доп. контакты: {comment}</Text>
+          <Preview>Плетунья благодорит вас за заказ!</Preview>
+          <Body className="bg-emerald-950 my-12 mx-auto">
+            <Container className="bg-green-900 text-white p-5 rounded-lg shadow-lg pt-10">
+              <Img
+                src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
+                alt="pletunia"
+                className="rounded-full mx-auto w-24"
+              ></Img>
+              <Heading as="h2" className="text-center text-xl">
+                Здравствуйте, Юзер{name}!
+              </Heading>
+              <Section className="p-5">
+                <Row className="mb-8">
                   <Text>
-                    Скоро мы с вами свяжемся. По любым вопросам пишите на почту:
-                    pletunia.orders@gmail.com или в Телеграм: @Alyonka_che
+                    Номер вашего заказа:{" "}
+                    <Text className="font-extrabold inline">{orderId}</Text>
                   </Text>
-                </Column>
+                  <Text>
+                    Вы выбрали:{" "}
+                    <Text className="font-extrabold inline">
+                      {selectedPostcards}
+                    </Text>
+                  </Text>
+                  <Text>
+                    Адрес:{" "}
+                    <Text className="font-extrabold inline">{userAddress}</Text>
+                  </Text>
+                  <Text>
+                    Примечания / доп. контакты:
+                    <Text className="italic">{comment}</Text>
+                  </Text>
+                </Row>
+                <Row>
+                  <Text>
+                    Скоро мы с вами свяжемся по поводу оплаты и доставки.
+                    <Text>
+                      По любым вопросам пишите на почту:
+                      pletunia.orders@gmail.com или в Телеграм:{" "}
+                      <Link
+                        href="https://t.me/Alyonka_che"
+                        className="text-amber-500 visited:text-rose-500"
+                      >
+                        @Alyonka_che
+                      </Link>
+                    </Text>
+                  </Text>
+                </Row>
               </Section>
             </Container>
           </Body>
         </>
-        {/* en is missing here*/}
       </Tailwind>
     </Html>
   );
@@ -78,6 +112,24 @@ export const OrderEmail = ({
 
 export default OrderEmail;
 
+{
+  /* {lang.includes("ru") ? ( */
+}
+
+// className="text-white
+// flex flex-col  pt-20 pb-20 px-10 pr-28
+// lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
+// style={{
+//   background:
+//     'linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")',
+//   backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
+//   backgroundPositionY: `67%`,
+//   backgroundPositionX: `49%`,
+// }}
+
+{
+  /* en is missing here*/
+}
 // ) : (
 //   <>
 //     <Preview>Hi, thanks for the order!</Preview>
