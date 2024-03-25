@@ -172,9 +172,11 @@ function OrderForm() {
 
   // ========================================
 
-  // Text copying
+  // Email copying
   const [copied, setCopiedId] = useState<string>();
   const [copiedText, setCopiedText] = useState<string>();
+
+
 
   return (
     <section
@@ -279,7 +281,7 @@ function OrderForm() {
           <span className="my-5 font-bold cursor-pointer">
             pletunia.orders@gmail.com
           </span>
-          {/* <button
+          <button
           onClick={async () => {
             await navigator.clipboard.writeText("pletunia.orders@gmail.com");
             setCopiedId("write-text");
@@ -288,7 +290,7 @@ function OrderForm() {
           {copied === "write-text"
             ? "Copied!"
             : t("order:emailConfirmation.copyEmailButton")}
-        </button> */}
+        </button>
         </div>
       )}
     </section>
