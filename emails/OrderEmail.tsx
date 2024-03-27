@@ -53,101 +53,136 @@ export const OrderEmail = ({
           fontWeight={400}
           fontStyle="normal"
         />
-        <>
-          <Preview>Плетунья благодорит вас за заказ!</Preview>
-          <Body className="bg-slate-100">
-            <Container className="bg-white text-black p-5 shadow-lg pt-10 my-20 mx-auto">
-              <Img
-                src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
-                alt="pletunia"
-                className="rounded-full mx-auto w-24"
-              ></Img>
-              <Heading as="h2" className="text-center text-xl">
-                Здравствуйте, {name}!
-              </Heading>
-              <Section className="p-5">
-                <Row className="mb-8">
-                  <Text>
-                    Номер вашего заказа:{" "}
-                    <Text className="font-extrabold inline">{orderId}</Text>
-                  </Text>
-                  <Text>
-                    Вы выбрали:{" "}
-                    <Text className="font-extrabold inline">
-                      {selectedPostcards}
-                    </Text>
-                  </Text>
-                  <Text>
-                    Адрес:{" "}
-                    <Text className="font-extrabold inline">{userAddress}</Text>
-                  </Text>
-                  <Text>
-                    Примечания / доп. контакты:
-                    <Text className="italic">{comment}</Text>
-                  </Text>
-                </Row>
-                <Row>
-                  <Text>
-                    Скоро мы с вами свяжемся по поводу оплаты и доставки.
+        {lang.includes("ru") ? (
+          <>
+            <Preview>Плетунья благодорит вас за заказ!</Preview>
+            <Body className="bg-slate-100">
+              <Container className="bg-white text-black p-5 shadow-lg pt-10 my-20 mx-auto">
+                <Img
+                  src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
+                  alt="pletunia"
+                  className="rounded-full mx-auto w-24"
+                ></Img>
+                <Heading as="h2" className="text-center text-xl">
+                  Здравствуйте, {name}!
+                </Heading>
+                <Section className="p-5">
+                  <Row className="mb-8">
                     <Text>
-                      По любым вопросам пишите на почту:
-                      pletunia.orders@gmail.com или в Телеграм:{" "}
-                      <Link
-                        href="https://t.me/Alyonka_che"
-                        className="visited:text-rose-500"
-                      >
-                        @Alyonka_che
-                      </Link>
+                      Номер вашего заказа:{" "}
+                      <span className="font-extrabold inline">{orderId}</span>
                     </Text>
-                  </Text>
-                </Row>
-              </Section>
-            </Container>
-          </Body>
-        </>
+                    <Text>
+                      Вы выбрали:{" "}
+                      <span className="font-extrabold inline">
+                        {selectedPostcards.map((postcard: string, i: number) =>
+                          i === selectedPostcards.length - 1
+                            ? postcard
+                            : postcard + ", "
+                        )}
+                      </span>
+                    </Text>
+                    <Text>
+                      Адрес:{" "}
+                      <span className="font-extrabold inline">
+                        {userAddress}
+                      </span>
+                    </Text>
+                    <Text>
+                      Примечания / доп. контакты:
+                      <Text className="italic">{comment}</Text>
+                    </Text>
+                  </Row>
+                  <Row>
+                    <Text>
+                      Скоро мы с вами свяжемся по поводу оплаты и доставки.
+                      <Text>
+                        По любым вопросам пишите на почту:{" "}
+                        <span className="text-blue-600 visited:text-rose-500">
+                          pletunia.orders@gmail.com
+                        </span>{" "}
+                        или в Телеграм:{" "}
+                        <Link
+                          href="https://t.me/Alyonka_che"
+                          className="text-blue-600 visited:text-rose-500"
+                        >
+                          @Alyonka_che
+                        </Link>
+                      </Text>
+                    </Text>
+                  </Row>
+                </Section>
+              </Container>
+            </Body>
+          </>
+        ) : (
+          <>
+            <Preview>Pletunia thanks you for the order!</Preview>
+            <Body className="bg-slate-100">
+              <Container className="bg-white text-black p-5 shadow-lg pt-10 my-20 mx-auto">
+                <Img
+                  src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
+                  alt="pletunia"
+                  className="rounded-full mx-auto w-24"
+                ></Img>
+                <Heading as="h2" className="text-center text-xl">
+                  Hello, {name}!
+                </Heading>
+                <Section className="p-5">
+                  <Row className="mb-8">
+                    <Text>
+                      Your order number:{" "}
+                      <span className="font-extrabold inline">{orderId}</span>
+                    </Text>
+                    <Text>
+                      You picked:{" "}
+                      <span className="font-extrabold inline">
+                        {selectedPostcards.map((postcard: string, i: number) =>
+                          i === selectedPostcards.length - 1
+                            ? postcard
+                            : postcard + ", "
+                        )}
+                      </span>
+                    </Text>
+                    <Text>
+                      Your address:{" "}
+                      <span className="font-extrabold inline">
+                        {userAddress}
+                      </span>
+                    </Text>
+                    <Text>
+                      Your comment / extra contact:
+                      <Text className="italic">{comment}</Text>
+                    </Text>
+                  </Row>
+                  <Row>
+                    <Text>
+                      We'll reach you soon and discuss the details of payment
+                      and delivery.
+                      <Text>
+                        If you have any extra questions, please leave a message
+                        here:{" "}
+                        <span className="text-blue-600 visited:text-rose-500">
+                          pletunia.orders@gmail.com
+                        </span>{" "}
+                        or in Telegram:{" "}
+                        <Link
+                          href="https://t.me/Alyonka_che"
+                          className="text-blue-600 visited:text-rose-500"
+                        >
+                          @Alyonka_che
+                        </Link>
+                      </Text>
+                    </Text>
+                  </Row>
+                </Section>
+              </Container>
+            </Body>
+          </>
+        )}
       </Tailwind>
     </Html>
   );
 };
 
 export default OrderEmail;
-
-{
-  /* {lang.includes("ru") ? ( */
-}
-
-// className="text-white
-// flex flex-col  pt-20 pb-20 px-10 pr-28
-// lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
-// style={{
-//   background:
-//     'linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")',
-//   backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
-//   backgroundPositionY: `67%`,
-//   backgroundPositionX: `49%`,
-// }}
-
-{
-  /* en is missing here*/
-}
-// ) : (
-//   <>
-//     <Preview>Hi, thanks for the order!</Preview>
-//     <Body>
-//       <Container className="mx-10 my-auto">
-//         <Heading>Hello, {name}</Heading>
-//         <Section className="px-6 py-10">
-//           <Column>
-//             <Text>You've selected: {selectedPostcards}</Text>
-//             <Text>Your comment: {comment}</Text>
-//             <Text>
-//               We'll reach you soon! If you have any extra questions,
-//               please leave a message here: pletunia.orders@gmail.com or
-//               in Telegram: @Alyonka_che
-//             </Text>
-//           </Column>
-//         </Section>
-//       </Container>
-//     </Body>
-//   </>
-// )}

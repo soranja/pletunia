@@ -90,11 +90,7 @@ function OrderForm() {
     await fetch("/api/orders", {
       method: "POST",
       body: JSON.stringify({
-        selectedPostcards: selectedPostcards.map(
-          (postcard: string) =>
-            // Extra space at the beginning
-            " " + postcard.charAt(0).toUpperCase() + postcard.slice(1)
-        ),
+        selectedPostcards: selectedPostcards,
         name: formData.name,
         email: formData.email,
         comment: formData.comment,
@@ -302,6 +298,7 @@ function OrderForm() {
               ? "Copied!"
               : t("order:emailConfirmation.copyEmailButton")}
           </button>
+          <p>{t("order:emailConfirmation.PS")}</p>
         </div>
       )}
     </section>
