@@ -52,20 +52,134 @@ function OrderForm() {
   const localStorageKey = "formData";
   const { setItem, getItem, removeItem } = useLocalStorage(localStorageKey);
 
+  // ========================================
+
+  // Postcards updation
+  const { checkedCards, selectedCardsIds } = useAppSelector(
+    (state) => state.selector
+  );
+  const { setSelectedCardsIds, setCheckedCards } = useActions();
+
+  // Duplicate handleAddButtonClick, so both components can update the same state
+  const handleTick = (id: number) => {
+    // Add cards Ids to an array, Ids are sorted
+    setSelectedCardsIds(
+      selectedCardsIds.includes(id)
+        ? selectedCardsIds
+            .filter((prevId) => prevId !== id)
+            .sort(function (a, b) {
+              return a - b;
+            })
+        : [...selectedCardsIds, id].sort(function (a, b) {
+            return a - b;
+          })
+    );
+
+    // Update checkedCards array
+    function updatedCheckedCards(prevCheckedCards: boolean[]) {
+      const updatedCheckedCardsArray = [...prevCheckedCards];
+      const indexToUpdate = postcards.findIndex((card) => card.id === id);
+
+      if (indexToUpdate !== -1) {
+        updatedCheckedCardsArray[indexToUpdate] =
+          !updatedCheckedCardsArray[indexToUpdate];
+      }
+      return updatedCheckedCardsArray;
+    }
+
+    setCheckedCards(updatedCheckedCards(checkedCards));
+  };
+
+  // Print names of selected postcards (relies on user's browser)
+  const selectedPostcards = postcards
+    .filter((card) => selectedCardsIds.includes(card.id))
+    .map((card) =>
+      navigator.language.includes("ru") ? card.nameRu : card.nameEn
+    );
+
+  // ========================================
+
+  // Form validation
+  const [formValidation, setFormValidation] = useState({
+    name: false,
+    email: false,
+    selectedPostcards: false,
+    userAddress: false,
+  });
+
+  console.log(selectedCardsIds.length, formValidation);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    fieldName: string
+  ) => {
+    const { name, value, checked } = e.target;
+
+    // Update formValidation based on the field name
+    switch (fieldName) {
+      case "name":
+      case "userAddress":
+        setFormValidation((prevState) => ({
+          ...prevState,
+          // double negative is used to convert a value to its corresponding boolean value
+          [name]: !!value.trim(),
+        }));
+        break;
+      case "email":
+        setFormValidation((prevState) => ({
+          ...prevState,
+          [name]: validateEmail(value),
+        }));
+        break;
+      case "selectedPostcards":
+        setFormValidation((prevState) => ({
+          ...prevState,
+          selectedPostcards: checked,
+        }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Function to validate email format
+  const validateEmail = (email: string): boolean => {
+    // Regular expression for basic email validation
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    return emailRegex.test(email);
+  };
+
   // Click event: triggers submission, reset, localStorage; updates setState.
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setState("loading");
-    // Collect data and send it to POST API
-    await submitFormData();
-    setState("ready");
-    // Show confirmation message
-    setShowModal(true);
-    resetForm();
+
+    // Check if all form fields are valid
+    const isFormValid = Object.values(formValidation).every(
+      (value) => value === true
+    );
+
+    if (isFormValid) {
+      setState("loading");
+      // Collect data and send it to POST API
+      await submitFormData();
+      setState("ready");
+      // Show confirmation message
+      setShowModal(true);
+      resetForm();
+    } else {
+      // Display validation error message or prevent submission
+      alert("Please fill in all required fields.");
+      console.log(
+        "Form validation failed. Please fill in all required fields."
+      );
+    }
   }
 
   // Collect data from form, send it to POST API, and add it to localStorage
   async function submitFormData() {
+    // Delete previous data from localStorage if it exists
+    removeItem();
+
     // formData for POST API and setItem
     const formData: Record<string, string | string[] | number[]> = {};
 
@@ -121,52 +235,10 @@ function OrderForm() {
   useEffect(() => {
     // Retrieve form data from localStorage
     setFormData(getItem());
+
+    // No issues so far!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
-
-  // ========================================
-
-  // Postcards updation
-  const { checkedCards, selectedCardsIds } = useAppSelector(
-    (state) => state.selector
-  );
-  const { setSelectedCardsIds, setCheckedCards } = useActions();
-
-  // Duplicate handleAddButtonClick, so both components can update the same state
-  const handleTick = (id: number) => {
-    // Add cards Ids to an array, Ids are sorted
-    setSelectedCardsIds(
-      selectedCardsIds.includes(id)
-        ? selectedCardsIds
-            .filter((prevId) => prevId !== id)
-            .sort(function (a, b) {
-              return a - b;
-            })
-        : [...selectedCardsIds, id].sort(function (a, b) {
-            return a - b;
-          })
-    );
-
-    // Update checkedCards array
-    function updatedCheckedCards(prevCheckedCards: boolean[]) {
-      const updatedCheckedCardsArray = [...prevCheckedCards];
-      const indexToUpdate = postcards.findIndex((card) => card.id === id);
-
-      if (indexToUpdate !== -1) {
-        updatedCheckedCardsArray[indexToUpdate] =
-          !updatedCheckedCardsArray[indexToUpdate];
-      }
-      return updatedCheckedCardsArray;
-    }
-
-    setCheckedCards(updatedCheckedCards(checkedCards));
-  };
-
-  // Print names of selected postcards (relies on user's browser)
-  const selectedPostcards = postcards
-    .filter((card) => selectedCardsIds.includes(card.id))
-    .map((card) =>
-      navigator.language.includes("ru") ? card.nameRu : card.nameEn
-    );
 
   // ========================================
 
@@ -196,7 +268,7 @@ function OrderForm() {
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")`,
         backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
-        backgroundPositionY: `67%`,
+        backgroundPositionY: `68%`,
         backgroundPositionX: `49%`,
       }}
       id="order"
@@ -222,13 +294,13 @@ function OrderForm() {
           alt="Green Girl"
         />
       </div>
-      <div className="center-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
+      <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
         <h4 className="text-2xl lg:text-3xl font-bold">
           {t("orderForm.choose")}
         </h4>
 
         <form
-          className="flex flex-col gap-5"
+          className="flex flex-col gap-y-4"
           onSubmit={handleSubmit}
           ref={formRef}
         >
@@ -242,7 +314,10 @@ function OrderForm() {
                   name="selectedPostcards"
                   value={card.name}
                   checked={checkedCards[index]}
-                  onChange={() => handleTick(card.id)}
+                  onChange={(e) => {
+                    handleTick(card.id);
+                    handleInputChange(e, "selectedPostcards");
+                  }}
                 />
                 <label htmlFor={`${card.id}`}>
                   {t(`postcards.cards.${card.name}.name` as const)}
@@ -251,11 +326,23 @@ function OrderForm() {
             ))}
           </div>
           <Label htmlFor="name">{t("orderForm.name")}</Label>
-          <Input id="name" name="name" />
+          <Input
+            id="name"
+            name="name"
+            onChange={(e) => handleInputChange(e, "name")}
+          />
           <Label htmlFor="email">{t("orderForm.email")}</Label>
-          <Input id="email" name="email" />
+          <Input
+            id="email"
+            name="email"
+            onChange={(e) => handleInputChange(e, "email")}
+          />
           <Label htmlFor="userAddress">{t("orderForm.address")}</Label>
-          <Input id="userAddress" name="userAddress" />
+          <Input
+            id="userAddress"
+            name="userAddress"
+            onChange={(e) => handleInputChange(e, "userAddress")}
+          />
           <Label htmlFor="comment">{t("orderForm.comment")}</Label>
           <textarea
             id="comment"
@@ -263,9 +350,8 @@ function OrderForm() {
             className="text-black px-5 lg:w-80 py-5 rounded-xl"
           ></textarea>
           <button
-            className="mt-8 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
+            className="mt-10 rounded-2xl p-5 w-40 lg:w-80 tracking-wider bg-layout-blue-gray font-bold text-xl cursor-pointer"
             disabled={state === "loading"}
-            onClick={getItem() && removeItem}
           >
             {state === "loading"
               ? `${t("common:buttons.orderInProgress")}`
@@ -278,7 +364,7 @@ function OrderForm() {
           onClose={() => setShowModal(false)}
           classNameModal="bg-orange-100 p-8 m-4 rounded-lg shadow-lg"
         >
-          <div className="right-column flex flex-col gap-y-3 items-center text-center text-black">
+          <div className="modal-content flex flex-col gap-y-3 items-center text-center text-black">
             <h4 className="text-2xl">
               {t("order:emailConfirmation.greeting", { user: formData?.name })}
             </h4>
