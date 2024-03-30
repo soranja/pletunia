@@ -5,6 +5,7 @@
     "message": "A confirmation email is already on the way to your mailbox ({{email}}).",
     "notReceived": "If you haven't gotten a message for some reason, please write to us directly at:",
     "copyEmailButton": "Copy Email",
+    "emailCopied": "Copied!",
     "PS": "The letter may appear in the spam folder. :("
   }
 }

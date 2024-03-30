@@ -17,6 +17,7 @@ import { useActions } from "../hooks/actions";
 // ui
 import { Label } from "./ui/Label";
 import { Input } from "./ui/Input";
+import { Modal } from "./ui/Modal";
 import Image from "next/image";
 
 // local storage
@@ -58,6 +59,8 @@ function OrderForm() {
     // Collect data and send it to POST API
     await submitFormData();
     setState("ready");
+    // Show confirmation message
+    setShowModal(true);
     resetForm();
   }
 
@@ -100,8 +103,6 @@ function OrderForm() {
       }),
     });
 
-    console.log(formData, selectedPostcards);
-
     // Add form data to local storage
     setItem(formData);
   }
@@ -119,12 +120,7 @@ function OrderForm() {
 
   useEffect(() => {
     // Retrieve form data from localStorage
-    const formDataFromLocalStorage = getItem();
-    setFormData(formDataFromLocalStorage);
-    console.log(formDataFromLocalStorage);
-    // if (formDataFromLocalStorage) {
-    //
-    // }
+    setFormData(getItem());
   }, [state]);
 
   // ========================================
@@ -181,7 +177,16 @@ function OrderForm() {
   // ========================================
 
   // Email copying
-  const [copied, setCopiedId] = useState<string>();
+  const [copied, setCopied] = useState(false);
+  const handleCopyEmail = async () => {
+    await navigator.clipboard.writeText("pletunia.orders@gmail.com");
+    setCopied(true);
+  };
+
+  // ========================================
+
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <section
@@ -268,38 +273,62 @@ function OrderForm() {
           </button>
         </form>
       </div>
-      {state === "ready" && (
-        <div className="right-column flex flex-col gap-y-3 items-center text-center">
-          <Image
-            className="inline"
-            src="/images/svgs-icons/email.svg"
-            height={24}
-            width={24}
-            alt="email-icon"
-          ></Image>
-          <h4>
-            {t("order:emailConfirmation.greeting", { user: formData?.name })}
-          </h4>
-          <h3>{t("order:emailConfirmation.thanks")}</h3>
-          <p>
-            {t("order:emailConfirmation.message", { email: formData?.email })}
-          </p>
-          <p>{t("order:emailConfirmation.notReceived")}</p>
-          <span className="my-5 font-bold cursor-pointer">
-            pletunia.orders@gmail.com
-          </span>
-          <button
-            onClick={async () => {
-              await navigator.clipboard.writeText("pletunia.orders@gmail.com");
-              setCopiedId("write-text");
-            }}
-          >
-            {copied === "write-text"
-              ? "Copied!"
-              : t("order:emailConfirmation.copyEmailButton")}
-          </button>
-          <p>{t("order:emailConfirmation.PS")}</p>
-        </div>
+      {state === "ready" && showModal && (
+        <Modal
+          onClose={() => setShowModal(false)}
+          classNameModal="bg-orange-100 p-8 m-4 rounded-lg shadow-lg"
+        >
+          <div className="right-column flex flex-col gap-y-3 items-center text-center text-black">
+            <h4 className="text-2xl">
+              {t("order:emailConfirmation.greeting", { user: formData?.name })}
+            </h4>
+            <h3>{t("order:emailConfirmation.thanks")}</h3>
+            <div className="mt-4">
+              <p>
+                {t("order:emailConfirmation.message", {
+                  email: formData?.email,
+                })}
+              </p>
+              <p>{t("order:emailConfirmation.notReceived")}</p>
+            </div>
+            <div className="flex gap-x-4">
+              <span
+                className={`my-5 font-bold cursor-pointer ${
+                  copied && "text-green-700"
+                }`}
+              >
+                pletunia.orders@gmail.com
+              </span>
+            </div>
+
+            <div className="flex gap-x-8 justify-between">
+              <button
+                className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 w-40"
+                onClick={handleCopyEmail}
+              >
+                {copied
+                  ? t("order:emailConfirmation.emailCopied")
+                  : t("order:emailConfirmation.copyEmailButton")}
+              </button>
+              <button
+                className="px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 w-40"
+                onClick={() => setShowModal(false)}
+              >
+                {t("common:buttons.close")}
+              </button>
+            </div>
+            <p className="text-xs italic mt-4">
+              {t("order:emailConfirmation.PS")}
+            </p>
+            <Image
+              className="inline"
+              src="/images/svgs-icons/email.svg"
+              height={18}
+              width={18}
+              alt="email-icon"
+            ></Image>
+          </div>
+        </Modal>
       )}
     </section>
   );
