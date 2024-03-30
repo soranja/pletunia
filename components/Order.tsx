@@ -276,7 +276,7 @@ function OrderForm() {
       {state === "ready" && showModal && (
         <Modal
           onClose={() => setShowModal(false)}
-          classNameModal="bg-orange-100 p-8 m-4 rounded-lg shadow-lg"
+          classNameModal="bg-orange-100 p-8 m-4 rounded-lg shadow-lg w-96"
         >
           <div className="right-column flex flex-col gap-y-3 items-center text-center text-black">
             <h4 className="text-2xl">
