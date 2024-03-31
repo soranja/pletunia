@@ -21,7 +21,7 @@
   "validationForm": {
     "emptyName": "Name is required.",
     "emptyEmail": "Email is required.",
-    "invalidEmailFormat": "Invalid email format (missing 'at' (@) or period).",
+    "invalidEmailFormat": "Invalid email format.",
     "emptyAddress": "Address is required.",
     "noPostcardsSelected": "Select at least one postcard."
   }

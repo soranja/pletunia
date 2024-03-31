@@ -20,7 +20,7 @@
   "validationForm": {
     "emptyName": "Впишите имя.",
     "emptyEmail": "Впишите почту.",
-    "invalidEmailFormat": "Неверный формат почты (не хватает собаки (@) или точки).",
+    "invalidEmailFormat": "Неверный формат почты.",
     "emptyAddress": "Впишите адрес.",
     "noPostcardsSelected": "Выберите как минимум одну открытку."
   }
