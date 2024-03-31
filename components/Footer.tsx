@@ -36,7 +36,7 @@ function Footer() {
             className="flex flex-col gap-y-4 items-end
           lg:flex-row lg:gap-x-6"
           >
-            <li>
+            {/* <li>
               <button onClick={() => setIsOpen(true)}>
                 {t("footer.about")}
               </button>
@@ -45,7 +45,7 @@ function Footer() {
               <button onClick={() => setIsOpen(true)}>
                 {t("footer.news")}
               </button>
-            </li>
+            </li> */}
             <li>
               <button
                 className="flex gap-x-2"

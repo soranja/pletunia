@@ -107,7 +107,7 @@ function OrderForm() {
     userAddress: false,
   });
 
-  console.log(selectedCardsIds.length, formValidation);
+  console.log(formValidation);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -157,7 +157,7 @@ function OrderForm() {
     const isFormValid = Object.values(formValidation).every(
       (value) => value === true
     );
-
+    setState("validating");
     if (isFormValid) {
       setState("loading");
       // Collect data and send it to POST API
@@ -168,7 +168,6 @@ function OrderForm() {
       resetForm();
     } else {
       // Display validation error message or prevent submission
-      alert("Please fill in all required fields.");
       console.log(
         "Form validation failed. Please fill in all required fields."
       );
@@ -177,9 +176,6 @@ function OrderForm() {
 
   // Collect data from form, send it to POST API, and add it to localStorage
   async function submitFormData() {
-    // Delete previous data from localStorage if it exists
-    removeItem();
-
     // formData for POST API and setItem
     const formData: Record<string, string | string[] | number[]> = {};
 
@@ -230,6 +226,14 @@ function OrderForm() {
     // Clear selected postcards and their checkboxes (update Redux state)
     setSelectedCardsIds([]);
     setCheckedCards(new Array(postcards.length).fill(false));
+
+    // Reset validation form
+    setFormValidation({
+      name: false,
+      email: false,
+      selectedPostcards: false,
+      userAddress: false,
+    });
   }
 
   useEffect(() => {
@@ -267,9 +271,7 @@ function OrderForm() {
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")`,
-        backgroundSize: `${initialSize <= 1168 ? "17%" : "14%"}`,
-        backgroundPositionY: `68%`,
-        backgroundPositionX: `49%`,
+        backgroundSize: `${initialSize <= 1168 ? "30%" : "14%"}`,
       }}
       id="order"
     >
@@ -289,14 +291,15 @@ function OrderForm() {
         <img
           className="
           hidden rounded-r-3xl
-          lg:block lg:w-5/12 xl:w-4/12"
-          src="/images/pages/green_girl.jpg"
-          alt="Green Girl"
+          lg:block lg:w-6/12 xl:w-3/5"
+          src="/images/pages/green_girl_multi.jpg"
+          alt="Green Girl (miltiplied)"
         />
       </div>
       <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
         <h4 className="text-2xl lg:text-3xl font-bold">
           {t("orderForm.choose")}
+          <span className="text-red-500"> *</span>
         </h4>
 
         <form
@@ -325,25 +328,58 @@ function OrderForm() {
               </div>
             ))}
           </div>
-          <Label htmlFor="name">{t("orderForm.name")}</Label>
+          {state === "validating" && !formValidation.selectedPostcards && (
+            <p className="text-red-500 text-xs">
+              {t("common:validationForm.noPostcardsSelected")}
+            </p>
+          )}
+          <Label htmlFor="name">
+            {t("orderForm.name")}
+            <span className="text-red-500"> *</span>
+          </Label>
           <Input
             id="name"
             name="name"
             onChange={(e) => handleInputChange(e, "name")}
           />
-          <Label htmlFor="email">{t("orderForm.email")}</Label>
+          {state === "validating" && !formValidation.name && (
+            <p className="text-red-500 text-xs">
+              {t("common:validationForm.emptyName")}
+            </p>
+          )}
+          <Label htmlFor="email">
+            {t("orderForm.email")} <span className="text-red-500"> *</span>
+          </Label>
           <Input
             id="email"
             name="email"
             onChange={(e) => handleInputChange(e, "email")}
           />
-          <Label htmlFor="userAddress">{t("orderForm.address")}</Label>
+          {state === "validating" && !formValidation.email && (
+            <p className="text-red-500 text-xs">
+              {(
+                formRef.current?.querySelector(
+                  'input[name="email"]'
+                ) as HTMLInputElement
+              )?.value.trim() === ""
+                ? t("common:validationForm.emptyEmail")
+                : t("common:validationForm.invalidEmailFormat")}
+            </p>
+          )}
+          <Label htmlFor="userAddress">
+            {t("orderForm.address")} <span className="text-red-500"> *</span>
+          </Label>
           <Input
             id="userAddress"
             name="userAddress"
             onChange={(e) => handleInputChange(e, "userAddress")}
           />
-          <Label htmlFor="comment">{t("orderForm.comment")}</Label>
+          {state === "validating" && !formValidation.userAddress && (
+            <p className="text-red-500 text-xs">
+              {t("common:validationForm.emptyAddress")}
+            </p>
+          )}
+          <Label htmlFor="comment">{t("orderForm.comment")} </Label>
           <textarea
             id="comment"
             name="comment"
@@ -361,7 +397,11 @@ function OrderForm() {
       </div>
       {state === "ready" && showModal && (
         <Modal
-          onClose={() => setShowModal(false)}
+          onClose={() => {
+            setShowModal(false);
+            // Delete previous data from localStorage if it exists (unnecessary?)
+            removeItem();
+          }}
           classNameModal="bg-orange-100 p-8 m-4 rounded-lg shadow-lg"
         >
           <div className="modal-content flex flex-col gap-y-3 items-center text-center text-black">
@@ -398,7 +438,11 @@ function OrderForm() {
               </button>
               <button
                 className="px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 w-40"
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  // Delete previous data from localStorage if it exists
+                  removeItem();
+                }}
               >
                 {t("common:buttons.close")}
               </button>

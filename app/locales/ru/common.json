@@ -16,5 +16,12 @@
     "postcards": "Открытки",
     "bracelets": "Фенечки",
     "contacts": "Конкакты"
+  },
+  "validationForm": {
+    "emptyName": "Впишите имя.",
+    "emptyEmail": "Впишите почту.",
+    "invalidEmailFormat": "Неверный формат почты (не хватает собаки (@) или точки).",
+    "emptyAddress": "Впишите адрес.",
+    "noPostcardsSelected": "Выберите как минимум одну открытку."
   }
 }
