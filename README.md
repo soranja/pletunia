@@ -12,7 +12,7 @@ FUTURE PLANS 🎯:
 
 We're planning to develop the project by adding new postcards and sections for postcard construction sets and friendship bracelets.
 
-After we're done with setting up proper e-commerce functionality (e.g., implementing a payment system, delivery section), we're considering expanding it further. We might add a blog, an about us section, and news updates.
+After we're done with setting up proper e-commerce functionality (e.g. implementing a shopping cart, payment system, delivery section), we're considering expanding it further. We might add a blog, an about us section, and news updates.
 
 ============
 
@@ -46,6 +46,7 @@ KNOWN ISSUES & REFACTORING & MINOR THINGS 🔧:
 - Check and remove unnecessary 'use client' uses
 - Keep scroll (especially after translation switch)
 - Check and remove unnecessary i18n namespaces + any types
+- Expanded / collapsed state of the postcards may not trigger with the first click (but it does with the second one)
 
 ❓============❓
 (optional or low priority):
@@ -55,3 +56,4 @@ KNOWN ISSUES & REFACTORING & MINOR THINGS 🔧:
 - No cache in fields in Safari (labels? htmlfor?)
 - Animate drawer
 - Decide where to put removeItem
+- More screen responsiveness
