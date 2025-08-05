@@ -1,14 +1,15 @@
-import { Resource, createInstance, i18n } from 'i18next';
+import { createInstance } from 'i18next';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
-import i18nConfig from '@/i18nConfig';
+import { i18nConfig } from '@/i18nConfig';
+import { TInitTranslations } from '@/types';
 
-export default async function initTranslations(
-  locale: string,
-  namespaces: string[],
-  i18nInstance?: i18n,
-  resources?: Resource
-) {
+export const initTranslations = async ({
+  locale,
+  namespaces,
+  i18nInstance,
+  resources,
+}: TInitTranslations) => {
   i18nInstance = i18nInstance || createInstance();
 
   i18nInstance.use(initReactI18next);
@@ -37,4 +38,4 @@ export default async function initTranslations(
     resources: i18nInstance.services.resourceStore.data,
     t: i18nInstance.t,
   };
-}
+};

@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,10 +24,21 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"] // app code
+      "@/*": [
+        "src/*"
+      ] // app code
       // "@locales/*": ["locales/*"] // i18n JSON files
-    }
+    },
+    "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "postcss.config.cjs"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "postcss.config.cjs"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

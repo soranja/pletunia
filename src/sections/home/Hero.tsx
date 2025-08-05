@@ -1,11 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 import React from 'react';
-
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import LinkScroll from './LinkScroll';
 
-function Hero() {
+import { LinkScroll } from '@/components/global/LinkScroll';
+import HeroImages from '@/data/home/hero.json';
+
+export function Hero() {
   const { t } = useTranslation();
 
   return (
@@ -45,21 +46,17 @@ function Hero() {
           </LinkScroll>
         </button>
       </div>
-      <div
-        className="hidden justify-end items-end overflow-hidden relative
-        lg:flex"
-      >
-        <img
-          className="w-full rounded-3xl rotate-7 absolute -bottom-10 -right-11"
-          src="/images/pages/iron-giant-hero.jpg"
-          alt="hero postcard"
+      <div className="relative w-full lg:w-1/2 h-[400px]">
+        <Image
+          className="object-contain rounded-3xl rotate-7 absolute -bottom-10 -right-11"
+          src={HeroImages.ironGiant.imgUrl}
+          alt="Iron Giant"
+          fill
         />
       </div>
       <div className="flex flex-col mt-10 justify-evenly items-center overflow-hidden lg:hidden">
-        <img className="md:w-10/12" src="/images/pages/lighthouse.png" alt="charm" />
+        <Image className="md:w-10/12" src={HeroImages.lighthouse.imgUrl} fill alt="Lighthouse" />
       </div>
     </section>
   );
 }
-
-export default Hero;

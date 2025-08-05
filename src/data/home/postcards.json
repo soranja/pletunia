@@ -6,7 +6,7 @@
     "nameRu": "Коралина",
     "description": "coraline",
     "price": 1500,
-    "imgUrl": "/images/postcards/coraline.jpg",
+    "imgUrl": "/images/pages/home/postcards/coraline.webp",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -17,7 +17,7 @@
     "nameRu": "Тыква",
     "description": "pumpkin",
     "price": 1500,
-    "imgUrl": "/images/postcards/pumpkin.jpg",
+    "imgUrl": "/images/pages/home/postcards/pumpkin.webp",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -28,7 +28,7 @@
     "nameRu": "На заказ",
     "description": "custom",
     "price": 3000,
-    "imgUrl": "/images/postcards/custom.jpg",
+    "imgUrl": "/images/pages/home/postcards/custom.webp",
     "addButton": "addButton",
     "addedButton": "addedButton"
   }

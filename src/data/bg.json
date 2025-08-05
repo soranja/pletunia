@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "hero-bg",
+    "imgUrl": "/images/bg/hero.webp"
+  },
+  {
+    "id": 2,
+    "name": "postcards",
+    "imgUrl": "/images/bg/postcards.webp",
+    "imgUrlMobile": "/images/bg/postcards-mobile.webp"
+  }
+]

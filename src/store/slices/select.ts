@@ -2,7 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SelectInitialState } from '@/types';
-import postcards from '@/data/postcards.json';
+import postcards from '@/data/home/postcards.json';
 
 const initialState: SelectInitialState = {
   selectedCardsIds: [],

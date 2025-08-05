@@ -4,18 +4,18 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { initialSize } from '@/constants';
 
-// data
-import postcards from '../data/postcards.json';
+// Data
+import postcards from '@/data/home/postcards.json';
 import { CardType } from '@/types';
 
-// translation
+// Translation
 import { useTranslation } from 'react-i18next';
 
-// redux
-import { useAppSelector } from '../hooks/selector';
-import { useActions } from '../hooks/actions';
+// Redux
+import { useAppSelector } from '../../hooks/selector';
+import { useActions } from '../../hooks/actions';
 
-// video background
+// Video Background
 // import backgroundVideo from "../../public/videos/postcards-bg-video.mp4";
 // import backgroundVideoPoster from "../../public/images/postcards-bg/postcards-bg-poster.jpg";
 

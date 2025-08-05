@@ -1,3 +1,16 @@
+import { i18n, Resource } from 'i18next';
+
+export type TInitTranslations = {
+  locale: string;
+  namespaces: string[];
+  i18nInstance?: i18n;
+  resources?: Resource;
+};
+
+export type CheckMobile = {
+  isMobile: boolean;
+};
+
 export type CardType = {
   id: number;
   name: string;
@@ -26,6 +39,9 @@ export type SelectInitialState = {
   checkedCards: boolean[];
 };
 
-export interface PostcardProps {
-  updateCardsData: (selectionMap: Record<number, boolean>) => void;
+export interface FormDataType {
+  selectedPostcards: string[];
+  name: string;
+  email: string;
+  comment: string;
 }

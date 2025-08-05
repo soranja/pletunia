@@ -1,14 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
-import { initialSize } from '@/constants';
 
 import {
   Body,
   Container,
-  Column,
   Head,
   Heading,
-  Hr,
   Html,
   Img,
   Link,
@@ -19,15 +16,7 @@ import {
   Tailwind,
   Font,
 } from '@react-email/components';
-
-interface OrderEmailProps {
-  selectedPostcards: string[];
-  name: string;
-  comment: string;
-  lang: string;
-  orderId: string;
-  userAddress: string;
-}
+import { OrderEmailProps } from '@/types/props';
 
 export const OrderEmail = ({
   selectedPostcards,
@@ -37,8 +26,6 @@ export const OrderEmail = ({
   orderId,
   userAddress,
 }: OrderEmailProps) => {
-  // lang relies on user's browser
-
   return (
     <Html lang={lang}>
       <Tailwind>
@@ -170,5 +157,3 @@ export const OrderEmail = ({
     </Html>
   );
 };
-
-export default OrderEmail;

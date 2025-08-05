@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import './global.css';
 
 // Translation
-import initTranslations from '../i18n';
+import { initTranslations } from '../i18n';
 import { dir } from 'i18next';
-import i18nConfig from '@/i18nConfig';
+import { i18nConfig } from '@/i18nConfig';
 import { i18nNamespaces } from '@/constants';
 
 // Components
-import TranslationsProvider from '@/components/i18n/TranslationsProvider';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
+import { TranslationsProvider } from '@/components/i18n/TranslationsProvider';
+import { Header } from '@/components/global/Header';
+import { Footer } from '@/components/global/Footer';
 
 export const metadata: Metadata = {
   title: 'Pletunia',
@@ -28,7 +28,10 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const { t, resources } = await initTranslations(locale, i18nNamespaces);
+  const { t, resources } = await initTranslations({
+    locale,
+    namespaces: i18nNamespaces,
+  });
 
   // Wrapped my whole shop with TranslationsProvider here, not in the page! For my current scale it's okay.
 

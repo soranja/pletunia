@@ -1,7 +1,7 @@
 'use client';
 
 // Components
-import Hero from '@/components/Hero';
+import { Hero } from '@/sections/home/Hero';
 // import Postcards from "@/components/Postcards";
 // import Order from "@/components/Order";
 
@@ -12,11 +12,11 @@ import { store } from '@/store/store';
 // For noSSR
 import dynamic from 'next/dynamic';
 
-const Postcards = dynamic(() => import('@/components/Postcards'), {
+const Postcards = dynamic(() => import('@/sections/home/Postcards'), {
   ssr: false,
 });
 
-const Order = dynamic(() => import('@/components/Order'), {
+const Order = dynamic(() => import('@/sections/home/Order'), {
   ssr: false,
 });
 

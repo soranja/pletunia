@@ -1,0 +1,12 @@
+{
+  "ironGiant": {
+    "id": 1,
+    "name": "iron-giant-hero",
+    "imgUrl": "/images/pages/home/hero/iron-giant.png"
+  },
+  "lighthouse": {
+    "id": 2,
+    "name": "lighthouse",
+    "imgUrl": "/images/pages/home/hero/lighthouse.png"
+  }
+}

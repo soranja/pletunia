@@ -3,13 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import i18nConfig from '@/i18nConfig';
+import { i18nConfig } from '@/i18nConfig';
 
-type CheckMobile = {
-  isMobile: boolean;
-};
-
-export default function LanguageChanger({ isMobile }: CheckMobile) {
+export default function LanguageChanger() {
   const { i18n } = useTranslation();
   const currentLocale = i18n.language;
   const router = useRouter();

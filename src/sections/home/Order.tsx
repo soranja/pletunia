@@ -1,41 +1,35 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useRef, useEffect } from 'react';
 import { initialSize } from '@/constants';
 
-// translation
+// Translation
 import { useTranslation } from 'react-i18next';
 
-// data
-import postcards from '../data/postcards.json';
-import { CardType } from '@/types';
+// Data
+import postcards from '@/data/home/postcards.json';
+import OrderImages from '@/data/home/order.json';
 
-// redux
-import { useAppSelector } from '../hooks/selector';
-import { useActions } from '../hooks/actions';
+import { CardType, FormDataType } from '@/types';
 
-// ui
-import { Label } from './ui/Label';
-import { Input } from './ui/Input';
-import { Modal } from './ui/Modal';
+// Redux
+import { useAppSelector } from '@/hooks/selector';
+import { useActions } from '@/hooks/actions';
+
+// UI
+import { Label } from '@/components/ui/Label';
+import { Input } from '@/components/ui/Input';
+import { Modal } from '@/components/ui/Modal';
 import Image from 'next/image';
 
-// local storage
+// Local storage
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-// id generator
+// ID generator
 import { customAlphabet } from 'nanoid';
 
-// type safety and guards
+// Type Safety & Guards
 function isInputNamedElement(e: Element): e is HTMLInputElement & { name: string } {
   return 'value' in e && 'name' in e;
-}
-
-interface FormDataType {
-  selectedPostcards: string[];
-  name: string;
-  email: string;
-  comment: string;
 }
 
 // the component
@@ -256,7 +250,7 @@ function OrderForm() {
       text-white flex flex-col pt-20 pb-20 px-10 pr-28
       lg:text-xl lg:grid grid-cols-order lg:grid-rows-order lg:pl-0 lg:items-start"
       style={{
-        background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url("/images/pages/green_girl.jpg")`,
+        background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${OrderImages.greenGirl.imgUrl})`,
         backgroundSize: `${initialSize <= 1168 ? '30%' : '14%'}`,
       }}
       id="order"
@@ -273,14 +267,15 @@ function OrderForm() {
         >
           {t('orderForm.headline')}
         </h3>
-
-        <img
-          className="
-          hidden rounded-r-3xl
-          lg:block lg:w-6/12 xl:w-3/5"
-          src="/images/pages/green_girl_multi.jpg"
-          alt="Green Girl (miltiplied)"
-        />
+        <div>
+          <Image
+            className="hidden rounded-r-3xl lg:block lg:w-6/12 xl:w-3/5"
+            src={OrderImages.greenGirl.imgUrlMilti}
+            alt="Green Girl (miltiplied)"
+            height={200}
+            width={300}
+          />
+        </div>
       </div>
       <div className="right-column lg:pl-24 flex flex-col gap-4 items-start justify-start">
         <h4 className="text-2xl lg:text-3xl font-bold">
@@ -347,6 +342,7 @@ function OrderForm() {
           )}
           <Label htmlFor="comment">{t('orderForm.comment')} </Label>
           <textarea
+            aria-label="comment"
             id="comment"
             name="comment"
             className="text-black px-5 lg:w-80 py-5 rounded-xl"

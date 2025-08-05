@@ -4,9 +4,9 @@ import React from 'react';
 
 // components
 import Drawer from './Drawer';
-import Navbar from './Navbar';
+import { Navbar } from './Navbar';
 
-import LinkScroll from './LinkScroll';
+import { LinkScroll } from './LinkScroll';
 
 export function Header() {
   return (

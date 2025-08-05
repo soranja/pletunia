@@ -1,0 +1,62 @@
+[
+  {
+    "layer": 1,
+    "label": "bg",
+    "path": "/images/pages/home/constructor/background.png"
+  },
+  {
+    "layer": 2,
+    "label": "mountains",
+    "path": "/images/pages/home/constructor/mountains.png"
+  },
+  {
+    "layer": 3,
+    "label": "shore",
+    "path": "/images/pages/home/constructor/shore.png"
+  },
+  {
+    "layer": 4,
+    "label": "rocks-down",
+    "path": "/images/pages/home/constructor/rocks-down.png"
+  },
+  {
+    "layer": 5,
+    "label": "rocks-up",
+    "path": "/images/pages/home/constructor/rocks-up.png"
+  },
+  {
+    "layer": 6,
+    "label": "lighthouse",
+    "path": "/images/pages/home/constructor/lighthouse.png"
+  },
+  {
+    "layer": 7,
+    "label": "entrance",
+    "path": "/images/pages/home/constructor/entrance.png"
+  },
+  {
+    "layer": 8,
+    "label": "window-down-left",
+    "path": "/images/pages/home/constructor/window-down-left.png"
+  },
+  {
+    "layer": 9,
+    "label": "window-down-right",
+    "path": "/images/pages/home/constructor/window-down-right.png"
+  },
+  {
+    "layer": 10,
+    "label": "window-up-left",
+    "path": "/images/pages/home/constructor/window-up-left.png"
+  },
+  {
+    "layer": 11,
+    "label": "window-up-right",
+    "path": "/images/pages/home/constructor/window-up-right.png"
+  },
+  {
+    "layer": 12,
+    "label": "handrail",
+    "path": "/images/pages/home/constructor/handrail.png"
+  }
+]

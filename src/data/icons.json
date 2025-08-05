@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "email",
+    "imgUrl": "/images/icons/social/email.webp"
+  },
+  {
+    "id": 2,
+    "name": "instagram",
+    "imgUrl": "/images/icons/social/instagram.webp"
+  },
+  {
+    "id": 3,
+    "name": "telegram",
+    "imgUrl": "/images/icons/social/telegram.webp"
+  },
+  {
+    "id": 4,
+    "name": "whats-app",
+    "imgUrl": "/images/icons/social/whats-app.webp"
+  }
+]

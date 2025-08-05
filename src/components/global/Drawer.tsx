@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navbar from './Navbar';
+import { Navbar } from './Navbar';
 
 function Drawer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +16,7 @@ function Drawer() {
       <button
         className="sidebar-to-open flex items-center text-layout-dark-green"
         onClick={ToggleSidebar}
+        aria-label="Open sidebar menu"
       >
         <svg
           className="block h-6 w-6 fill-current"
@@ -31,7 +32,11 @@ function Drawer() {
         <nav className="fixed md:bottom-0 top-0 right-0 flex flex-col w-[270px] max-w-sm py-14 px-10 text-white bg-layout-dark-green border-r ">
           <div className="flex justify-between items-start mb-4">
             <Navbar isMobile={true}></Navbar>
-            <button className="sidebar-to-close" onClick={ToggleSidebar}>
+            <button
+              className="sidebar-to-close"
+              onClick={ToggleSidebar}
+              aria-label="Sidebar to close"
+            >
               <svg
                 className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
                 xmlns="http://www.w3.org/2000/svg"

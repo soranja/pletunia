@@ -2,18 +2,16 @@
 
 import React from 'react';
 
-// components
-import LinkScroll from './LinkScroll';
+// Components
+import { LinkScroll } from './LinkScroll';
 
-// translation
+// Translation
 import { useTranslation } from 'react-i18next';
-import LanguageChanger from './i18n/LanguageChanger';
+import LanguageChanger from '../i18n/LanguageChanger';
 
-type CheckMobile = {
-  isMobile: boolean;
-};
+import { CheckMobile } from '@/types';
 
-function Navbar({ isMobile }: CheckMobile): React.JSX.Element {
+export const Navbar: React.FC<CheckMobile> = ({ isMobile }) => {
   const { t } = useTranslation('common');
 
   return (
@@ -48,13 +46,11 @@ function Navbar({ isMobile }: CheckMobile): React.JSX.Element {
       ${isMobile ? 'flex' : 'hidden lg:flex'}
       `}
         >
-          <LanguageChanger isMobile={false}></LanguageChanger>
+          <LanguageChanger isMobile={false} />
         </div>
       </nav>
     </>
   );
-}
-
-export default Navbar;
+};
 
 // language switcher closes drawer!
