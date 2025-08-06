@@ -10,21 +10,11 @@ import { LinkScroll } from './LinkScroll';
 
 export function Header() {
   return (
-    <header
-      className="fixed
-    flex flex-row justify-between items-center 
-    w-full p-4 bg-layout-skintone font-sans shadow-xl z-20
-    md:p-6 md:px-10 
-    "
-    >
-      <span
-        className="font-extrabold text-black grow
-        text-2xl 
-        md:text-3xl"
-      >
+    <header className="bg-layout-skintone fixed z-20 flex w-full flex-row items-center justify-between p-4 font-sans shadow-xl md:p-6 md:px-10">
+      <span className="grow text-2xl font-extrabold text-black md:text-3xl">
         <LinkScroll to={'hero'} offset={0}>
           PLETUNIA
-          <span className=" text-layout-dark-green font-serif text-2xl md:text-4xl pl-0.5">.</span>
+          <span className="text-layout-dark-green pl-0.5 font-serif text-2xl md:text-4xl">.</span>
         </LinkScroll>
       </span>
 

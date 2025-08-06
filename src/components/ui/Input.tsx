@@ -10,7 +10,7 @@ export function Input({ id, name, onChange }: InputProps) {
       name={name}
       onChange={onChange}
       type="text"
-      className="text-black px-5 lg:w-80 py-2 rounded-lg"
+      className="rounded-lg px-5 py-2 text-black lg:w-80"
       placeholder="Enter text"
       title="Input field"
     />

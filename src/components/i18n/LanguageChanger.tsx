@@ -23,22 +23,16 @@ export default function LanguageChanger() {
   };
 
   return (
-    <div className="text-white font-bold">
+    <div className="font-bold text-white">
       <button
-        className={`
-        rounded-full p-2 px-5 tracking-wider bg-layout-blue-gray 
-        ${currentLocale === 'en' ? 'hidden' : ''}
-        `}
+        className={`bg-layout-blue-gray rounded-full p-2 px-5 tracking-wider ${currentLocale === 'en' ? 'hidden' : ''} `}
         onClick={() => handleChange('en')}
         disabled={currentLocale === 'en'}
       >
         EN
       </button>
       <button
-        className={`
-        rounded-full p-2 px-5 tracking-wider bg-layout-blue-gray 
-        ${currentLocale === 'ru' ? 'hidden' : ''}
-        `}
+        className={`bg-layout-blue-gray rounded-full p-2 px-5 tracking-wider ${currentLocale === 'ru' ? 'hidden' : ''} `}
         onClick={() => handleChange('ru')}
         disabled={currentLocale === 'ru'}
       >

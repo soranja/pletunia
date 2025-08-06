@@ -14,7 +14,7 @@ function Drawer() {
     <div className="lg:hidden">
       {/*burger menu button*/}
       <button
-        className="sidebar-to-open flex items-center text-layout-dark-green"
+        className="sidebar-to-open text-layout-dark-green flex items-center"
         onClick={ToggleSidebar}
         aria-label="Open sidebar menu"
       >
@@ -29,8 +29,8 @@ function Drawer() {
 
       {/*burger menu drawer*/}
       <div className={`${isOpen === true ? 'sidebar-menu relative z-50' : 'hidden'}`}>
-        <nav className="fixed md:bottom-0 top-0 right-0 flex flex-col w-[270px] max-w-sm py-14 px-10 text-white bg-layout-dark-green border-r ">
-          <div className="flex justify-between items-start mb-4">
+        <nav className="bg-layout-dark-green fixed top-0 right-0 flex w-[270px] max-w-sm flex-col border-r px-10 py-14 text-white md:bottom-0">
+          <div className="mb-4 flex items-start justify-between">
             <Navbar isMobile={true}></Navbar>
             <button
               className="sidebar-to-close"
@@ -38,7 +38,7 @@ function Drawer() {
               aria-label="Sidebar to close"
             >
               <svg
-                className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
+                className="h-6 w-6 cursor-pointer text-gray-400 hover:text-gray-500"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"

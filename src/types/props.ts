@@ -1,5 +1,6 @@
 import { Resource } from 'i18next';
 import { ReactNode } from 'react';
+import { TCard, TFormData } from '.';
 
 export interface TranslationsProviderProps {
   children: ReactNode;
@@ -31,6 +32,15 @@ export interface ModalProps {
   classNameModal: string;
 }
 
+export interface OrderFormProps {
+  onSubmit: (data: TFormData) => void | Promise<void>;
+}
+
+export interface OrderSuccessModalProps {
+  formData: TFormData;
+  onClose: () => void;
+}
+
 export interface OrderEmailProps {
   selectedPostcards: string[];
   name: string;
@@ -38,4 +48,14 @@ export interface OrderEmailProps {
   lang: string;
   orderId: string;
   userAddress: string;
+}
+
+export interface PostcardCardProps {
+  card: TCard;
+  index: number;
+  expandedIndex: number[];
+  selectedCardsIds: number[];
+  checkedCards: boolean[];
+  onCardClick: (index: number) => void;
+  onAddButtonClick: (id: number) => void;
 }

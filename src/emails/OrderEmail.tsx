@@ -44,11 +44,11 @@ export const OrderEmail = ({
           <>
             <Preview>Плетунья благодорит вас за заказ!</Preview>
             <Body className="bg-slate-100">
-              <Container className="bg-white text-black p-5 shadow-lg pt-10 my-20 mx-auto">
+              <Container className="mx-auto my-20 bg-white p-5 pt-10 text-black shadow-lg">
                 <Img
                   src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
                   alt="pletunia"
-                  className="rounded-full mx-auto w-24"
+                  className="mx-auto w-24 rounded-full"
                 ></Img>
                 <Heading as="h2" className="text-center text-xl">
                   Здравствуйте, {name}!
@@ -56,18 +56,18 @@ export const OrderEmail = ({
                 <Section className="p-5">
                   <Row className="mb-8">
                     <Text>
-                      Номер вашего заказа: <span className="font-extrabold inline">{orderId}</span>
+                      Номер вашего заказа: <span className="inline font-extrabold">{orderId}</span>
                     </Text>
                     <Text>
                       Вы выбрали:{' '}
-                      <span className="font-extrabold inline">
+                      <span className="inline font-extrabold">
                         {selectedPostcards.map((postcard: string, i: number) =>
                           i === selectedPostcards.length - 1 ? postcard : postcard + ', '
                         )}
                       </span>
                     </Text>
                     <Text>
-                      Адрес: <span className="font-extrabold inline">{userAddress}</span>
+                      Адрес: <span className="inline font-extrabold">{userAddress}</span>
                     </Text>
                     <Text>
                       Примечания / доп. контакты:
@@ -100,11 +100,11 @@ export const OrderEmail = ({
           <>
             <Preview>Pletunia thanks you for the order!</Preview>
             <Body className="bg-slate-100">
-              <Container className="bg-white text-black p-5 shadow-lg pt-10 my-20 mx-auto">
+              <Container className="mx-auto my-20 bg-white p-5 pt-10 text-black shadow-lg">
                 <Img
                   src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
                   alt="pletunia"
-                  className="rounded-full mx-auto w-24"
+                  className="mx-auto w-24 rounded-full"
                 ></Img>
                 <Heading as="h2" className="text-center text-xl">
                   Hello, {name}!
@@ -112,18 +112,18 @@ export const OrderEmail = ({
                 <Section className="p-5">
                   <Row className="mb-8">
                     <Text>
-                      Your order number: <span className="font-extrabold inline">{orderId}</span>
+                      Your order number: <span className="inline font-extrabold">{orderId}</span>
                     </Text>
                     <Text>
                       You picked:{' '}
-                      <span className="font-extrabold inline">
+                      <span className="inline font-extrabold">
                         {selectedPostcards.map((postcard: string, i: number) =>
                           i === selectedPostcards.length - 1 ? postcard : postcard + ', '
                         )}
                       </span>
                     </Text>
                     <Text>
-                      Your address: <span className="font-extrabold inline">{userAddress}</span>
+                      Your address: <span className="inline font-extrabold">{userAddress}</span>
                     </Text>
                     <Text>
                       Your comment / extra contact:

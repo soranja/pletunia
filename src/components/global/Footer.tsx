@@ -22,18 +22,15 @@ export function Footer() {
   return (
     <footer>
       <div
-        className="z-20 flex flex-row min-w-full p-10 bg-layout-dark-green text-white lg:items-center"
+        className="bg-layout-dark-green z-20 flex min-w-full flex-row p-10 text-white lg:items-center"
         id="contacts"
       >
-        <span className="grow text-2xl md:text-3xl font-extrabold">
+        <span className="grow text-2xl font-extrabold md:text-3xl">
           PLETUNIA
-          <span className="text-black font-serif text-2xl md:text-4xl pl-0.5">.</span>
+          <span className="pl-0.5 font-serif text-2xl text-black md:text-4xl">.</span>
         </span>
         <nav className="font-bold">
-          <ul
-            className="flex flex-col gap-y-4 items-end
-          lg:flex-row lg:gap-x-6"
-          >
+          <ul className="flex flex-col items-end gap-y-4 lg:flex-row lg:gap-x-6">
             {/* <li>
               <button onClick={() => setIsOpen(true)}>
                 {t("footer.about")}
@@ -81,11 +78,11 @@ export function Footer() {
         </nav>
       </div>
 
-      <div className="flex flex-col bg-layout-dark-green items-center" id="copyright">
-        <hr className="border-b-0 border-black w-[300px] lg:w-[800px]" />
+      <div className="bg-layout-dark-green flex flex-col items-center" id="copyright">
+        <hr className="w-[300px] border-b-0 border-black lg:w-[800px]" />
 
         <button
-          className="text-white text-sm text-center py-4"
+          className="py-4 text-center text-sm text-white"
           onClick={() => media.open(media.telegramIvan)}
         >
           {t('copyright')} &copy;

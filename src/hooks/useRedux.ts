@@ -1,8 +1,9 @@
 'use client';
 
+import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 import { selectActions } from '@/store/slices/select';
+import { RootState } from '@/store/store';
 
 // Exports each slice here
 const actions = {
@@ -14,3 +15,6 @@ export const useActions = () => {
 
   return bindActionCreators(actions, dispatch);
 };
+
+// A custom hook to get data from the Redux wrapped with types
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -12,11 +12,11 @@ import { store } from '@/store/store';
 // For noSSR
 import dynamic from 'next/dynamic';
 
-const Postcards = dynamic(() => import('@/sections/home/Postcards'), {
+const Postcards = dynamic(() => import('@/sections/home/Postcards/Postcards'), {
   ssr: false,
 });
 
-const Order = dynamic(() => import('@/sections/home/Order'), {
+const Order = dynamic(() => import('@/sections/home/Order/Order'), {
   ssr: false,
 });
 

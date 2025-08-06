@@ -11,7 +11,7 @@ export type CheckMobile = {
   isMobile: boolean;
 };
 
-export type CardType = {
+export type TCard = {
   id: number;
   name: string;
   description: string;
@@ -39,7 +39,7 @@ export type SelectInitialState = {
   checkedCards: boolean[];
 };
 
-export interface FormDataType {
+export interface TFormData {
   selectedPostcards: string[];
   name: string;
   email: string;
