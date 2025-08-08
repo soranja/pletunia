@@ -1,7 +1,7 @@
 'use client';
 
 // Components
-import { Hero } from '@/sections/home/Hero';
+import { Hero } from '@/sections/home/Hero/Hero';
 // import Postcards from "@/components/Postcards";
 // import Order from "@/components/Order";
 

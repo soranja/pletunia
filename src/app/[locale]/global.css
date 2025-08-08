@@ -28,7 +28,6 @@
   --text-xxs: 0.5rem;
   --text-xxs--line-height: 0.75rem;
 
-  --grid-cols-hero: 2fr 1fr;
   --grid-cols-order: 3fr 2fr 1fr;
   --grid-rows-order: 4fr;
 
@@ -36,9 +35,12 @@
   --rotate-15: 15deg;
 }
 
+html,
 body {
   margin: 0;
   box-sizing: border-box;
+  color: white;
+  overflow-x: hidden;
 }
 
 code {

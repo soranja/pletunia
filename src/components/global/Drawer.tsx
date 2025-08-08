@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { Navbar } from './Navbar';
+import { CheckMobile } from '@/types';
 
-function Drawer() {
+export const Drawer: FC<CheckMobile> = ({ isMobile }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ToggleSidebar = () => {
@@ -57,6 +58,4 @@ function Drawer() {
       </div>
     </div>
   );
-}
-
-export default Drawer;
+};

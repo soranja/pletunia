@@ -1,24 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 
-// Translation
-import { useTranslation } from 'react-i18next';
+import { SOCIAL_LINKS, CURRENT_YEAR, SOCIAL_ICONS } from '@/constants';
 
-// import Modal from "./Modal";
-
-const media = {
-  open: (url: string) => window.open(url, '_blank', 'noreferrer'),
-  telegramAlyona: 'https://t.me/Alyonka_che',
-  instagram: 'https://www.instagram.com/i_carry_joy/',
-  whatsApp: 'https://wa.me/+79940221741',
-  telegramIvan: 'https://t.me/s_oranja',
-};
-
-export function Footer() {
-  const [isOpen, setIsOpen] = useState(false);
+export const Footer = () => {
   const { t } = useTranslation('common');
+
   return (
     <footer>
       <div
@@ -29,53 +19,39 @@ export function Footer() {
           PLETUNIA
           <span className="pl-0.5 font-serif text-2xl text-black md:text-4xl">.</span>
         </span>
-        <nav className="font-bold">
-          <ul className="flex flex-col items-end gap-y-4 lg:flex-row lg:gap-x-6">
-            {/* <li>
-              <button onClick={() => setIsOpen(true)}>
-                {t("footer.about")}
-              </button>
-            </li>
-            <li>
-              <button onClick={() => setIsOpen(true)}>
-                {t("footer.news")}
-              </button>
-            </li> */}
-            <li>
-              <button className="flex gap-x-2" onClick={() => media.open(media.telegramAlyona)}>
-                Telegram
-                <Image
-                  src="/images/svgs-icons/telegram.svg"
-                  height={24}
-                  width={24}
-                  alt="telegram-icon"
-                ></Image>
-              </button>
-            </li>
-            <li className="flex gap-x-2">
-              <button className="flex gap-x-2" onClick={() => media.open(media.instagram)}>
-                Instagram
-                <Image
-                  src="/images/svgs-icons/instagram.svg"
-                  height={24}
-                  width={24}
-                  alt="telegram-icon"
-                ></Image>
-              </button>
-            </li>
-            <li>
-              <button className="flex gap-x-2" onClick={() => media.open(media.whatsApp)}>
-                What&apos;s App
-                <Image
-                  src="/images/svgs-icons/whats-app.svg"
-                  height={24}
-                  width={24}
-                  alt="telegram-icon"
-                ></Image>
-              </button>
-            </li>
-          </ul>
-        </nav>
+
+        <ul className="flex cursor-pointer flex-col items-end gap-y-4 lg:flex-row lg:gap-x-4">
+          <li>
+            <a onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.telegramAlyona)}>
+              <Image
+                src={SOCIAL_ICONS.telegram.src}
+                height={24}
+                width={24}
+                alt={SOCIAL_ICONS.telegram.alt}
+              />
+            </a>
+          </li>
+          <li className="flex gap-x-2">
+            <a onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.instagram)}>
+              <Image
+                src={SOCIAL_ICONS.insta.src}
+                height={24}
+                width={24}
+                alt={SOCIAL_ICONS.insta.alt}
+              />
+            </a>
+          </li>
+          <li>
+            <a onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.whatsApp)}>
+              <Image
+                src={SOCIAL_ICONS.whatsApp.src}
+                height={24}
+                width={24}
+                alt={SOCIAL_ICONS.whatsApp.alt}
+              />
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div className="bg-layout-dark-green flex flex-col items-center" id="copyright">
@@ -83,11 +59,11 @@ export function Footer() {
 
         <button
           className="py-4 text-center text-sm text-white"
-          onClick={() => media.open(media.telegramIvan)}
+          onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.telegramIvan)}
         >
-          {t('copyright')} &copy;
+          {CURRENT_YEAR} {t('copyright')} &copy;
         </button>
       </div>
     </footer>
   );
-}
+};

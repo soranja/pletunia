@@ -1,11 +1,13 @@
 'use client';
 
+import { FC } from 'react';
+
 import { I18nextProvider } from 'react-i18next';
 import { createInstance } from 'i18next';
 import { initTranslations } from '../../app/i18n';
 import { TranslationsProviderProps } from '@/types/props';
 
-export const TranslationsProvider: React.FC<TranslationsProviderProps> = ({
+export const TranslationsProvider: FC<TranslationsProviderProps> = ({
   children,
   locale,
   namespaces,

@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 
-import postcards from '@/data/home/postcards.json';
 import OrderImages from '@/data/home/order.json';
 import { initialSize } from '@/constants';
 import OrderForm from './OrderForm';
 import OrderSuccessModal from './OrderSuccessModal';
-import { useActions } from '@/hooks/useRedux';
 import { TFormData } from '@/types';
 
 export default function Order() {
@@ -28,7 +26,7 @@ export default function Order() {
 
   return (
     <section
-      className="order grid-cols-order lg:grid-rows-order flex flex-col px-10 pt-20 pr-28 pb-20 text-white lg:grid lg:items-start lg:pl-0 lg:text-xl"
+      className="order grid-cols-order lg:grid-rows-order flex flex-col border-2 border-b-cyan-500 px-10 pt-20 pr-28 pb-20 text-white lg:grid lg:items-start lg:pl-0 lg:text-xl"
       style={{
         background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${OrderImages.greenGirl.imgUrl})`,
         backgroundSize: `${initialSize <= 1168 ? '30%' : '14%'}`,

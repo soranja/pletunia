@@ -21,31 +21,25 @@ export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({
-  children,
-  params: { locale },
-}: Readonly<{
-  children: React.ReactNode;
-  params: { locale: string };
-}>) {
+export default async function RootLayout(
+  props: Readonly<{
+    children: React.ReactNode;
+    params: Promise<{ locale: string }>;
+  }>
+) {
+  const { children, params } = props;
+  const { locale } = await params;
+
   const { t, resources } = await initTranslations({
     locale,
     namespaces: i18nNamespaces,
   });
 
-  // Wrapped my whole shop with TranslationsProvider here, not in the page! For my current scale it's okay.
-
-  /* @i18nexus:
-
-  Yep, you can put the translation provider in the root layout instead of putting in each page component. But if you do this you will load into memory all namespaces for every page. This may be ok for smaller projects, but it's more efficient to load only the namespaces you need for each page.
-
-  */
-
   return (
     <html lang={locale} dir={dir(locale)}>
       <body>
         <TranslationsProvider resources={resources} locale={locale} namespaces={i18nNamespaces}>
-          <Header />
+          <Header isMobile={false} />
           {children}
           <Footer />
         </TranslationsProvider>
@@ -53,3 +47,11 @@ export default async function RootLayout({
     </html>
   );
 }
+
+// Wrapped my whole shop with TranslationsProvider here, not in the page! For my current scale it's okay.
+
+/* @i18nexus:
+
+  Yep, you can put the translation provider in the root layout instead of putting in each page component. But if you do this you will load into memory all namespaces for every page. This may be ok for smaller projects, but it's more efficient to load only the namespaces you need for each page.
+
+  */

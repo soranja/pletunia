@@ -1,25 +1,29 @@
 'use client';
 
-import React from 'react';
+import { FC } from 'react';
 
-// components
-import Drawer from './Drawer';
+// Components
+import { Drawer } from './Drawer';
 import { Navbar } from './Navbar';
-
 import { LinkScroll } from './LinkScroll';
+import { LanguageChanger } from '../i18n/LanguageChanger';
 
-export function Header() {
+import { CheckMobile } from '@/types';
+
+export const Header: FC<CheckMobile> = ({ isMobile }) => {
   return (
-    <header className="bg-layout-skintone fixed z-20 flex w-full flex-row items-center justify-between p-4 font-sans shadow-xl md:p-6 md:px-10">
-      <span className="grow text-2xl font-extrabold text-black md:text-3xl">
+    <header className="bg-layout-skintone sticky top-0 z-50 flex w-full items-center p-4 font-sans shadow-xl md:p-6 md:px-10">
+      <div className="grow text-2xl font-extrabold">
         <LinkScroll to={'hero'} offset={0}>
-          PLETUNIA
-          <span className="text-layout-dark-green pl-0.5 font-serif text-2xl md:text-4xl">.</span>
+          <span className="text-black md:text-3xl">PLETUNIA</span>
+          <span className="text-layout-dark-green font-serif md:text-4xl">.</span>
         </LinkScroll>
-      </span>
-
-      <Navbar isMobile={false} />
-      <Drawer />
+      </div>
+      <div className="flex gap-x-4">
+        <Navbar isMobile={isMobile} />
+        <LanguageChanger isMobile={isMobile} />
+      </div>
+      <Drawer isMobile={isMobile} />
     </header>
   );
-}
+};

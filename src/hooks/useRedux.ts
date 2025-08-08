@@ -16,5 +16,5 @@ export const useActions = () => {
   return bindActionCreators(actions, dispatch);
 };
 
-// A custom hook to get data from the Redux wrapped with types
+// A custom hook to get data from the Redux
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

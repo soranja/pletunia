@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { PostcardCard } from './PostcardCard';
+
 import postcards from '@/data/home/postcards.json';
 import { initialSize } from '@/constants';
 import { TCard } from '@/types';
-import { PostcardCard } from './PostcardCard';
 
 const Postcards = () => {
   const { t } = useTranslation();
@@ -36,7 +37,7 @@ const Postcards = () => {
 
   return (
     <section
-      className={`postcards ${initialSize <= 1280 ? 'bg-postcards bg-cover' : ''}`}
+      className={`relative z-20 h-[110dvh] text-white ${initialSize <= 1280 ? 'bg-postcards bg-cover' : ''}`}
       id="postcards"
     >
       {initialSize >= 1280 && (
@@ -46,34 +47,31 @@ const Postcards = () => {
           autoPlay
           loop
           muted
-          className="absolute -z-10 h-screen w-screen object-cover"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-top"
         />
       )}
 
-      <div className="flex flex-col bg-white/[0.1] pt-16 lg:items-center">
-        <h3 className="my-5 mt-0 mb-12 pl-10 text-4xl font-extrabold text-white md:mb-10 md:text-6xl lg:pl-0">
-          {t('postcards.headline')}
-        </h3>
-        <span className="px-10 text-justify text-xl text-white md:text-2xl lg:px-0 lg:text-center lg:font-semibold">
-          {t('postcards.sectionDescription')}
-        </span>
-        <div className="py-16">
-          <div className="max-w-7xl">
-            <div className="flex flex-col justify-center gap-6 px-10 xl:flex-row xl:items-center">
-              {postcards.map((card: TCard, index: number) => (
-                <PostcardCard
-                  key={card.id}
-                  card={card}
-                  index={index}
-                  expandedIndex={expandedIndex}
-                  selectedCardsIds={selectedCardsIds}
-                  checkedCards={checkedCards}
-                  onCardClick={handleCardClick}
-                  onAddButtonClick={handleAddButtonClick}
-                />
-              ))}
-            </div>
-          </div>
+      <div className="relative inset-0 flex h-full flex-col gap-y-8 border-2 border-amber-400 py-16 lg:items-center">
+        <div className="flex flex-col items-center gap-y-4">
+          <h3 className="text-4xl font-extrabold md:text-6xl">{t('postcards.headline')}</h3>
+          <span className="max-w-lg text-xl font-semibold md:text-2xl lg:text-center">
+            {t('postcards.sectionDescription')}
+          </span>
+        </div>
+
+        <div className="flex flex-col justify-center gap-6 lg:flex-row lg:items-center">
+          {postcards.map((card: TCard, index: number) => (
+            <PostcardCard
+              key={card.id}
+              card={card}
+              index={index}
+              expandedIndex={expandedIndex}
+              selectedCardsIds={selectedCardsIds}
+              checkedCards={checkedCards}
+              onCardClick={handleCardClick}
+              onAddButtonClick={handleAddButtonClick}
+            />
+          ))}
         </div>
       </div>
     </section>
