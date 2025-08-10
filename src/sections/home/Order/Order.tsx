@@ -26,13 +26,20 @@ export default function Order() {
 
   return (
     <section
-      className="order grid-cols-order lg:grid-rows-order flex flex-col border-2 border-b-cyan-500 px-10 pt-20 pr-28 pb-20 text-white lg:grid lg:items-start lg:pl-0 lg:text-xl"
-      style={{
-        background: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(24, 64, 23, 0.8)), url(${OrderImages.greenGirl.imgUrl})`,
-        backgroundSize: `${initialSize <= 1168 ? '30%' : '14%'}`,
-      }}
+      className={`relative h-[110dvh] border-b-8 text-white ${initialSize <= 1280 ? 'bg-postcards bg-cover' : ''}`}
       id="order"
     >
+      {initialSize >= 1280 && (
+        <video
+          src="/videos/postcards-bg-video.mp4"
+          poster="/images/bg/postcards.webp"
+          autoPlay
+          loop
+          muted
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-top"
+        />
+      )}
+
       <div className="left-column flex flex-col lg:items-end lg:pr-24">
         <h3 className="mb-12 text-3xl font-extrabold md:pr-0 lg:text-right lg:text-5xl">
           {t('orderForm.headline')}

@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next';
 import { i18nConfig } from '@/i18nConfig';
 
 import { LANGUAGES } from '@/constants';
-import { CheckMobile } from '@/types';
+import { TMobile } from '@/types';
 
-export const LanguageChanger: FC<CheckMobile> = ({ isMobile }) => {
+export const LanguageChanger: FC<TMobile> = ({ isMobile }) => {
   const { i18n } = useTranslation();
   const currentLocale = i18n.language;
   const router = useRouter();
@@ -27,16 +27,16 @@ export const LanguageChanger: FC<CheckMobile> = ({ isMobile }) => {
   };
 
   return (
-    <div className="cursor-pointer font-bold text-white">
+    <div className="cursor-pointer font-bold">
       {LANGUAGES.map((lang) => (
         <button
           key={lang}
           type="button"
-          className={`cursor-pointer p-2 px-5 text-black ${currentLocale === lang ? 'hidden' : ''} `}
+          className={`cursor-pointer uppercase ${currentLocale === lang ? 'hidden' : ''} `}
           onClick={() => handleChange(lang)}
           disabled={currentLocale === lang}
         >
-          {lang.toUpperCase()}
+          {lang}
         </button>
       ))}
     </div>

@@ -8,9 +8,9 @@ import { LinkScroll } from './LinkScroll';
 // Translation
 import { useTranslation } from 'react-i18next';
 
-import { CheckMobile } from '@/types';
+import { TMobile } from '@/types';
 
-export const Navbar: FC<CheckMobile> = ({ isMobile }) => {
+export const Navbar: FC<TMobile> = ({ isMobile }) => {
   const { t } = useTranslation('common');
 
   return (

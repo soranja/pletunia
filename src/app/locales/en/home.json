@@ -16,13 +16,21 @@
         "name": "CORALINE",
         "description": "An adventurous 11-year-old girl."
       },
+      "kimono": {
+        "name": "ЦИПАО",
+        "description": "Chinese minimalism."
+      },
       "pumpkin": {
         "name": "PUMPKIN",
         "description": "Halloween's classic!"
       },
+      "alyona": {
+        "name": "ALYONA",
+        "description": ":*"
+      },
       "custom": {
         "name": "CUSTOM",
-        "description": "All we need is your photo."
+        "description": "A reference is needed."
       }
     }
   },

@@ -7,7 +7,7 @@ export type TInitTranslations = {
   resources?: Resource;
 };
 
-export type CheckMobile = {
+export type TMobile = {
   isMobile: boolean;
 };
 

@@ -11,7 +11,7 @@ export function Hero() {
 
   return (
     <section
-      className="bg-hero z-10 flex min-h-[90vh] items-stretch justify-between border-2 border-blue-700 bg-cover px-10 pb-16"
+      className="bg-hero z-10 flex min-h-[90vh] items-stretch justify-between border-b-8 bg-cover px-10 pb-16"
       id="hero"
     >
       <div className="ml-10 flex flex-col justify-center gap-y-8">
@@ -25,7 +25,7 @@ export function Hero() {
         <LinkScroll to={'postcards'} offset={-50}>
           <button
             type="button"
-            className="bg-layout-dark-green cursor-pointer self-start rounded-md px-14 py-5 text-xl font-bold"
+            className="bg-layout-dark-green cursor-pointer self-start rounded-xl px-14 py-5 text-xl font-bold"
           >
             {t('hero.want')}
           </button>

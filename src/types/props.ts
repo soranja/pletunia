@@ -53,9 +53,10 @@ export interface OrderEmailProps {
 export interface PostcardCardProps {
   card: TCard;
   index: number;
-  expandedIndex: number[];
+  isExpanded: boolean;
   selectedCardsIds: number[];
   checkedCards: boolean[];
+  flexGrowTarget: number;
   onCardClick: (index: number) => void;
   onAddButtonClick: (id: number) => void;
 }

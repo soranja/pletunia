@@ -2,9 +2,9 @@
 
 import { FC, useState } from 'react';
 import { Navbar } from './Navbar';
-import { CheckMobile } from '@/types';
+import { TMobile } from '@/types';
 
-export const Drawer: FC<CheckMobile> = ({ isMobile }) => {
+export const Drawer: FC<TMobile> = ({ isMobile }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ToggleSidebar = () => {

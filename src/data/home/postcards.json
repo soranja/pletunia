@@ -5,13 +5,24 @@
     "nameEn": "Coraline",
     "nameRu": "Коралина",
     "description": "coraline",
-    "price": 1500,
+    "price": 3000,
     "imgUrl": "/images/pages/home/postcards/coraline.webp",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
   {
     "id": 2,
+    "name": "kimono",
+    "nameEn": "Kimono",
+    "nameRu": "Кимоно",
+    "description": "kimono",
+    "price": 2000,
+    "imgUrl": "/images/pages/home/postcards/kimono.webp",
+    "addButton": "addButton",
+    "addedButton": "addedButton"
+  },
+  {
+    "id": 3,
     "name": "pumpkin",
     "nameEn": "Pumpkin",
     "nameRu": "Тыква",
@@ -22,12 +33,23 @@
     "addedButton": "addedButton"
   },
   {
-    "id": 3,
+    "id": 4,
+    "name": "alyona",
+    "nameEn": "Alyona",
+    "nameRu": "Алёна",
+    "description": "alyona",
+    "price": 7000,
+    "imgUrl": "/images/pages/home/postcards/alyona.webp",
+    "addButton": "addButton",
+    "addedButton": "addedButton"
+  },
+  {
+    "id": 5,
     "name": "custom",
     "nameEn": "Custom",
     "nameRu": "На заказ",
     "description": "custom",
-    "price": 3000,
+    "price": 5000,
     "imgUrl": "/images/pages/home/postcards/custom.webp",
     "addButton": "addButton",
     "addedButton": "addedButton"

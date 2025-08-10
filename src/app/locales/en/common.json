@@ -8,14 +8,8 @@
     "languageSwitch": "Ru"
   },
   "copyright": "Ivan Zakharov",
-  "footer": {
-    "news": "News",
-    "about": "About us",
-    "aboutDescription": "Hello! We are Alyona and Ivan. We're living in Yerevan, Armenia. This website is our first step into the big world of business and entrepreneurship. Our current goal is to create a line of products people would love to buy."
-  },
   "navbar": {
     "postcards": "Postcards",
-    "bracelets": "Bracelets",
     "contacts": "Contact us"
   },
   "validationForm": {

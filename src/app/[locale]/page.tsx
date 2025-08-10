@@ -23,7 +23,7 @@ const Order = dynamic(() => import('@/sections/home/Order/Order'), {
 export default function Home() {
   return (
     <Provider store={store}>
-      <main>
+      <main className="overflow-x-hidden">
         <Hero />
         <Postcards />
         <Order />
