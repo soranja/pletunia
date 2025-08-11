@@ -3,13 +3,9 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { PostcardCard } from './PostcardCard';
-import OrderImages from '@/data/home/order.json';
 import postcards from '@/data/home/postcards.json';
-import { initialSize } from '@/constants';
+import { PostcardCard } from './PostcardCard';
 import { TCard } from '@/types';
-
-const GROWTH = 0.3;
 
 const Postcards = () => {
   const { t } = useTranslation();
@@ -36,6 +32,7 @@ const Postcards = () => {
     });
   };
 
+  const GROWTH = 0.3;
   const flexTargets = useMemo(() => {
     const cards = postcards.length;
     if (expandedIndex === null) return Array(cards).fill(1);
@@ -47,7 +44,7 @@ const Postcards = () => {
   return (
     <section
       id="postcards"
-      className="bg-paper-tile bg-layout-dark-blue relative z-20 flex h-full flex-col items-center gap-y-8 py-16 bg-blend-multiply"
+      className="bg-paper-tile bg-layout-dark-blue relative z-20 flex h-full flex-col items-center gap-y-8 border-b-8 border-b-white py-16 bg-blend-multiply"
     >
       <div className="flex flex-col items-center gap-y-4">
         <h3 className="text-4xl font-extrabold md:text-6xl">{t('postcards.headline')}</h3>
@@ -71,6 +68,8 @@ const Postcards = () => {
           />
         ))}
       </div>
+
+      <p className="italic">{t('postcards.oneItemOnly')}</p>
     </section>
   );
 };

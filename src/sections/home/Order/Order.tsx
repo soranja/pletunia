@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Image from 'next/image';
 
-import OrderImages from '@/data/home/order.json';
+import { OrderForm } from './OrderForm';
+import { OrderSuccessModal } from './OrderSuccessModal';
 import { initialSize } from '@/constants';
-import OrderForm from './OrderForm';
-import OrderSuccessModal from './OrderSuccessModal';
 import { TFormData } from '@/types';
 
 export default function Order() {
-  const { t }: any = useTranslation(['home', 'common', 'order']);
+  const { t } = useTranslation(['home', 'common', 'order']);
 
   const [formData, setFormData] = useState<TFormData | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +24,7 @@ export default function Order() {
 
   return (
     <section
-      className={`relative h-[110dvh] border-b-8 text-white ${initialSize <= 1280 ? 'bg-postcards bg-cover' : ''}`}
+      className={`relative h-[110dvh] border-b-8 py-16 text-white ${initialSize <= 1280 ? 'bg-postcards bg-cover' : ''}`}
       id="order"
     >
       {initialSize >= 1280 && (
@@ -40,28 +38,12 @@ export default function Order() {
         />
       )}
 
-      <div className="left-column flex flex-col lg:items-end lg:pr-24">
-        <h3 className="mb-12 text-3xl font-extrabold md:pr-0 lg:text-right lg:text-5xl">
-          {t('orderForm.headline')}
-        </h3>
-        <div>
-          <Image
-            className="hidden rounded-r-3xl lg:block lg:w-6/12 xl:w-3/5"
-            src={OrderImages.greenGirl.imgUrlMilti}
-            alt="Green Girl (miltiplied)"
-            height={200}
-            width={300}
-          />
-        </div>
-      </div>
-      <div className="right-column flex flex-col items-start justify-start gap-4 lg:pl-24">
-        <h4 className="text-2xl font-bold lg:text-3xl">
-          {t('orderForm.choose')}
-          <span className="text-red-500"> *</span>
-        </h4>
+      <div className="flex flex-col items-center justify-center gap-y-8">
+        <h3 className="text-4xl font-extrabold md:text-6xl">{t('orderForm.headline')}</h3>
 
         <OrderForm onSubmit={handleFormSubmit} />
       </div>
+
       {formData && showModal && (
         <OrderSuccessModal formData={formData} onClose={handleCloseModal} />
       )}

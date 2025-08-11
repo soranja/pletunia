@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LOCAL_STORAGE_KEY } from '@/constants';
@@ -7,8 +7,8 @@ import { Modal } from '@/components/ui/Modal';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { OrderSuccessModalProps } from '@/types/props';
 
-export default function OrderSuccessModal({ formData, onClose }: OrderSuccessModalProps) {
-  const { t }: any = useTranslation(['home', 'common', 'order']);
+export const OrderSuccessModal: FC<OrderSuccessModalProps> = ({ formData, onClose }) => {
+  const { t } = useTranslation(['home', 'common', 'order']);
 
   const { removeItem } = useLocalStorage(LOCAL_STORAGE_KEY);
   const [emailCopied, setEmailCopied] = useState(false);
@@ -71,4 +71,4 @@ export default function OrderSuccessModal({ formData, onClose }: OrderSuccessMod
       </div>
     </Modal>
   );
-}
+};

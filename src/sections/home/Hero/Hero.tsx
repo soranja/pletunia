@@ -3,8 +3,8 @@ import React from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
-import { LinkScroll } from '@/components/global/LinkScroll';
 import HeroImages from '@/data/home/hero.json';
+import { LinkScroll } from '@/components/global/LinkScroll';
 
 export function Hero() {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export function Hero() {
           <span>{t('hero.aboutGoods')}</span>
           <span>{t('hero.aboutDelivery')}</span>
         </div>
-        <LinkScroll to={'postcards'} offset={-50}>
+        <LinkScroll to={'postcards'} offset={-95}>
           <button
             type="button"
             className="bg-layout-dark-green cursor-pointer self-start rounded-xl px-14 py-5 text-xl font-bold"

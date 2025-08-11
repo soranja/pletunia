@@ -45,7 +45,7 @@ code {
 
   .blur-cap::before {
     content: '';
-    @apply absolute inset-0 z-0 bg-black/40 backdrop-blur-[5px];
+    @apply absolute inset-0 z-0 bg-black/40;
     -webkit-mask-image: linear-gradient(to bottom, transparent, black 48px, black);
     mask-image: linear-gradient(to bottom, transparent, black 48px, black);
   }

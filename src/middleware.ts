@@ -1,6 +1,4 @@
-import { chain } from './middlewares/chain';
-import { withDataFetch } from './middlewares/withDataFetch';
-import { withI18n } from './middlewares/withI18n';
+import { chain, withDataFetch, withI18n } from './middlewares/';
 
 const middlewares = [withDataFetch, withI18n];
 export default chain(middlewares);

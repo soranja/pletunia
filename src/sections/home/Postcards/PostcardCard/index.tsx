@@ -45,11 +45,9 @@ export const PostcardCard: FC<PostcardCardProps> = ({
           }}
         />
 
-        {/* Checked Icon */}
+        {/* Checked Dot */}
         {isChecked && (
-          <div className="absolute top-2 right-2 rounded-full bg-white p-1 shadow-md">
-            <p className="text-layout-dark-green h-6 w-6"></p>
-          </div>
+          <div className="absolute top-2 right-2 h-6 w-6 rounded-full bg-white p-1 shadow-md"></div>
         )}
 
         <div className="pointer-events-none absolute inset-0 flex flex-col justify-end">

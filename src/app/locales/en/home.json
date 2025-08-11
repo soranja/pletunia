@@ -2,13 +2,14 @@
   "hero": {
     "slogan": "Bonds we create can hardly be broken",
     "aboutGoods": "Podcasts, bracelets, and whatever keeps your friendship strong and valued.",
-    "aboutDelivery": "Free delivery in Yerevan, HayPost in Armenia. Need a worldwide delivery? – Contact us!",
+    "aboutDelivery": "Delivery by HayPost in Armenia. Contact us via e-mail for a worldwide delivery.",
     "want": "I want!"
   },
 
   "postcards": {
     "headline": "POSTCARDS",
-    "sectionDescription": "A variety of postcards: templated and custom. Contact us if you want to order an individual design!",
+    "sectionDescription": "Pre-made or custom-ordered.",
+    "oneItemOnly": "Each item is unique!",
     "addButton": "Add",
     "addedButton": "Added",
     "cards": {
@@ -17,7 +18,7 @@
         "description": "An adventurous 11-year-old girl."
       },
       "kimono": {
-        "name": "ЦИПАО",
+        "name": "QIPAO",
         "description": "Chinese minimalism."
       },
       "pumpkin": {
@@ -26,7 +27,7 @@
       },
       "alyona": {
         "name": "ALYONA",
-        "description": ":*"
+        "description": "A kind of a self-portrait."
       },
       "custom": {
         "name": "CUSTOM",
@@ -36,11 +37,10 @@
   },
 
   "orderForm": {
-    "headline": "PLACE YOUR ORDER HERE",
+    "headline": "What's your order?",
     "choose": "Choose your postcard(s):",
     "name": "Your name",
     "email": "Your email",
-    "phone": "Your phone",
     "address": "Your address",
     "comment": "Comment / Extra Contact"
   }
