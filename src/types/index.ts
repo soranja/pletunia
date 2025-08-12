@@ -21,24 +21,6 @@ export type TCard = {
   addedButton: string;
 };
 
-export type OrderData = {
-  selectedPostcards: string[];
-  userComment: string;
-  userEmail: string;
-  userName: string;
-  userPhone: string | number | readonly string[] | undefined;
-};
-
-export type SelectedCards = {
-  selectedIds: number[];
-  areSelected: boolean[];
-};
-
-export type SelectInitialState = {
-  selectedCardsIds: number[];
-  checkedCards: boolean[];
-};
-
 export interface TFormData {
   selectedPostcards: string[];
   name: string;

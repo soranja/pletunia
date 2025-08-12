@@ -1,33 +1,23 @@
 'use client';
+import dynamic from 'next/dynamic';
+import { PostcardsSelectionProvider } from '@/contexts/PostcardsSelectionContext';
 
 // Components
 import { Hero } from '@/sections/home/Hero/Hero';
-// import Postcards from "@/components/Postcards";
-// import Order from "@/components/Order";
+import Postcards from '@/sections/home/Postcards/Postcards';
+// import Order from '@/sections/home/Order/Order';
 
-// Redux
-import { Provider } from 'react-redux';
-import { store } from '@/store/store';
-
-// For noSSR
-import dynamic from 'next/dynamic';
-
-const Postcards = dynamic(() => import('@/sections/home/Postcards/Postcards'), {
-  ssr: false,
-});
-
-const Order = dynamic(() => import('@/sections/home/Order/Order'), {
-  ssr: false,
-});
+// const Postcards = dynamic(() => import('@/sections/home/Postcards/Postcards'), { ssr: false });
+const Order = dynamic(() => import('@/sections/home/Order/Order'), { ssr: false });
 
 export default function Home() {
   return (
-    <Provider store={store}>
-      <main className="overflow-x-hidden">
-        <Hero />
+    <main className="overflow-x-hidden">
+      <Hero />
+      <PostcardsSelectionProvider>
         <Postcards />
         <Order />
-      </main>
-    </Provider>
+      </PostcardsSelectionProvider>
+    </main>
   );
 }

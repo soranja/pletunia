@@ -3,34 +3,20 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import postcards from '@/data/home/postcards.json';
 import { PostcardCard } from './PostcardCard';
+import postcards from '@/data/home/postcards.json';
+import { usePostcardsSelection } from '@/contexts/PostcardsSelectionContext';
+
 import { TCard } from '@/types';
 
 const Postcards = () => {
   const { t } = useTranslation();
+  const { selectedCardIds, checkedCards, toggleById } = usePostcardsSelection();
 
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const [selectedCardsIds, setSelectedCardsIds] = useState<number[]>([]);
-  const [checkedCards, setCheckedCards] = useState<boolean[]>(postcards.map(() => false));
-
-  const handleCardClick = (index: number) => {
+  const handleCardClick = (index: number) =>
     setExpandedIndex((prev) => (prev === index ? null : index));
-  };
-
-  const handleAddButtonClick = (id: number) => {
-    setSelectedCardsIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
-
-    setCheckedCards((prev) => {
-      const i = postcards.findIndex((c) => c.id === id);
-      if (i < 0) return prev;
-      const next = [...prev];
-      next[i] = !next[i];
-      return next;
-    });
-  };
+  const handleAddButtonClick = (id: number) => toggleById(id);
 
   const GROWTH = 0.3;
   const flexTargets = useMemo(() => {
@@ -60,7 +46,7 @@ const Postcards = () => {
             card={card}
             index={index}
             isExpanded={expandedIndex === index}
-            selectedCardsIds={selectedCardsIds}
+            selectedCardIds={selectedCardIds}
             checkedCards={checkedCards}
             onCardClick={handleCardClick}
             onAddButtonClick={handleAddButtonClick}

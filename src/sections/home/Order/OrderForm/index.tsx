@@ -1,11 +1,11 @@
 import React, { FC, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { customAlphabet } from 'nanoid';
 
 import postcards from '@/data/home/postcards.json';
+import { usePostcardsSelection } from '@/contexts/PostcardsSelectionContext';
 import { Label } from '@/components/ui/Label';
 import { Input } from '@/components/ui/Input';
-import { useActions, useAppSelector } from '@/hooks/useRedux';
+import { buildOrderPayload, idsToCardNames, submitOrder, validateEmail } from '@/utils/order';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { TCard, TFormData } from '@/types';
 import { OrderFormProps } from '@/types/props';
@@ -19,102 +19,34 @@ export const OrderForm: FC<OrderFormProps> = ({ onSubmit }) => {
     name: false,
     email: false,
     selectedPostcards: false,
-    userAddress: false,
   });
-  const { checkedCards, selectedCardsIds } = useAppSelector((s) => s.selector);
-  const { setSelectedCardsIds, setCheckedCards } = useActions();
+  const { selectedCardIds, checkedCards, toggleById, clearAll } = usePostcardsSelection();
   const { setItem } = useLocalStorage('formData');
 
-  function isInputNamedElement(e: Element): e is HTMLInputElement & { name: string } {
-    return 'value' in e && 'name' in e;
-  }
-
-  const handleTick = (id: number) => {
-    // Add cards Ids to an array, Ids are sorted
-    setSelectedCardsIds(
-      selectedCardsIds.includes(id)
-        ? selectedCardsIds
-            .filter((prevId) => prevId !== id)
-            .sort(function (a, b) {
-              return a - b;
-            })
-        : [...selectedCardsIds, id].sort(function (a, b) {
-            return a - b;
-          })
-    );
-
-    // Update checkedCards array
-    function updatedCheckedCards(prevCheckedCards: boolean[]) {
-      const updatedCheckedCardsArray = [...prevCheckedCards];
-      const indexToUpdate = postcards.findIndex((card) => card.id === id);
-
-      if (indexToUpdate !== -1) {
-        updatedCheckedCardsArray[indexToUpdate] = !updatedCheckedCardsArray[indexToUpdate];
-      }
-      return updatedCheckedCardsArray;
-    }
-
-    setCheckedCards(updatedCheckedCards(checkedCards));
-  };
-
   function collectFormData(): TFormData {
-    const formData: any = {};
-    Array.from(formRef.current?.elements || [])
-      .filter(isInputNamedElement)
-      .forEach((field) => {
-        if (field.type === 'checkbox') {
-          formData.selectedPostcards ??= [];
-          if (field.checked) (formData.selectedPostcards as string[]).push(field.value);
-        } else {
-          formData[field.name] = field.value;
-        }
-      });
+    const form = formRef.current!;
+    const name = (form.querySelector('input[name="name"]') as HTMLInputElement)?.value || '';
+    const email = (form.querySelector('input[name="email"]') as HTMLInputElement)?.value || '';
+    const comment = (form.querySelector('#comment') as HTMLTextAreaElement)?.value || '';
+    const selectedPostcards = idsToCardNames(selectedCardIds, postcards);
 
-    return {
-      selectedPostcards: formData.selectedPostcards || [],
-      name: formData.name as string,
-      email: formData.email as string,
-      comment: formData.comment as string,
-    };
-  }
-
-  async function submitFormData(data: TFormData) {
-    const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
-    await fetch('/api/orders', {
-      method: 'POST',
-      body: JSON.stringify({
-        ...data,
-        lang: navigator.language,
-        orderId: nanoid(),
-        userAddress: data.comment,
-      }),
-    });
-    setItem(data);
+    return { selectedPostcards, name, email, comment };
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
-    const { name, value, checked } = e.target;
+    const { name, value, checked: isChecked } = e.target;
 
-    // Update formValidation based on the field name
     switch (fieldName) {
       case 'name':
-      case 'userAddress':
-        setFormValidation((prevState) => ({
-          ...prevState,
-          // double negative is used to convert a value to its corresponding boolean value
-          [name]: !!value.trim(),
-        }));
+        setFormValidation((p) => ({ ...p, name: !!value.trim() }));
         break;
       case 'email':
-        setFormValidation((prevState) => ({
-          ...prevState,
-          [name]: validateEmail(value),
-        }));
+        setFormValidation((prev) => ({ ...prev, [name]: validateEmail(value) }));
         break;
       case 'selectedPostcards':
-        setFormValidation((prevState) => ({
-          ...prevState,
-          selectedPostcards: checked,
+        setFormValidation((prev) => ({
+          ...prev,
+          selectedPostcards: isChecked || selectedCardIds.length > 0,
         }));
         break;
       default:
@@ -122,19 +54,21 @@ export const OrderForm: FC<OrderFormProps> = ({ onSubmit }) => {
     }
   };
 
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    return emailRegex.test(email);
-  };
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setState('validating');
 
-    if (Object.values(formValidation).every((v) => v)) {
+    const isValid =
+      formValidation.name &&
+      formValidation.email &&
+      (selectedCardIds.length > 0 || formValidation.selectedPostcards);
+
+    if (isValid) {
       setState('loading');
       const data = collectFormData();
-      await submitFormData(data);
+      const payload = buildOrderPayload(data);
+      await submitOrder(payload);
+      setItem(payload);
       await onSubmit(data);
       resetForm();
       setState('ready');
@@ -142,20 +76,12 @@ export const OrderForm: FC<OrderFormProps> = ({ onSubmit }) => {
   }
 
   function resetForm() {
-    if (formRef.current) {
-      formRef.current.reset();
-    }
-
-    // Clear selected postcards and their checkboxes (update Redux state)
-    setSelectedCardsIds([]);
-    setCheckedCards(new Array(postcards.length).fill(false));
-
-    // Reset validation form
+    formRef.current?.reset();
+    clearAll();
     setFormValidation({
       name: false,
       email: false,
       selectedPostcards: false,
-      userAddress: false,
     });
   }
 
@@ -178,7 +104,7 @@ export const OrderForm: FC<OrderFormProps> = ({ onSubmit }) => {
                 value={card.name}
                 checked={checkedCards[index]}
                 onChange={(e) => {
-                  handleTick(card.id);
+                  toggleById(card.id);
                   handleInputChange(e, 'selectedPostcards');
                 }}
               />

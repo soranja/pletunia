@@ -8,7 +8,7 @@ export const PostcardCard: FC<PostcardCardProps> = ({
   card,
   index,
   isExpanded,
-  selectedCardsIds,
+  selectedCardIds,
   checkedCards,
   flexGrowTarget,
   onCardClick,
@@ -16,7 +16,7 @@ export const PostcardCard: FC<PostcardCardProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const isSelected = selectedCardsIds.includes(card.id);
+  const isSelected = selectedCardIds.includes(card.id);
   const isChecked = checkedCards[index];
 
   const variants = {

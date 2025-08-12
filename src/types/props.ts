@@ -54,7 +54,7 @@ export interface PostcardCardProps {
   card: TCard;
   index: number;
   isExpanded: boolean;
-  selectedCardsIds: number[];
+  selectedCardIds: number[];
   checkedCards: boolean[];
   flexGrowTarget: number;
   onCardClick: (index: number) => void;
