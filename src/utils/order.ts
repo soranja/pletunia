@@ -46,8 +46,14 @@ export async function submitOrder(payload: ReturnType<typeof buildOrderPayload>)
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
+
   if (!res.ok) {
-    throw new Error(`Order submit failed: ${res.status}`);
+    let msg = `Order submit failed: ${res.status}`;
+    try {
+      const body = await res.json();
+      if (body?.error) msg += ` – ${body.error}`;
+    } catch {}
+    throw new Error(msg);
   }
   return payload.orderId;
 }

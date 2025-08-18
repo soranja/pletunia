@@ -10,7 +10,7 @@ export function Input({ id, name, onChange }: InputProps) {
       name={name}
       onChange={onChange}
       type="text"
-      className="w-full rounded-md bg-white/20 px-2 py-1"
+      className="w-full resize-none bg-white/20 px-2 py-1 leading-6 ring-1 ring-transparent outline-none focus:ring-white"
       placeholder="..."
       title="Input field"
     />

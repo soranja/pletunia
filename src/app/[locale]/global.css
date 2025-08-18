@@ -5,19 +5,17 @@
 
 html,
 body {
-  box-sizing: border-box;
   color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
 @theme {
-  --font-serif: 'Roboto Slab', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-sans:
-    'Raleway', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    'Raleway', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Armenian',
+    'Noto Sans', sans-serif;
+
+  --font-serif:
+    'Roboto Slab', ui-serif, Georgia, Cambria, 'Times New Roman', 'Noto Serif Armenian',
+    'Noto Serif', serif;
 
   --background-image-hero:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/bg/hero.webp');
@@ -25,17 +23,12 @@ code {
     linear-gradient(rgba(1, 1, 1, 0.2), rgba(1, 1, 1, 0.2)), url('/images/bg/postcards.webp');
 
   --background-image-paper-tile: url('/images/bg/paper-tile.png');
+  --background-image-sea-sky: linear-gradient(to bottom, #a2ccce 54%, #4a7b83 46%);
 
-  --color-layout-skintone: #f2c4cd;
-  --color-layout-dark-green: #184017;
-  --color-layout-blue-gray: #315c72;
-  --color-layout-dark-blue: #042940;
-
-  --text-xxs: 0.5rem;
-  --text-xxs--line-height: 0.75rem;
-
-  --grid-cols-order: 3fr 2fr 1fr;
-  --grid-rows-order: 4fr;
+  --color-skintone: #f2c4cd;
+  --color-dark-green: #184017;
+  --color-blue-gray: #315c72;
+  --color-dark-blue: #042940;
 }
 
 @layer utilities {

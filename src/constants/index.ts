@@ -1,12 +1,49 @@
-export const initialSize = typeof window === 'undefined' ? 768 : window.innerWidth;
-export const i18nNamespaces = ['home', 'common', 'news', 'order'];
+import { Metadata } from 'next';
+
+export const I18N_NAMESPACES = ['common', 'hero', 'order', 'postcards', 'sets'];
+
+export const METADATA: Metadata = {
+  metadataBase: new URL('https://pletunia.com'),
+  title: 'Pletunia',
+  description: 'Postcards and postcard constructor sets from Yerevan',
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'Pletunia',
+    title: 'Pletunia',
+    description: 'Postcards, postcard constructor sets, and friendship bracelets from Yerevan',
+    images: [
+      {
+        url: '/images/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Pletunia — postcards & gifts from Yerevan',
+      },
+    ],
+    locale: 'en_US',
+    alternateLocale: ['ru_RU'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pletunia',
+    description: 'Postcards, postcard constructor sets, and friendship bracelets from Yerevan',
+    images: ['/images/og.png'],
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      en: '/en',
+      ru: '/ru',
+    },
+  },
+  robots: { index: true, follow: true },
+};
 
 export const LANGUAGES = ['en', 'ru'];
 export const LOCAL_STORAGE_KEY = 'formData';
 export const CURRENT_YEAR = new Date().getFullYear();
 
 export const SOCIAL_LINKS = {
-  open: (url: string) => window.open(url, '_blank', 'noreferrer'),
   telegramAlyona: 'https://t.me/Alyonka_che',
   instagram: 'https://www.instagram.com/i_carry_joy/',
   whatsApp: 'https://wa.me/+79940221741',

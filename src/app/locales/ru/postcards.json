@@ -1,0 +1,33 @@
+{
+  "headline": "ОТКРЫТКИ",
+  "sectionDescription": "Готовые или на заказ.",
+  "oneItemOnly": "Все открытки в одном экземпляре!",
+  "addButton": "Добавить",
+  "addedButton": "Добавлено!",
+  "cards": {
+    "coraline": {
+      "name": "КОРАЛИНА",
+      "description": "Девочка-приключение."
+    },
+    "kimono": {
+      "name": "ЦИПАО",
+      "description": "Китайский минимализм."
+    },
+    "pumpkin": {
+      "name": "ТЫКВА",
+      "description": "Хэллоуинская классика!"
+    },
+    "alyona": {
+      "name": "АЛЁНА",
+      "description": "Затейливый автопортрет."
+    },
+    "set": {
+      "name": "КОНСТРУКТОР",
+      "description": "На заказ, по фото или картинке."
+    },
+    "custom": {
+      "name": "ПОД ЗАКАЗ",
+      "description": "По фото или картинке (собранная)."
+    }
+  }
+}

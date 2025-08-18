@@ -1,74 +1,105 @@
+'use client';
+
 import Image from 'next/image';
-import { FC, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import CloseIcon from '@/assets/icons/close.svg';
 import { LOCAL_STORAGE_KEY } from '@/constants';
-import { Modal } from '@/components/ui/Modal';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { OrderSuccessModalProps } from '@/types/props';
 
 export const OrderSuccessModal: FC<OrderSuccessModalProps> = ({ formData, onClose }) => {
-  const { t } = useTranslation(['home', 'common', 'order']);
-
+  const { t } = useTranslation(['common', 'order']);
   const { removeItem } = useLocalStorage(LOCAL_STORAGE_KEY);
   const [emailCopied, setEmailCopied] = useState(false);
+
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const handleCopyEmail = async () => {
     await navigator.clipboard.writeText('pletunia.orders@gmail.com');
     setEmailCopied(true);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     removeItem();
     onClose();
+  }, [removeItem, onClose]);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [handleClose]);
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) handleClose();
   };
 
   return (
-    <Modal onClose={onClose} classNameModal="bg-orange-100 p-8 m-4 rounded-lg shadow-lg">
-      <div className="modal-content flex flex-col items-center gap-y-3 text-center text-black">
-        <h4 className="text-2xl">
-          {t('order:emailConfirmation.greeting', { user: formData?.name })}
-        </h4>
-        <h3>{t('order:emailConfirmation.thanks')}</h3>
-        <div className="mt-4">
-          <p>
-            {t('order:emailConfirmation.message', {
-              email: formData?.email,
-            })}
-          </p>
-          <p>{t('order:emailConfirmation.notReceived')}</p>
-        </div>
-        <div className="flex gap-x-4">
-          <span className={`my-5 cursor-pointer font-bold ${emailCopied && 'text-green-700'}`}>
-            pletunia.orders@gmail.com
-          </span>
-        </div>
+    <>
+      {/* Dark Overlay */}
+      <div
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-[5px]"
+        role="dialog"
+        aria-modal="true"
+        onClick={handleBackdropClick}
+      />
 
-        <div className="flex justify-between gap-x-8">
+      {/* Modal Content */}
+      <div
+        ref={dialogRef}
+        className="bg-dark-green fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transform border-8 border-white p-8 text-white shadow-lg"
+      >
+        <div className="flex flex-col items-center gap-y-8">
+          {/* Greeting */}
+          <div className="flex w-full items-start justify-between">
+            <div className="flex flex-col">
+              <h4 className="text-2xl">
+                {t('order:emailConfirmation.greeting', { user: '' })}
+                <strong>{formData?.name}</strong>!
+              </h4>
+              <h3>{t('order:emailConfirmation.thanks')}</h3>
+            </div>
+            <button
+              onClick={handleClose}
+              aria-label={t('common:buttons.close') ?? 'close'}
+              type="button"
+            >
+              <CloseIcon className="h-6 w-6 cursor-pointer text-white hover:text-gray-300" />
+            </button>
+          </div>
+
+          {/* Confirmation Message */}
+          <div>
+            <p>
+              {t('order:emailConfirmation.message', { email: '' })}{' '}
+              <strong>{formData.email}</strong>
+            </p>
+            <br />
+            <p>{t('order:emailConfirmation.notReceived')}</p>{' '}
+            <span className={`my-5 cursor-pointer font-bold ${emailCopied ? 'text-skintone' : ''}`}>
+              pletunia.orders@gmail.com
+            </span>
+          </div>
+
+          {/* Copy Button */}
           <button
-            className="w-40 rounded-lg bg-cyan-500 px-4 py-2 text-white hover:bg-cyan-600"
+            className="bg-dark-blue w-40 cursor-pointer px-4 py-2 text-white"
             onClick={handleCopyEmail}
+            type="button"
           >
             {emailCopied
               ? t('order:emailConfirmation.emailCopied')
               : t('order:emailConfirmation.copyEmailButton')}
           </button>
-          <button
-            className="w-40 rounded-lg bg-rose-500 px-4 py-2 text-white hover:bg-rose-600"
-            onClick={handleClose}
-          >
-            {t('common:buttons.close')}
-          </button>
+
+          {/* Spam Alert */}
+          <p className="text-xs italic">{t('order:emailConfirmation.PS')}</p>
         </div>
-        <p className="mt-4 text-xs italic">{t('order:emailConfirmation.PS')}</p>
-        <Image
-          className="inline"
-          src="/images/svgs-icons/email.svg"
-          height={18}
-          width={18}
-          alt="email-icon"
-        />
       </div>
-    </Modal>
+    </>
   );
 };

@@ -1,33 +1,30 @@
 'use client';
 
 import { FC } from 'react';
-import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { i18nConfig } from '@/i18nConfig';
-
 import { LANGUAGES } from '@/constants';
-import { TMobile } from '@/types';
+import { LanguageChangerProps } from '@/types/props';
 
-export const LanguageChanger: FC<TMobile> = ({ isMobile }) => {
+export const LanguageChanger: FC<LanguageChangerProps> = ({ onChangeEnd }) => {
   const { i18n } = useTranslation();
   const currentLocale = i18n.language;
   const router = useRouter();
   const currentPathname = usePathname();
 
-  const handleChange = (newLocale: string) => {
-    // Redirect to the new locale path
+  const handleChange = async (newLocale: string) => {
     if (currentLocale === i18nConfig.defaultLocale && !i18nConfig.prefixDefault) {
       router.push('/' + newLocale + currentPathname);
     } else {
       router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`));
     }
-
     router.refresh();
+    onChangeEnd?.();
   };
 
   return (
-    <div className="cursor-pointer font-bold">
+    <div className={`lg:text-dark-green font-bold`}>
       {LANGUAGES.map((lang) => (
         <button
           key={lang}

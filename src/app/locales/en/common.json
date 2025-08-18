@@ -2,21 +2,13 @@
   "buttons": {
     "close": "Close",
     "open": "Open",
-    "orderButton": "Order",
-    "orderInProgress": "Ordering in progress...",
-    "want": "I want!",
     "languageSwitch": "Ru"
   },
-  "copyright": "Ivan Zakharov",
   "navbar": {
+    "constructor": "Constructor",
     "postcards": "Postcards",
-    "contacts": "Contact us"
+    "order": "Order",
+    "contacts": "Contacts"
   },
-  "validationForm": {
-    "emptyName": "Name is required.",
-    "emptyEmail": "Email is required.",
-    "invalidEmailFormat": "Invalid email format.",
-    "emptyAddress": "Address is required.",
-    "noPostcardsSelected": "Select at least one postcard."
-  }
+  "copyright": "Ivan Zakharov"
 }

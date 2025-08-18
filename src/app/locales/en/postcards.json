@@ -1,0 +1,33 @@
+{
+  "headline": "POSTCARDS",
+  "sectionDescription": "Pre-made or custom-ordered.",
+  "oneItemOnly": "Each item is unique!",
+  "addButton": "Add",
+  "addedButton": "Added",
+  "cards": {
+    "coraline": {
+      "name": "CORALINE",
+      "description": "An adventurous 11-year-old girl."
+    },
+    "kimono": {
+      "name": "QIPAO",
+      "description": "Chinese minimalism."
+    },
+    "pumpkin": {
+      "name": "PUMPKIN",
+      "description": "Halloween's classic!"
+    },
+    "alyona": {
+      "name": "ALYONA",
+      "description": "A kind of a self-portrait."
+    },
+    "set": {
+      "name": "CONSTRUCTOR",
+      "description": "Custom, a reference is needed."
+    },
+    "custom": {
+      "name": "CUSTOM",
+      "description": "A reference is needed (assembled)."
+    }
+  }
+}

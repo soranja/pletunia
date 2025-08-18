@@ -12,17 +12,20 @@ export const Footer = () => {
   return (
     <footer>
       <div
-        className="bg-layout-dark-green z-20 flex min-w-full flex-row p-10 text-white lg:items-center"
+        className="bg-dark-green z-20 flex min-w-full flex-row p-10 text-white lg:items-center"
         id="contacts"
       >
-        <span className="grow text-2xl font-extrabold md:text-3xl">
-          PLETUNIA
-          <span className="pl-0.5 font-serif text-2xl text-black md:text-4xl">.</span>
-        </span>
+        <span className="grow text-2xl font-extrabold text-white md:text-3xl">PLETUNIA</span>
 
-        <ul className="flex cursor-pointer flex-col items-end gap-y-4 lg:flex-row lg:gap-x-4">
+        <ul className="flex flex-col items-end gap-y-4 lg:flex-row lg:gap-x-4">
           <li>
-            <a onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.telegramAlyona)}>
+            <a
+              href={SOCIAL_LINKS.telegramAlyona}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Telegram (Alyona) in a new tab"
+              className="inline-flex"
+            >
               <Image
                 src={SOCIAL_ICONS.telegram.src}
                 height={24}
@@ -31,8 +34,14 @@ export const Footer = () => {
               />
             </a>
           </li>
-          <li className="flex gap-x-2">
-            <a onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.instagram)}>
+          <li>
+            <a
+              href={SOCIAL_LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Instagram in a new tab"
+              className="inline-flex"
+            >
               <Image
                 src={SOCIAL_ICONS.insta.src}
                 height={24}
@@ -42,7 +51,13 @@ export const Footer = () => {
             </a>
           </li>
           <li>
-            <a onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.whatsApp)}>
+            <a
+              href={SOCIAL_LINKS.whatsApp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open WhatsApp in a new tab"
+              className="inline-flex"
+            >
               <Image
                 src={SOCIAL_ICONS.whatsApp.src}
                 height={24}
@@ -54,15 +69,17 @@ export const Footer = () => {
         </ul>
       </div>
 
-      <div className="bg-layout-dark-green flex flex-col items-center" id="copyright">
+      <div className="bg-dark-green flex flex-col items-center" id="copyright">
         <hr className="w-[300px] border-b-0 border-black lg:w-[800px]" />
-
-        <button
+        <a
+          href={SOCIAL_LINKS.telegramIvan}
+          target="_blank"
+          rel="noopener noreferrer"
           className="py-4 text-center text-sm text-white"
-          onClick={() => SOCIAL_LINKS.open(SOCIAL_LINKS.telegramIvan)}
+          aria-label="Open Telegram (Ivan) in a new tab"
         >
           {CURRENT_YEAR} {t('copyright')} &copy;
-        </button>
+        </a>
       </div>
     </footer>
   );

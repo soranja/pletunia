@@ -27,3 +27,9 @@ export interface TFormData {
   email: string;
   comment: string;
 }
+
+export interface TConstructorLayer {
+  layer: number;
+  label: string;
+  path: string;
+}

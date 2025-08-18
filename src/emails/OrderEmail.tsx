@@ -24,7 +24,6 @@ export const OrderEmail = ({
   comment,
   lang,
   orderId,
-  userAddress,
 }: OrderEmailProps) => {
   return (
     <Html lang={lang}>
@@ -48,7 +47,7 @@ export const OrderEmail = ({
                 <Img
                   src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
                   alt="pletunia"
-                  className="mx-auto w-24 rounded-full"
+                  className="mx-auto w-24"
                 ></Img>
                 <Heading as="h2" className="text-center text-xl">
                   Здравствуйте, {name}!
@@ -65,9 +64,6 @@ export const OrderEmail = ({
                           i === selectedPostcards.length - 1 ? postcard : postcard + ', '
                         )}
                       </span>
-                    </Text>
-                    <Text>
-                      Адрес: <span className="inline font-extrabold">{userAddress}</span>
                     </Text>
                     <Text>
                       Примечания / доп. контакты:
@@ -104,7 +100,7 @@ export const OrderEmail = ({
                 <Img
                   src="https://lh3.googleusercontent.com/a/ACg8ocLHNw_iQ2naWLZu20fzYbLahqqai-XuoeoFZ-3CUhdsng=s576-c-no"
                   alt="pletunia"
-                  className="mx-auto w-24 rounded-full"
+                  className="mx-auto w-24"
                 ></Img>
                 <Heading as="h2" className="text-center text-xl">
                   Hello, {name}!
@@ -121,9 +117,6 @@ export const OrderEmail = ({
                           i === selectedPostcards.length - 1 ? postcard : postcard + ', '
                         )}
                       </span>
-                    </Text>
-                    <Text>
-                      Your address: <span className="inline font-extrabold">{userAddress}</span>
                     </Text>
                     <Text>
                       Your comment / extra contact:

@@ -1,61 +1,61 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { LanguageChanger } from '../i18n/LanguageChanger';
 import { Navbar } from './Navbar';
-import { TMobile } from '@/types';
 
-export const Drawer: FC<TMobile> = ({ isMobile }) => {
+export const Drawer: FC = () => {
+  const { t } = useTranslation('common');
   const [isOpen, setIsOpen] = useState(false);
-
-  const ToggleSidebar = () => {
-    isOpen === true ? setIsOpen(false) : setIsOpen(true);
-  };
+  const close = useCallback(() => setIsOpen(false), []);
+  const open = () => setIsOpen(true);
 
   return (
-    <div className="lg:hidden">
-      {/*burger menu button*/}
+    <>
+      {/* Burger */}
       <button
-        className="sidebar-to-open text-layout-dark-green flex items-center"
-        onClick={ToggleSidebar}
-        aria-label="Open sidebar menu"
+        className="text-dark-green flex items-center"
+        onClick={open}
+        aria-label="Open menu"
+        aria-controls="mobile-drawer"
       >
-        <svg
-          className="block h-6 w-6 fill-current"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+        <svg className="block h-6 w-6 fill-current" viewBox="0 0 20 20">
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
       </button>
 
-      {/*burger menu drawer*/}
-      <div className={`${isOpen === true ? 'sidebar-menu relative z-50' : 'hidden'}`}>
-        <nav className="bg-layout-dark-green fixed top-0 right-0 flex w-[270px] max-w-sm flex-col border-r px-10 py-14 text-white md:bottom-0">
-          <div className="mb-4 flex items-start justify-between">
-            <Navbar isMobile={true}></Navbar>
-            <button
-              className="sidebar-to-close"
-              onClick={ToggleSidebar}
-              aria-label="Sidebar to close"
-            >
-              <svg
-                className="h-6 w-6 cursor-pointer text-gray-400 hover:text-gray-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
-            </button>
+      {/* Dark Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[5px]"
+          onClick={close}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Panel */}
+      <aside
+        id="mobile-drawer"
+        role="dialog"
+        aria-modal="true"
+        className={`bg-dark-green fixed top-0 right-0 z-50 h-full w-3/4 transform text-white shadow-2xl transition-transform duration-200 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
+        <div className="flex h-full flex-col justify-between p-10">
+          <div className="flex flex-col gap-y-4">
+            <Navbar orientation="col" onItemClick={close} />
+            <LanguageChanger onChangeEnd={close} />
           </div>
-        </nav>
-      </div>
-    </div>
+
+          <button
+            className="w-full border border-white/40 px-4 py-3 font-bold tracking-wide uppercase hover:bg-white/10 active:scale-[0.99]"
+            onClick={close}
+          >
+            {t('buttons.close')}
+          </button>
+        </div>
+      </aside>
+    </>
   );
 };

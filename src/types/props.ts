@@ -2,6 +2,8 @@ import { Resource } from 'i18next';
 import { ReactNode } from 'react';
 import { TCard, TFormData } from '.';
 
+export type LocaleParamsProps = Promise<{ locale: string }>;
+
 export interface TranslationsProviderProps {
   children: ReactNode;
   locale: string;
@@ -9,10 +11,20 @@ export interface TranslationsProviderProps {
   resources: Resource;
 }
 
+export interface NavbarProps {
+  orientation: 'row' | 'col';
+  onItemClick?: () => void;
+}
+
+export interface LanguageChangerProps {
+  onChangeEnd?: () => void;
+}
+
 export interface LinkScrollProps {
   to: string;
   offset: number;
   children: React.ReactNode;
+  onAfterClick?: () => void;
 }
 
 export interface InputProps {
@@ -26,12 +38,6 @@ export interface LabelProps {
   children: React.ReactNode;
 }
 
-export interface ModalProps {
-  onClose: () => void;
-  children: React.ReactNode;
-  classNameModal: string;
-}
-
 export interface OrderFormProps {
   onSubmit: (data: TFormData) => void | Promise<void>;
 }
@@ -42,12 +48,11 @@ export interface OrderSuccessModalProps {
 }
 
 export interface OrderEmailProps {
+  lang: string;
+  orderId: string;
   selectedPostcards: string[];
   name: string;
   comment: string;
-  lang: string;
-  orderId: string;
-  userAddress: string;
 }
 
 export interface PostcardCardProps {
@@ -59,4 +64,5 @@ export interface PostcardCardProps {
   flexGrowTarget: number;
   onCardClick: (index: number) => void;
   onAddButtonClick: (id: number) => void;
+  isMobile: boolean;
 }

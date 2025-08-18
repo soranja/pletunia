@@ -1,8 +1,22 @@
 {
+  "headline": "What's your order?",
+  "orderForm": {
+    "orderButton": "Order",
+    "orderInProgress": "Ordering in progress...",
+    "name": "Your name",
+    "email": "Your e-mail",
+    "comment": "Comment / Extra Contact"
+  },
+  "formValidation": {
+    "emptyName": "Name is required!",
+    "emptyEmail": "E-mail is required.",
+    "invalidEmailFormat": "Invalid e-mail format.",
+    "noPostcardsSelected": "Select at least one postcard."
+  },
   "emailConfirmation": {
-    "greeting": "Hi, {{user}}!",
+    "greeting": "Hi, {{user}}",
     "thanks": "Thank you for your order.",
-    "message": "A confirmation email is already on the way to your mailbox ({{email}}).",
+    "message": "A confirmation email is already on the way to your mailbox: {{email}}",
     "notReceived": "If you haven't gotten a message for some reason, please write to us directly at:",
     "copyEmailButton": "Copy Email",
     "emailCopied": "Copied!",

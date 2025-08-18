@@ -3,11 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 import { OrderForm } from './OrderForm';
 import { OrderSuccessModal } from './OrderSuccessModal';
-import { initialSize } from '@/constants';
 import { TFormData } from '@/types';
 
-export default function Order() {
-  const { t } = useTranslation(['home', 'common', 'order']);
+export const Order = () => {
+  const { t } = useTranslation('order');
 
   const [formData, setFormData] = useState<TFormData | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -24,22 +23,22 @@ export default function Order() {
 
   return (
     <section
-      className={`relative h-[110dvh] border-b-8 py-16 text-white ${initialSize <= 1280 ? 'bg-postcards bg-cover' : ''}`}
+      className={`relative flex flex-col items-center justify-center border-b-8 py-10 text-white ${'bg-postcards bg-cover'}`}
       id="order"
     >
-      {initialSize >= 1280 && (
+      {
         <video
           src="/videos/postcards-bg-video.mp4"
           poster="/images/bg/postcards.webp"
           autoPlay
           loop
           muted
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-top"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
         />
-      )}
+      }
 
-      <div className="flex flex-col items-center justify-center gap-y-8">
-        <h3 className="text-4xl font-extrabold md:text-6xl">{t('orderForm.headline')}</h3>
+      <div className="my-10 flex flex-col items-center justify-center gap-y-8 lg:w-1/3">
+        <h3 className="mb-4 text-4xl font-extrabold md:text-6xl">{t('headline')}</h3>
 
         <OrderForm onSubmit={handleFormSubmit} />
       </div>
@@ -49,4 +48,4 @@ export default function Order() {
       )}
     </section>
   );
-}
+};

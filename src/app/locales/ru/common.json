@@ -2,20 +2,13 @@
   "buttons": {
     "close": "Закрыть",
     "open": "Открыть",
-    "orderButton": "Заказать",
-    "orderInProgress": "Заказываем...",
     "languageSwitch": "Eng"
   },
-  "copyright": "Ivan Zakharov",
   "navbar": {
+    "constructor": "Конструктор",
     "postcards": "Открытки",
+    "order": "Заказ",
     "contacts": "Конкакты"
   },
-  "validationForm": {
-    "emptyName": "Впишите имя.",
-    "emptyEmail": "Впишите почту.",
-    "invalidEmailFormat": "Неверный формат почты.",
-    "emptyAddress": "Впишите адрес.",
-    "noPostcardsSelected": "Выберите как минимум одну открытку."
-  }
+  "copyright": "Ivan Zakharov"
 }
