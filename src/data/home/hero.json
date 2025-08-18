@@ -8,5 +8,10 @@
     "id": 2,
     "name": "lighthouse",
     "imgUrl": "/images/pages/home/hero/lighthouse.png"
+  },
+  "greenGirl": {
+    "id": 3,
+    "name": "green-girl",
+    "imgUrl": "/images/pages/home/hero/green-girl.webp"
   }
 }

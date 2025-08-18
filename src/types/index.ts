@@ -7,10 +7,6 @@ export type TInitTranslations = {
   resources?: Resource;
 };
 
-export type TMobile = {
-  isMobile: boolean;
-};
-
 export type TCard = {
   id: number;
   name: string;
@@ -21,15 +17,29 @@ export type TCard = {
   addedButton: string;
 };
 
-export interface TFormData {
+export type TFormData = {
   selectedPostcards: string[];
   name: string;
   email: string;
   comment: string;
+};
+
+type TFieldName = Exclude<keyof TFormData, 'selectedPostcards'>;
+type TFieldKind = 'text' | 'email' | 'textarea';
+
+export interface TField<N extends TFieldName = TFieldName> {
+  name: N;
+  kind: TFieldKind;
+  required: boolean;
+  label: string;
+  placeholder: string;
+  rows?: number;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  textareaProps?: React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 }
 
-export interface TConstructorLayer {
+export type TConstructorLayer = {
   layer: number;
   label: string;
   path: string;
-}
+};

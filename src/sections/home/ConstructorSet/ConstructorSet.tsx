@@ -14,6 +14,14 @@ export const ConstructorSet: FC = () => {
   const [hovered, setHovered] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
 
+  const viewRef = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(viewRef, {
+    amount: 0.5,
+    margin: '0px 0px -15% 0px',
+  });
+
+  const assembled = isTouch ? inView : hovered;
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const mq = window.matchMedia('(hover: none)');
@@ -25,6 +33,7 @@ export const ConstructorSet: FC = () => {
   }, []);
 
   const FAST_SPRING = { type: 'spring' as const, stiffness: 280, damping: 24, mass: 0.6 };
+
   const SLOW_SPRING = {
     type: 'spring' as const,
     stiffness: 280 / 9,
@@ -52,31 +61,27 @@ export const ConstructorSet: FC = () => {
     [layers]
   );
 
-  const stackRef = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(stackRef, { amount: 0.35, margin: '0px 0px -10% 0px' });
-  const assembled = isTouch ? inView : hovered;
-
   return (
     <section
       id="constructor-set"
       className="bg-sea-sky relative z-10 flex w-full flex-col justify-between overflow-hidden border-b-8 bg-cover lg:flex-row"
     >
       {/* TEXT COLUMN — first on mobile, second on desktop */}
-      <div className="z-10 order-1 mt-6 flex w-full flex-col justify-center gap-y-6 pb-8 lg:order-2 lg:mt-8 lg:w-auto lg:gap-y-8 lg:px-16 lg:pb-0">
-        <h2 className="bg-dark-blue mb-2 px-6 py-3 font-serif text-3xl font-extrabold uppercase lg:mb-6 lg:px-8 lg:py-4 lg:text-5xl">
+      <div className="z-10 order-1 mt-6 flex w-full flex-col justify-center gap-y-6 pb-8 md:mt-8 md:w-auto md:gap-y-8 md:px-16 md:pb-0 lg:order-2">
+        <h2 className="bg-dark-blue mb-2 px-6 py-3 font-serif text-3xl font-extrabold uppercase md:mb-6 md:px-8 md:py-4 lg:text-5xl">
           {t('headline')}
         </h2>
-        <div className="flex flex-col justify-center gap-y-1 bg-[#8fb7ba]/80 px-6 py-2 lg:bg-transparent lg:px-8">
-          <span className="text-xl lg:text-2xl">{t('description')}</span>
+        <div className="flex flex-col justify-center gap-y-1 bg-[#8fb7ba]/80 px-6 py-2 md:px-8 lg:bg-transparent">
+          <span className="text-xl md:text-2xl">{t('description')}</span>
           <span className="italic opacity-70">{t('hint')}</span>
         </div>
       </div>
 
       {/* INTERACTIVE ANIMATION — second on mobile, first on desktop */}
-      <div className="order-2 flex h-[60vh] w-full items-center justify-center md:h-[48vh] lg:order-1 lg:h-auto lg:w-1/2 lg:justify-start">
+      <div className="order-2 flex h-[60vh] w-full items-center justify-center md:h-screen lg:order-1 lg:h-auto lg:w-1/2 lg:justify-start">
         <motion.div
-          ref={stackRef}
-          className="relative flex h-full w-full items-center justify-end lg:w-1/2"
+          ref={viewRef}
+          className="relative flex h-full w-full items-center justify-end md:w-2/3 lg:w-1/2"
           onHoverStart={() => setHovered(true)}
           onHoverEnd={() => setHovered(false)}
         >

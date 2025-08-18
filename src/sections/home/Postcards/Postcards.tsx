@@ -7,7 +7,7 @@ import { PostcardCard } from './PostcardCard';
 import postcards from '@/data/home/postcards.json';
 import { usePostcardsSelection } from '@/contexts/PostcardsSelectionContext';
 
-import { TCard, TMobile } from '@/types';
+import { TCard } from '@/types';
 
 export const Postcards = () => {
   const { t } = useTranslation('postcards');
@@ -17,19 +17,19 @@ export const Postcards = () => {
   const handleCardClick = (index: number) =>
     setExpandedIndex((prev) => (prev === index ? null : index));
   const handleAddButtonClick = (id: number) => toggleById(id);
-  const [mobile, setMobile] = useState<TMobile>({ isMobile: false });
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const mq = window.matchMedia('(max-width: 767px)');
-      const apply = () => setMobile({ isMobile: mq.matches });
+      const apply = () => setMobile(mq.matches);
       apply();
       mq.addEventListener?.('change', apply);
       return () => mq.removeEventListener?.('change', apply);
     }
   }, []);
 
-  const GROWTH = mobile.isMobile ? 2 : 0.5;
+  const GROWTH = mobile ? 2 : 0.5;
   const flexTargets = useMemo(() => {
     const cards = postcards.length;
     if (expandedIndex === null) return Array(cards).fill(1);
@@ -62,7 +62,7 @@ export const Postcards = () => {
             onCardClick={handleCardClick}
             onAddButtonClick={handleAddButtonClick}
             flexGrowTarget={flexTargets[index]}
-            isMobile={mobile.isMobile}
+            isMobile={mobile}
           />
         ))}
       </div>

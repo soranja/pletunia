@@ -1,6 +1,6 @@
 import { Resource } from 'i18next';
 import { ReactNode } from 'react';
-import { TCard, TFormData } from '.';
+import { TCard, TField, TFormData } from '.';
 
 export type LocaleParamsProps = Promise<{ locale: string }>;
 
@@ -27,19 +27,18 @@ export interface LinkScrollProps {
   onAfterClick?: () => void;
 }
 
-export interface InputProps {
-  id: string;
-  name: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export interface LabelProps {
-  htmlFor: string;
-  children: React.ReactNode;
-}
-
 export interface OrderFormProps {
   onSubmit: (data: TFormData) => void | Promise<void>;
+}
+
+export interface OrderFieldProps {
+  field: TField;
+  state: 'idle' | 'validating' | 'loading' | 'ready';
+  formValidation: Record<string, boolean>;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    fieldName: string
+  ) => void;
 }
 
 export interface OrderSuccessModalProps {

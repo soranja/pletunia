@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { TField } from '@/types';
 
 export const I18N_NAMESPACES = ['common', 'hero', 'order', 'postcards', 'sets'];
 
@@ -55,3 +56,29 @@ export const SOCIAL_ICONS = {
   whatsApp: { src: '/images/icons/social/whats-app.svg', alt: 'wa-icon' },
   insta: { src: '/images/icons/social/instagram.svg', alt: 'insta-icon' },
 };
+
+export const ORDER_FIELDS: TField[] = [
+  {
+    name: 'name',
+    kind: 'text',
+    required: true,
+    label: 'order:orderForm.name',
+    placeholder: '...',
+  },
+  {
+    name: 'email',
+    kind: 'email',
+    required: true,
+    label: 'order:orderForm.email',
+    placeholder: '...',
+    inputProps: { inputMode: 'email', autoComplete: 'email' },
+  },
+  {
+    name: 'comment',
+    kind: 'textarea',
+    required: false,
+    label: 'order:orderForm.comment',
+    placeholder: '...',
+    rows: 3,
+  },
+];
