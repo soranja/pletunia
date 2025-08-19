@@ -14,6 +14,7 @@ export const PostcardCard: FC<PostcardCardProps> = ({
   onCardClick,
   onAddButtonClick,
   isMobile,
+  reserved,
 }) => {
   const { t } = useTranslation('postcards');
 
@@ -28,6 +29,14 @@ export const PostcardCard: FC<PostcardCardProps> = ({
   const showMobileDetails = isExpanded;
   const showDesktopNameAlways = true;
   const showDesktopButtonAlways = true;
+
+  const btnState = reserved ? 'reserved' : isSelected ? 'selected' : 'default';
+  const btnClass =
+    btnState === 'reserved'
+      ? 'bg-gray-500 text-white cursor-not-allowed opacity-60'
+      : btnState === 'selected'
+        ? 'text-dark-green bg-white'
+        : 'bg-dark-green text-white';
 
   return (
     <AnimatePresence>
@@ -44,11 +53,14 @@ export const PostcardCard: FC<PostcardCardProps> = ({
       >
         {/* Card Image (shorter on mobile) */}
         <div
-          className="h-[300px] w-full bg-cover bg-center md:h-[450px]"
+          className={`h-[300px] w-full bg-cover bg-center md:h-[450px] ${reserved ? 'grayscale' : ''}`}
           style={{
             backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.38), rgba(0,0,0,0.12)), url(${card.imgUrl})`,
           }}
         />
+
+        {/* Reserved Gray Overlay */}
+        {reserved && <div className="pointer-events-none absolute inset-0 bg-black/30" />}
 
         {/* Checked Dot — centered on mobile, top-right on desktop */}
         {isChecked && (
@@ -69,10 +81,7 @@ export const PostcardCard: FC<PostcardCardProps> = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: isExpanded ? -4 : 4 }}
                     transition={{ duration: 0.18 }}
-                    className={`text-base font-extrabold md:text-xl ${
-                      // mobile: hide when not expanded
-                      isExpanded ? '' : 'hidden md:block'
-                    }`}
+                    className={`text-base font-extrabold md:text-xl ${isExpanded ? '' : 'hidden md:block'}`}
                   >
                     {t(`cards.${card.name}.name`)}
                   </motion.h4>
@@ -96,18 +105,21 @@ export const PostcardCard: FC<PostcardCardProps> = ({
               )}
             </div>
 
-            {/* ADD / ADDED button:
-                - Mobile: show only for expanded
-                - Desktop: always show  */}
+            {/* ADD / ADDED button */}
             {(showMobileDetails || showDesktopButtonAlways) && (
               <button
-                className={` ${isExpanded ? 'block' : 'hidden md:block'} min-w-full py-2 text-sm md:py-2 md:text-lg ${isSelected ? 'text-dark-green bg-white' : 'bg-dark-green text-white'} `}
+                className={`${isExpanded ? 'block' : 'hidden md:block'} min-w-full py-2 text-sm md:py-2 md:text-lg ${btnClass}`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  onAddButtonClick(card.id);
+                  if (!reserved) onAddButtonClick(card.id);
                 }}
+                disabled={reserved}
               >
-                {isSelected ? t(`${card.addedButton}`) : t(`${card.addButton}`)}
+                {reserved
+                  ? t('reservedButton')
+                  : isSelected
+                    ? t(`${card.addedButton}`)
+                    : t(`${card.addButton}`)}
               </button>
             )}
           </motion.div>

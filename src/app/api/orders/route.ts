@@ -2,13 +2,18 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
 
-import { OrderEmail } from '@/emails/OrderEmail';
+import postcards from '@/data/home/postcards.json';
+import OrderEmail from '@/emails/OrderEmail';
+import { normalizeLang } from '@/utils/order';
+import { SupportedLang } from '@/types/props';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const RESEND = new Resend(requireEnv('RESEND_API_KEY'));
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const LangSchema = z.preprocess(normalizeLang, z.enum(['en', 'ru']));
+
 const OrderSchema = z.object({
-  lang: z.string().default('en'),
+  lang: LangSchema.default('en'),
   orderId: z.string().min(1),
   selectedPostcards: z.array(z.string()).min(1),
   name: z.string().min(1),
@@ -27,25 +32,54 @@ function requireEnv(key: string): string {
 export async function POST(request: Request) {
   try {
     const json = await request.json().catch(() => null);
-
     if (!json) {
       return NextResponse.json({ error: 'Missing / invalid JSON body' }, { status: 400 });
     }
 
     const PAYLOAD = OrderSchema.parse(json);
     const FROM = requireEnv('EMAIL_FROM');
-    const TO = process.env.EMAIL_TO ?? PAYLOAD.email;
+    const OWNER = process.env.EMAIL_TO;
+    const TO = PAYLOAD.email;
 
-    const { data, error } = await resend.emails.send({
+    const originFromReq = (() => {
+      try {
+        return new URL(request.url).origin;
+      } catch {
+        return null;
+      }
+    })();
+
+    const assetBaseUrl = process.env.ASSET_BASE_URL || originFromReq || 'https://pletunia.com';
+
+    const selectedIds = PAYLOAD.selectedPostcards
+      .map((slug) => postcards.find((p) => p.name === slug)?.id)
+      .filter((id): id is number => typeof id === 'number');
+
+    if (selectedIds.length === 0) {
+      return NextResponse.json({ error: 'No valid postcards selected' }, { status: 400 });
+    }
+
+    const { data, error } = await RESEND.emails.send({
       from: FROM,
-      to: TO,
-      subject: `Pletunia order #${PAYLOAD.orderId}`,
-      react: OrderEmail(PAYLOAD),
+      to: [TO],
+      ...(OWNER ? { bcc: [OWNER] } : {}),
+      reply_to: [TO],
+      subject: `Pletunia • Order #${PAYLOAD.orderId}`,
+      react: OrderEmail({
+        lang: PAYLOAD.lang as SupportedLang,
+        orderId: PAYLOAD.orderId,
+        name: PAYLOAD.name,
+        comment: PAYLOAD.comment,
+        selectedIds,
+        assetBaseUrl,
+      }),
     });
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      const code = (error as Error & { name?: string }).name ?? 'ResendError';
+      return NextResponse.json({ error: error.message, code }, { status: 500 });
     }
+
     return NextResponse.json({ ok: true, id: data?.id });
   } catch (err: unknown) {
     if (err instanceof z.ZodError) {

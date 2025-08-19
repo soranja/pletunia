@@ -15,6 +15,6 @@ function getNextCounter(): number {
 }
 
 export function generateOrderId(): string {
-  const incrementPart = String(getNextCounter()).padStart(2, '0'); // 01, 02, ...
-  return `#${incrementPart}-${nanoid()}`;
+  const incrementPart = String(getNextCounter()).padStart(2, '0');
+  return `${incrementPart}-${nanoid()}`;
 }

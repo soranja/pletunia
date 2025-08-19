@@ -4,6 +4,7 @@
   "oneItemOnly": "Each item is unique!",
   "addButton": "Add",
   "addedButton": "Added",
+  "reservedButton": "Reserved",
   "cards": {
     "coraline": {
       "name": "CORALINE",

@@ -7,6 +7,7 @@
     "description": "coraline",
     "price": 3000,
     "imgUrl": "/images/pages/home/postcards/coraline.webp",
+    "emailImgUrl": "/images/pages/home/postcards/email/coraline.png",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -18,6 +19,7 @@
     "description": "kimono",
     "price": 2000,
     "imgUrl": "/images/pages/home/postcards/kimono.webp",
+    "emailImgUrl": "/images/pages/home/postcards/email/kimono.png",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -29,6 +31,7 @@
     "description": "pumpkin",
     "price": 1500,
     "imgUrl": "/images/pages/home/postcards/pumpkin.webp",
+    "emailImgUrl": "/images/pages/home/postcards/email/pumpkin.png",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -40,6 +43,7 @@
     "description": "alyona",
     "price": 7000,
     "imgUrl": "/images/pages/home/postcards/alyona.webp",
+    "emailImgUrl": "/images/pages/home/postcards/email/alyona.png",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -51,6 +55,7 @@
     "description": "set",
     "price": 10000,
     "imgUrl": "/images/pages/home/postcards/constructor.webp",
+    "emailImgUrl": "/images/pages/home/postcards/email/constructor.png",
     "addButton": "addButton",
     "addedButton": "addedButton"
   },
@@ -62,6 +67,7 @@
     "description": "custom",
     "price": 5000,
     "imgUrl": "/images/pages/home/postcards/custom.webp",
+    "emailImgUrl": "/images/pages/home/postcards/email/custom.png",
     "addButton": "addButton",
     "addedButton": "addedButton"
   }

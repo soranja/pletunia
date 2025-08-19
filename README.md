@@ -1,59 +1,86 @@
-Pletunia v. 1.0 welcomes you! ✨
+# Pletunia v. 2.0.1 ✨
 
-THE PROJECT DESCRIPTION 💌:
+Welcome to **Pletunia**, a small but meaningful project built to support my wife’s first business. ✨  
+She’s an incredibly creative person, making beautiful art pieces using the paper cut-out technique. This website is my way of helping her share that art with the world.
 
-This is my first relatively big project dedicated to my wife’s first business. She is a very creative person, and I want to support her in any way possible, currently by helping her sell her art pieces.
+---
 
-For now, you can only perform one basic action on the website: ordering postcards (all made using the paper cut-out technique). After filling out the order form, you’ll receive a confirmation email, following which we’ll contact you via the provided email to discuss payment and delivery details.
+## 💌 THE PROJECT DESCRIPTION
 
-============
+Right now, the website allows you to do one main thing: **order postcards**.
 
-FUTURE PLANS 🎯:
+- Browse postcards (all original designs).
+- Fill out a simple order form.
+- Receive a confirmation email in your chosen language (EN/RU).
+- After that, we’ll personally contact you by email to arrange payment and delivery.
 
-We're planning to develop the project by adding new postcards and sections for postcard construction sets and friendship bracelets.
+---
 
-After we're done with setting up proper e-commerce functionality (e.g. implementing a shopping cart, payment system, delivery section), we're considering expanding it further. We might add a blog, an about us section, and news updates.
+## 🎯 FUTURE PLANS
 
-============
+We’re planning to grow Pletunia step by step:
 
-NOTE ABOUT DEVELOPING 🚀:
+- Add more postcard designs.
+- Implement proper e-commerce features: shopping cart, payment system, delivery details.
+- Possibly expand further with a **blog**, **about us**, and **news/updates** section.
 
-The production may seem super slow as I've done a lot of rebuilding, and also I've been learning a huge amount of things on the go.
+✅ **Constructor Set section is successfully added** (2025 refactor).
 
-The project utilizes many libraries and tools, and it was originally built with CRA (then migrated to Next.js 14). It may contain numerous structural and coherence errors, but I’m always open to suggestions, feedback, or reviews on how to improve it.
+---
 
-The website currently supports two languages: Russian and English. The language of email confirmation letters is based on your browser language (RU/EN). Postcard names are also translated.
+## 🚀 DEV NOTES
 
-============
+This used to be my **first relatively big project**, and progress has been slow at times because:
 
-USED STACK 💾:
+- I’ve been **learning a lot of new tools and concepts** while building.
+- I’ve done several **rebuilds and refactors** to improve structure and performance (2023, 2025).
 
-- Typescript 5
-- React 18
-- Next.js 14.1
-- React Redux + Redux Toolkit
-- Tailwind 3.3
-- i18next + i18next-resources-to-backend + react-i18next + next-i18n-router
-- Framer Motion
-- Resend + React Email
-- Nanoid
-- React Scroll
+Originally built with **CRA**, the project was later **migrated to Next.js 15**.
 
-============
+🌍 **Languages supported**: English and Russian (including postcard names and email confirmations).
 
-KNOWN ISSUES & REFACTORING & MINOR THINGS 🔧:
+---
 
-- Check and remove unnecessary 'use client' uses
-- Keep scroll (especially after translation switch)
-- Check and remove unnecessary i18n namespaces + any types
-- Expanded / collapsed state of the postcards may not trigger with the first click (but it does with the second one)
+## 💾 TECH STACK
 
-❓============❓
-(optional or low priority):
+- **TypeScript 5**
+- **React 18 → upgraded to 19.1 in 2025**
+- **Next.js 14.1 → upgraded to 15.4 in 2025**
+- **Tailwind CSS 3.3 → upgraded to 4.1 in 2025**
+- **React Redux + Redux Toolkit** (used earlier; later simplified with useContext)
+- **i18next + react-i18next + next-i18n-router**
+- **Framer Motion**
+- **Resend**
+- **React Email**
+- **Nanoid**
+- **React Scroll**
 
-- Add separate message for pletunia.orders
-- Put all order translations into order.json
-- No cache in fields in Safari (labels? htmlfor?)
-- Animate drawer
-- Decide where to put removeItem
-- More screen responsiveness
+---
+
+## 🔧 KNOWN ISSUES & TO-DOS
+
+**Improve overall consistency and coherence across the project:**
+
+- Clean up unnecessary `use client` directives.
+- Preserve scroll position after language switch.
+- Flatten overly complex or bloated logic.
+- Remove redundant or duplicating constants, functions, etc.
+- Remove leftover types from old logic.
+
+---
+
+## 📌 2025 REFACTOR HIGHLIGHTS
+
+In 2025, I made a **major cleanup and modernization pass**:
+
+1. Updated all major libraries and frameworks to their latest stable versions.
+2. Migrated to **Tailwind CSS 4** with a refreshed config.
+3. Optimized and downsized most images and other assets (**huge performance boost**).
+4. Refactored types and separated logic for a **cleaner structure**.
+5. Added a new **Constructor Set** section.
+6. Enhanced animations with **Framer Motion**.
+7. Debugged and simplified the order form.
+8. Removed Redux for postcards/order state → replaced with **lighter React context**.
+9. Fixed smaller bugs and improved overall coherence.
+
+---

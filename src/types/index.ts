@@ -17,6 +17,13 @@ export type TCard = {
   addedButton: string;
 };
 
+export type TReservedCard = {
+  id: number;
+  orderId: string;
+  reservedAt: number; // ms
+  expiresAt?: number; // ms
+};
+
 export type TFormData = {
   selectedPostcards: string[];
   name: string;

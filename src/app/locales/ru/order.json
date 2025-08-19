@@ -1,10 +1,13 @@
 {
   "headline": "Что заказываем?",
   "orderForm": {
+    "orderButton": "Заказать",
+    "orderInProgress": "Заказываем...",
     "name": "Ваше имя",
     "email": "Ваша почта",
     "address": "Ваш адрес",
-    "comment": "Комментарий / Доп. контакт"
+    "comment": "Комментарий / Доп. контакт",
+    "reserved": "Есть забронированные открытки."
   },
   "formValidation": {
     "emptyName": "Впишите имя.",

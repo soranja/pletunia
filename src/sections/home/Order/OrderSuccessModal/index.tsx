@@ -5,13 +5,13 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CloseIcon from '@/assets/icons/close.svg';
-import { LOCAL_STORAGE_KEY } from '@/constants';
+import { LOCAL_STORAGE_KEY_FORM_DATA } from '@/constants';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { OrderSuccessModalProps } from '@/types/props';
 
 export const OrderSuccessModal: FC<OrderSuccessModalProps> = ({ formData, onClose }) => {
   const { t } = useTranslation(['common', 'order']);
-  const { removeItem } = useLocalStorage(LOCAL_STORAGE_KEY);
+  const { removeItem } = useLocalStorage(LOCAL_STORAGE_KEY_FORM_DATA);
   const [emailCopied, setEmailCopied] = useState(false);
 
   const dialogRef = useRef<HTMLDivElement>(null);

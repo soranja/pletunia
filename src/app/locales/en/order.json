@@ -5,7 +5,8 @@
     "orderInProgress": "Ordering in progress...",
     "name": "Your name",
     "email": "Your e-mail",
-    "comment": "Comment / Extra Contact"
+    "comment": "Comment / Extra Contact",
+    "reserved": "Some postcards are reserved."
   },
   "formValidation": {
     "emptyName": "Name is required!",

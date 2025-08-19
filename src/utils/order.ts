@@ -3,6 +3,13 @@ import { generateOrderId } from './orderId';
 
 export const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
+export function normalizeLang(x: unknown): 'en' | 'ru' {
+  const s = String(x || '').toLowerCase();
+  if (s.startsWith('ru')) return 'ru';
+  if (s.startsWith('en')) return 'en';
+  return 'en';
+}
+
 export function getInputValue(form: HTMLFormElement, selector: string): string {
   return (
     (form.querySelector(selector) as HTMLInputElement | HTMLTextAreaElement)?.value ?? ''
@@ -35,9 +42,9 @@ export function validateEmail(email: string) {
   return EMAIL_REGEX.test(email);
 }
 
-export function buildOrderPayload(data: TFormData) {
+export function buildOrderPayload(data: TFormData, lang?: string) {
   const orderId = generateOrderId();
-  return { ...data, orderId };
+  return { ...data, orderId, ...(lang ? { lang } : {}) };
 }
 
 export async function submitOrder(payload: ReturnType<typeof buildOrderPayload>) {

@@ -41,7 +41,9 @@ export const METADATA: Metadata = {
 };
 
 export const LANGUAGES = ['en', 'ru'];
-export const LOCAL_STORAGE_KEY = 'formData';
+export const LOCAL_STORAGE_KEY_FORM_DATA = 'formData';
+export const LOCAL_STORAGE_KEY_RESERVED_CARDS = 'reservedPostcards';
+
 export const CURRENT_YEAR = new Date().getFullYear();
 
 export const SOCIAL_LINKS = {

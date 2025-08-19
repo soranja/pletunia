@@ -2,6 +2,8 @@ import { Resource } from 'i18next';
 import { ReactNode } from 'react';
 import { TCard, TField, TFormData } from '.';
 
+export type SupportedLang = 'en' | 'ru';
+
 export type LocaleParamsProps = Promise<{ locale: string }>;
 
 export interface TranslationsProviderProps {
@@ -46,14 +48,6 @@ export interface OrderSuccessModalProps {
   onClose: () => void;
 }
 
-export interface OrderEmailProps {
-  lang: string;
-  orderId: string;
-  selectedPostcards: string[];
-  name: string;
-  comment: string;
-}
-
 export interface PostcardCardProps {
   card: TCard;
   index: number;
@@ -64,4 +58,5 @@ export interface PostcardCardProps {
   onCardClick: (index: number) => void;
   onAddButtonClick: (id: number) => void;
   isMobile: boolean;
+  reserved: boolean;
 }

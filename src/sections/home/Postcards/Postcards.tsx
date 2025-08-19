@@ -4,9 +4,10 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PostcardCard } from './PostcardCard';
-import postcards from '@/data/home/postcards.json';
 import { usePostcardsSelection } from '@/contexts/PostcardsSelectionContext';
-
+import { LOCAL_STORAGE_KEY_RESERVED_CARDS } from '@/constants';
+import postcards from '@/data/home/postcards.json';
+import { getReservedSet } from '@/utils/reservations';
 import { TCard } from '@/types';
 
 export const Postcards = () => {
@@ -18,6 +19,7 @@ export const Postcards = () => {
     setExpandedIndex((prev) => (prev === index ? null : index));
   const handleAddButtonClick = (id: number) => toggleById(id);
   const [mobile, setMobile] = useState(false);
+  const [reservedSet, setReservedSet] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -27,6 +29,18 @@ export const Postcards = () => {
       mq.addEventListener?.('change', apply);
       return () => mq.removeEventListener?.('change', apply);
     }
+  }, []);
+
+  useEffect(() => {
+    setReservedSet(getReservedSet());
+
+    const onStorage = (e: StorageEvent) => {
+      if (!e.key || e.key === LOCAL_STORAGE_KEY_RESERVED_CARDS) {
+        setReservedSet(getReservedSet());
+      }
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
   }, []);
 
   const GROWTH = mobile ? 2 : 0.5;
@@ -41,7 +55,7 @@ export const Postcards = () => {
   return (
     <section
       id="postcards"
-      className="bg-paper-tile bg-dark-blue relative z-20 flex h-full flex-col items-center gap-y-8 border-b-8 border-b-white px-1 py-16 bg-blend-multiply lg:px-0"
+      className="bg-tile-on-dark-blue relative z-20 flex h-full flex-col items-center gap-y-8 border-b-8 border-b-white px-1 py-16 lg:px-0"
     >
       <div className="flex flex-col items-center gap-y-4">
         <h3 className="text-4xl font-extrabold md:text-6xl">{t('headline')}</h3>
@@ -51,20 +65,24 @@ export const Postcards = () => {
       </div>
 
       <div className="flex w-full gap-x-1 md:max-w-6xl md:px-8 lg:gap-x-4">
-        {postcards.map((card: TCard, index: number) => (
-          <PostcardCard
-            key={card.id}
-            card={card}
-            index={index}
-            isExpanded={expandedIndex === index}
-            selectedCardIds={selectedCardIds}
-            checkedCards={checkedCards}
-            onCardClick={handleCardClick}
-            onAddButtonClick={handleAddButtonClick}
-            flexGrowTarget={flexTargets[index]}
-            isMobile={mobile}
-          />
-        ))}
+        {postcards.map((card: TCard, index: number) => {
+          const reserved = reservedSet.has(card.id);
+          return (
+            <PostcardCard
+              key={card.id}
+              card={card}
+              index={index}
+              isExpanded={expandedIndex === index}
+              selectedCardIds={selectedCardIds}
+              checkedCards={checkedCards}
+              onCardClick={handleCardClick}
+              onAddButtonClick={handleAddButtonClick}
+              flexGrowTarget={flexTargets[index]}
+              isMobile={mobile}
+              reserved={reserved}
+            />
+          );
+        })}
       </div>
 
       <p className="italic">{t('oneItemOnly')}</p>
