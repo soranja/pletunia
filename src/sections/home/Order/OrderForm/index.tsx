@@ -20,15 +20,9 @@ import { OrderFormProps } from '@/types/props';
 export const OrderForm: FC<OrderFormProps> = ({ onSubmit }) => {
   const { i18n, t } = useTranslation(['postcards', 'order']);
   const formRef = useRef<HTMLFormElement>(null);
-
   const [state, setState] = useState<'idle' | 'validating' | 'loading' | 'ready'>('idle');
   const [reservedSet, setReservedSet] = useState<Set<number>>(new Set());
-
-  const [formValidation, setFormValidation] = useState({
-    name: false,
-    email: false,
-  });
-
+  const [formValidation, setFormValidation] = useState({ name: false, email: false });
   const { selectedCardIds, checkedCards, toggleById, clearAll } = usePostcardsSelection();
   const { setItem } = useLocalStorage(LOCAL_STORAGE_KEY_FORM_DATA);
 
@@ -85,10 +79,10 @@ export const OrderForm: FC<OrderFormProps> = ({ onSubmit }) => {
     setState('loading');
     const data = collectFormData();
     const payload = buildOrderPayload(data, i18n.language);
-    const orderId = await submitOrder(payload);
+    const result = await submitOrder(payload);
+
+    reserveCards(result.selectedIds, result.orderId, 30);
     setItem(payload);
-    reserveCards(selectedCardIds, orderId, 30);
-    setReservedSet(getReservedSet());
 
     await onSubmit(data);
     resetForm();

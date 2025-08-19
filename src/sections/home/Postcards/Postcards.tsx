@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { PostcardCard } from './PostcardCard';
 import { usePostcardsSelection } from '@/contexts/PostcardsSelectionContext';
-import { LOCAL_STORAGE_KEY_RESERVED_CARDS } from '@/constants';
+import { LOCAL_STORAGE_KEY_RESERVED_CARDS, RESERVATIONS_EVENT } from '@/constants';
 import postcards from '@/data/home/postcards.json';
 import { getReservedSet } from '@/utils/reservations';
 import { TCard } from '@/types';
@@ -40,7 +40,14 @@ export const Postcards = () => {
       }
     };
     window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
+
+    const onReservations = () => setReservedSet(getReservedSet());
+    window.addEventListener(RESERVATIONS_EVENT, onReservations);
+
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener(RESERVATIONS_EVENT, onReservations);
+    };
   }, []);
 
   const GROWTH = mobile ? 2 : 0.5;
@@ -55,7 +62,7 @@ export const Postcards = () => {
   return (
     <section
       id="postcards"
-      className="bg-tile-on-dark-blue relative z-20 flex h-full flex-col items-center gap-y-8 border-b-8 border-b-white px-1 py-16 lg:px-0"
+      className="bg-dark-blue relative z-20 flex h-full flex-col items-center gap-y-8 border-b-8 border-b-white px-1 py-16 lg:px-0"
     >
       <div className="flex flex-col items-center gap-y-4">
         <h3 className="text-4xl font-extrabold md:text-6xl">{t('headline')}</h3>

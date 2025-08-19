@@ -1,7 +1,6 @@
-import type { TFormData, TCard } from '@/types';
+import { EMAIL_REGEX } from '@/constants';
 import { generateOrderId } from './orderId';
-
-export const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+import type { TFormData, TCard, TOrderSuccess } from '@/types';
 
 export function normalizeLang(x: unknown): 'en' | 'ru' {
   const s = String(x || '').toLowerCase();
@@ -10,32 +9,11 @@ export function normalizeLang(x: unknown): 'en' | 'ru' {
   return 'en';
 }
 
-export function getInputValue(form: HTMLFormElement, selector: string): string {
-  return (
-    (form.querySelector(selector) as HTMLInputElement | HTMLTextAreaElement)?.value ?? ''
-  ).trim();
-}
-
-export function collectFormValues(form: HTMLFormElement) {
-  return {
-    name: getInputValue(form, 'input[name="name"]'),
-    email: getInputValue(form, 'input[name="email"]'),
-    comment: getInputValue(form, '#comment'),
-  };
-}
-
 export function idsToCardNames(ids: number[], cards: TCard[]): string[] {
   return ids
     .map((id) => cards.find((card) => card.id === id))
     .filter((card): card is TCard => Boolean(card))
     .map((card) => card.name);
-}
-
-export function idsToCardIds(ids: number[], cards: TCard[]): number[] {
-  return ids
-    .map((id) => cards.find((card) => card.id === id))
-    .filter((card): card is TCard => Boolean(card))
-    .map((card) => card.id);
 }
 
 export function validateEmail(email: string) {
@@ -47,7 +25,9 @@ export function buildOrderPayload(data: TFormData, lang?: string) {
   return { ...data, orderId, ...(lang ? { lang } : {}) };
 }
 
-export async function submitOrder(payload: ReturnType<typeof buildOrderPayload>) {
+export async function submitOrder(
+  payload: ReturnType<typeof buildOrderPayload>
+): Promise<TOrderSuccess> {
   const res = await fetch('/api/orders', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -62,5 +42,12 @@ export async function submitOrder(payload: ReturnType<typeof buildOrderPayload>)
     } catch {}
     throw new Error(msg);
   }
-  return payload.orderId;
+
+  const data = await res.json();
+  return {
+    ok: true,
+    id: data?.id,
+    orderId: data?.orderId ?? payload.orderId,
+    selectedIds: data?.selectedIds ?? [],
+  };
 }

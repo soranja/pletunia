@@ -22,7 +22,6 @@ body {
   --background-image-postcards:
     linear-gradient(rgba(1, 1, 1, 0.2), rgba(1, 1, 1, 0.2)), url('/images/bg/postcards.webp');
 
-  --background-image-paper-tile: url('/images/bg/paper-tile.png');
   --background-image-sea-sky: linear-gradient(to bottom, #a2ccce 54%, #4a7b83 46%);
 
   --color-skintone: #f2c4cd;
@@ -45,13 +44,5 @@ body {
 
   .blur-cap > * {
     @apply relative z-10;
-  }
-
-  .bg-tile-on-dark-blue {
-    background-color: var(--color-dark-blue);
-    background-image: var(--background-image-paper-tile);
-    background-blend-mode: multiply;
-    background-repeat: repeat;
-    background-size: 200px auto;
   }
 }

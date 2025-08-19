@@ -1,5 +1,11 @@
-import { LOCAL_STORAGE_KEY_RESERVED_CARDS } from '@/constants';
+import { RESERVATIONS_EVENT, LOCAL_STORAGE_KEY_RESERVED_CARDS } from '@/constants';
 import { TReservedCard } from '@/types';
+
+function notifyChange() {
+  try {
+    window.dispatchEvent(new Event(RESERVATIONS_EVENT));
+  } catch {}
+}
 
 function loadRaw(): TReservedCard[] {
   if (typeof window === 'undefined') return [];
@@ -14,6 +20,7 @@ function loadRaw(): TReservedCard[] {
 function saveRaw(list: TReservedCard[]) {
   try {
     localStorage.setItem(LOCAL_STORAGE_KEY_RESERVED_CARDS, JSON.stringify(list));
+    notifyChange();
   } catch {}
 }
 
@@ -43,9 +50,7 @@ export function reserveCards(ids: number[], orderId: string, ttlDays = 30) {
     .filter((id) => !existingIds.has(id))
     .map((id) => ({ id, orderId, reservedAt: now, expiresAt }));
 
-  if (additions.length) {
-    saveRaw([...existing, ...additions]);
-  }
+  if (additions.length) saveRaw([...existing, ...additions]);
 }
 
 export function unreserveCards(ids: number[]) {
@@ -58,5 +63,6 @@ export function unreserveCards(ids: number[]) {
 export function clearAllReservations() {
   try {
     localStorage.removeItem(LOCAL_STORAGE_KEY_RESERVED_CARDS);
+    notifyChange();
   } catch {}
 }

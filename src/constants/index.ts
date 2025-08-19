@@ -41,8 +41,10 @@ export const METADATA: Metadata = {
 };
 
 export const LANGUAGES = ['en', 'ru'];
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const LOCAL_STORAGE_KEY_FORM_DATA = 'formData';
 export const LOCAL_STORAGE_KEY_RESERVED_CARDS = 'reservedPostcards';
+export const RESERVATIONS_EVENT = 'reservations:changed';
 
 export const CURRENT_YEAR = new Date().getFullYear();
 

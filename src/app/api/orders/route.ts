@@ -3,21 +3,19 @@ import { Resend } from 'resend';
 import { z } from 'zod';
 
 import postcards from '@/data/home/postcards.json';
+import { EMAIL_REGEX } from '@/constants';
 import OrderEmail from '@/emails/OrderEmail';
 import { normalizeLang } from '@/utils/order';
 import { SupportedLang } from '@/types/props';
 
 const RESEND = new Resend(requireEnv('RESEND_API_KEY'));
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 const LangSchema = z.preprocess(normalizeLang, z.enum(['en', 'ru']));
-
 const OrderSchema = z.object({
   lang: LangSchema.default('en'),
   orderId: z.string().min(1),
   selectedPostcards: z.array(z.string()).min(1),
   name: z.string().min(1),
-  email: z.string().regex(EMAIL_RE, { message: 'Invalid email' }),
+  email: z.string().regex(EMAIL_REGEX, { message: 'Invalid email' }),
   comment: z.string().optional().default(''),
 });
 
@@ -80,7 +78,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message, code }, { status: 500 });
     }
 
-    return NextResponse.json({ ok: true, id: data?.id });
+    return NextResponse.json({
+      ok: true,
+      id: data?.id,
+      orderId: PAYLOAD.orderId,
+      selectedIds,
+    });
   } catch (err: unknown) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ error: 'Validation failed', issues: err.issues }, { status: 400 });

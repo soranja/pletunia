@@ -20,8 +20,8 @@ export type TCard = {
 export type TReservedCard = {
   id: number;
   orderId: string;
-  reservedAt: number; // ms
-  expiresAt?: number; // ms
+  reservedAt: number;
+  expiresAt?: number;
 };
 
 export type TFormData = {
@@ -49,4 +49,11 @@ export type TConstructorLayer = {
   layer: number;
   label: string;
   path: string;
+};
+
+export type TOrderSuccess = {
+  ok: true;
+  id?: string;
+  orderId: string;
+  selectedIds: number[];
 };
