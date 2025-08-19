@@ -12,7 +12,7 @@ export const METADATA: Metadata = {
     url: '/',
     siteName: 'Pletunia',
     title: 'Pletunia',
-    description: 'Postcards, postcard constructor sets, and friendship bracelets from Yerevan',
+    description: 'Postcards and postcard constructor sets from Yerevan',
     images: [
       {
         url: '/images/og.png',
@@ -27,7 +27,7 @@ export const METADATA: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Pletunia',
-    description: 'Postcards, postcard constructor sets, and friendship bracelets from Yerevan',
+    description: 'Postcards and postcard constructor sets from Yerevan',
     images: ['/images/og.png'],
   },
   alternates: {

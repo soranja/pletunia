@@ -50,8 +50,8 @@
   {
     "id": 5,
     "name": "set",
-    "nameEn": "CONSTRUCTOR",
-    "nameRu": "КОНСТРУКТОР",
+    "nameEn": "Constructor",
+    "nameRu": "Конструктор",
     "description": "set",
     "price": 10000,
     "imgUrl": "/images/pages/home/postcards/constructor.webp",
