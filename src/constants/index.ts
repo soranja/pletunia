@@ -3,16 +3,13 @@ import { TField } from '@/types';
 
 export const I18N_NAMESPACES = ['common', 'hero', 'order', 'postcards', 'sets'];
 
-export const METADATA: Metadata = {
+export const METADATA_BASE: Metadata = {
   metadataBase: new URL('https://pletunia.com'),
   title: 'Pletunia',
-  description: 'Postcards and postcard constructor sets from Yerevan',
   openGraph: {
     type: 'website',
-    url: '/',
     siteName: 'Pletunia',
     title: 'Pletunia',
-    description: 'Postcards and postcard constructor sets from Yerevan',
     images: [
       {
         url: '/images/og.png',
@@ -21,21 +18,11 @@ export const METADATA: Metadata = {
         alt: 'Pletunia — postcards & gifts from Yerevan',
       },
     ],
-    locale: 'en_US',
-    alternateLocale: ['ru_RU'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pletunia',
-    description: 'Postcards and postcard constructor sets from Yerevan',
     images: ['/images/og.png'],
-  },
-  alternates: {
-    canonical: '/',
-    languages: {
-      en: '/en',
-      ru: '/ru',
-    },
   },
   robots: { index: true, follow: true },
 };
